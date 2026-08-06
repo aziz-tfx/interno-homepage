@@ -19,7 +19,13 @@
   --paper:#F4EFE8;
   --muted:#9a9aa4;
   --line:rgba(255,255,255,.08);
-  --glass:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  /* Liquid glass — настройки с лендинга дизайна интерьера (interno-open-lesson, тема .dark) */
+  --glass-bg:rgba(255,255,255,.03);
+  --glass-blur:12px;
+  --glass-shadow-inset:rgba(255,255,255,.1);
+  --glass-border-bright:rgba(255,255,255,.45);
+  --glass-border-dim:rgba(255,255,255,.15);
+  --glass-border-width:1.4px;
   --font-display:'Unbounded',sans-serif;
   --font-body:'Manrope',sans-serif;
 }
@@ -38,6 +44,36 @@ body{
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ===== LIQUID GLASS (как на лендинге дизайна интерьера) ===== */
+.liquid-glass{
+  background:var(--glass-bg);
+  background-blend-mode:luminosity;
+  backdrop-filter:blur(var(--glass-blur));
+  -webkit-backdrop-filter:blur(var(--glass-blur));
+  border:none;
+  box-shadow:inset 0 1px 1px var(--glass-shadow-inset);
+  position:relative;
+  overflow:hidden;
+}
+.liquid-glass::before{
+  content:'';
+  position:absolute;inset:0;border-radius:inherit;
+  padding:var(--glass-border-width);
+  background:linear-gradient(180deg,
+    var(--glass-border-bright) 0%,
+    var(--glass-border-dim) 20%,
+    transparent 40%,
+    transparent 60%,
+    var(--glass-border-dim) 80%,
+    var(--glass-border-bright) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  z-index:1;
+}
+.liquid-glass > *{position:relative;z-index:2}
 
 /* ---------- ambient glow orbs ---------- */
 .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.5;will-change:transform}
@@ -107,9 +143,8 @@ a{color:inherit;text-decoration:none}
 .hero-badge{
   display:inline-flex;align-items:center;gap:10px;
   font-size:13.5px;font-weight:600;letter-spacing:.04em;color:var(--paper);
-  background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:100px;
+  border-radius:100px;
   padding:9px 20px;margin-bottom:34px;
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
 }
 .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange);animation:pulse 2.2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
@@ -130,8 +165,6 @@ a{color:inherit;text-decoration:none}
 }
 .stat{
   min-width:170px;padding:18px 26px;border-radius:20px;
-  background:var(--glass);border:1px solid var(--line);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   text-align:left;
 }
 .stat b{display:block;font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--paper)}
@@ -163,20 +196,22 @@ section{position:relative;z-index:2;padding:110px 0}
 /* ---------- course cards ---------- */
 .courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
 .course{
-  position:relative;border-radius:28px;padding:34px;
-  background:var(--glass);border:1px solid var(--line);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  overflow:hidden;display:flex;flex-direction:column;gap:0;
-  transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s,box-shadow .35s;
+  border-radius:28px;padding:34px;
+  display:flex;flex-direction:column;gap:0;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;
   transform-style:preserve-3d;will-change:transform;
 }
-.course:hover{border-color:rgba(247,107,43,.45);box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 60px rgba(247,107,43,.12)}
-.course::before{
+.course:hover{
+  --glass-border-bright:rgba(247,107,43,.65);
+  --glass-border-dim:rgba(247,107,43,.25);
+  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 24px 70px rgba(0,0,0,.5),0 0 60px rgba(247,107,43,.12);
+}
+.course::after{
   content:'';position:absolute;top:-40%;right:-25%;width:70%;aspect-ratio:1;
   background:radial-gradient(circle,rgba(247,107,43,.16),transparent 65%);
-  opacity:0;transition:opacity .4s;pointer-events:none;
+  opacity:0;transition:opacity .4s;pointer-events:none;z-index:1;
 }
-.course:hover::before{opacity:1}
+.course:hover::after{opacity:1}
 .course-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px}
 .course-icon{
   width:112px;height:112px;border-radius:24px;overflow:hidden;flex-shrink:0;
@@ -211,11 +246,14 @@ section{position:relative;z-index:2;padding:110px 0}
 .features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .feature{
   border-radius:24px;padding:28px 24px;
-  background:var(--glass);border:1px solid var(--line);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .3s;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
 }
-.feature:hover{transform:translateY(-8px);border-color:rgba(247,107,43,.4);box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 44px rgba(247,107,43,.1)}
+.feature:hover{
+  --glass-border-bright:rgba(247,107,43,.6);
+  --glass-border-dim:rgba(247,107,43,.22);
+  transform:translateY(-8px);
+  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 18px 50px rgba(0,0,0,.45),0 0 44px rgba(247,107,43,.1);
+}
 .feature-icon{
   width:76px;height:76px;border-radius:18px;overflow:hidden;margin-bottom:20px;
   border:1px solid var(--line);box-shadow:0 8px 26px rgba(0,0,0,.4),0 0 26px rgba(247,107,43,.12);
@@ -227,12 +265,14 @@ section{position:relative;z-index:2;padding:110px 0}
 /* ---------- formats ---------- */
 .formats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .format{
-  position:relative;border-radius:24px;padding:30px 26px;overflow:hidden;
-  background:var(--glass);border:1px solid var(--line);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  transition:transform .3s,border-color .3s;
+  border-radius:24px;padding:30px 26px;
+  transition:transform .3s;
 }
-.format:hover{transform:translateY(-6px);border-color:rgba(247,107,43,.4)}
+.format:hover{
+  --glass-border-bright:rgba(247,107,43,.6);
+  --glass-border-dim:rgba(247,107,43,.22);
+  transform:translateY(-6px);
+}
 .format b{
   display:block;font-family:var(--font-display);font-size:44px;font-weight:800;line-height:1;
   background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.05));
@@ -244,13 +284,15 @@ section{position:relative;z-index:2;padding:110px 0}
 
 /* ---------- open lesson CTA ---------- */
 .cta-panel{
-  position:relative;border-radius:36px;padding:70px 60px;overflow:hidden;
-  background:var(--glass);border:1px solid var(--line);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-radius:36px;padding:70px 60px;
   text-align:center;
+  /* глубокое стекло — как у модалки лендинга интерьера */
+  background:rgba(22,22,22,.55);
+  backdrop-filter:blur(28px) saturate(160%);
+  -webkit-backdrop-filter:blur(28px) saturate(160%);
 }
-.cta-panel::before{
-  content:'';position:absolute;inset:-1px;border-radius:36px;pointer-events:none;
+.cta-panel::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
   background:
     radial-gradient(ellipse 60% 90% at 50% -20%,rgba(247,107,43,.22),transparent 60%),
     radial-gradient(ellipse 40% 60% at 85% 110%,rgba(255,139,77,.14),transparent 60%);
@@ -343,7 +385,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
     </video>
   </div>
   <div class="hero-content">
-    <div class="hero-badge"><span class="dot"></span>Школа современных профессий · Ташкент / Самарканд / Фергана</div>
+    <div class="hero-badge liquid-glass"><span class="dot"></span>Школа современных профессий · Ташкент / Самарканд / Фергана</div>
     <h1>Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span></h1>
     <p class="hero-sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.</p>
     <div class="hero-cta">
@@ -351,10 +393,10 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <a class="btn btn-ghost" href="#courses">Смотреть направления</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><b><em data-counter="4">0</em></b><span>направления обучения</span></div>
-      <div class="stat"><b><em data-counter="3">0</em></b><span>города Узбекистана</span></div>
-      <div class="stat"><b><em data-counter="36">0</em>+</b><span>уроков в программе курса</span></div>
-      <div class="stat"><b>0-0-<em data-counter="6">0</em></b><span>рассрочка до 6 месяцев</span></div>
+      <div class="stat liquid-glass"><b><em data-counter="4">0</em></b><span>направления обучения</span></div>
+      <div class="stat liquid-glass"><b><em data-counter="3">0</em></b><span>города Узбекистана</span></div>
+      <div class="stat liquid-glass"><b><em data-counter="36">0</em>+</b><span>уроков в программе курса</span></div>
+      <div class="stat liquid-glass"><b>0-0-<em data-counter="6">0</em></b><span>рассрочка до 6 месяцев</span></div>
     </div>
   </div>
 </header>
@@ -376,7 +418,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <p class="sec-sub">Каждый курс — это практика с первого занятия, портфолио на выходе и поддержка менторов на всём пути.</p>
     </div>
     <div class="courses-grid">
-      <a class="course reveal" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
+      <a class="course liquid-glass reveal" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-interior.png" alt="Дизайн интерьера"></div>
           <span class="course-tag">Открытый урок</span>
@@ -386,7 +428,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
         <p>Флагманское направление школы: от идеи и планировки до 3D-визуализации и работы с реальным заказчиком.</p>
         <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <a class="course reveal reveal-d1" href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">
+      <a class="course liquid-glass reveal reveal-d1" href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-graphic.png" alt="Графический дизайн"></div>
           <span class="course-tag">Курс</span>
@@ -396,7 +438,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
         <p>С нуля до первых заказов: айдентика, Photoshop, Figma, работа с брендами и упаковка портфолио.</p>
         <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <a class="course reveal reveal-d1" href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">
+      <a class="course liquid-glass reveal reveal-d1" href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-data.png" alt="Data-аналитика"></div>
           <span class="course-tag">Курс</span>
@@ -406,7 +448,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
         <p>Python, SQL и Power BI: собирайте, анализируйте и визуализируйте данные — станьте специалистом, которого ищут компании.</p>
         <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <a class="course reveal reveal-d2" href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener">
+      <a class="course liquid-glass reveal reveal-d2" href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-ai.png" alt="Искусственный интеллект"></div>
           <span class="course-tag">Новый курс</span>
@@ -428,22 +470,22 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <h2 class="sec-title">Учим так, чтобы вы работали, а не просто слушали</h2>
     </div>
     <div class="features-grid">
-      <div class="feature reveal">
+      <div class="feature liquid-glass reveal">
         <div class="feature-icon"><img src="assets/icon-mentor.png" alt=""></div>
         <h4>Менторы-практики</h4>
         <p>Преподают действующие специалисты с реальными проектами — объясняют сложное простым языком.</p>
       </div>
-      <div class="feature reveal reveal-d1">
+      <div class="feature liquid-glass reveal reveal-d1">
         <div class="feature-icon"><img src="assets/icon-platform.png" alt=""></div>
         <h4>Практика с первого дня</h4>
         <p>Домашние задания на реальных кейсах и разбор работ — навык формируется руками.</p>
       </div>
-      <div class="feature reveal reveal-d2">
+      <div class="feature liquid-glass reveal reveal-d2">
         <div class="feature-icon"><img src="assets/icon-diploma.png" alt=""></div>
         <h4>Сертификат школы</h4>
         <p>По окончании курса — подтверждение полученных навыков и готовое портфолио с проектами.</p>
       </div>
-      <div class="feature reveal reveal-d3">
+      <div class="feature liquid-glass reveal reveal-d3">
         <div class="feature-icon"><img src="assets/icon-career.png" alt=""></div>
         <h4>Путь к доходу</h4>
         <p>Помогаем сделать первые шаги: оформление портфолио, первые заказы и уверенный старт в профессии.</p>
@@ -460,10 +502,10 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <h2 class="sec-title">Выберите комфортный формат</h2>
     </div>
     <div class="formats-grid">
-      <div class="format reveal"><b>01</b><h4>В группе</h4><p>Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.</p></div>
-      <div class="format reveal reveal-d1"><b>02</b><h4>Офлайн</h4><p>Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.</p></div>
-      <div class="format reveal reveal-d2"><b>03</b><h4>Практикумы</h4><p>Разборы работ и живая обратная связь от ментора на каждом занятии.</p></div>
-      <div class="format reveal reveal-d3"><b>04</b><h4>Рассрочка</h4><p>Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.</p></div>
+      <div class="format liquid-glass reveal"><b>01</b><h4>В группе</h4><p>Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.</p></div>
+      <div class="format liquid-glass reveal reveal-d1"><b>02</b><h4>Офлайн</h4><p>Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.</p></div>
+      <div class="format liquid-glass reveal reveal-d2"><b>03</b><h4>Практикумы</h4><p>Разборы работ и живая обратная связь от ментора на каждом занятии.</p></div>
+      <div class="format liquid-glass reveal reveal-d3"><b>04</b><h4>Рассрочка</h4><p>Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.</p></div>
     </div>
   </div>
 </section>
@@ -471,7 +513,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 <!-- ======== OPEN LESSON CTA ======== -->
 <section id="open-lesson">
   <div class="wrap">
-    <div class="cta-panel reveal">
+    <div class="cta-panel liquid-glass reveal">
       <h2>Начните с <span class="grad-text">бесплатного открытого урока</span></h2>
       <p class="cities">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i></p>
       <div class="cta-actions">

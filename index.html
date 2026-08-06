@@ -370,6 +370,69 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 .socials a:hover{background:rgba(247,107,43,.15);border-color:rgba(247,107,43,.4);transform:translateY(-3px)}
 .socials svg{width:18px;height:18px;fill:var(--paper)}
 
+/* ---------- попап-форма заявки ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.is-open{display:flex;animation:modalFadeIn .25s ease}
+@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal-panel{
+  position:relative;z-index:1;width:100%;max-width:440px;
+  border-radius:28px;padding:36px 32px;
+  background:rgba(22,22,22,.6);
+  backdrop-filter:blur(28px) saturate(160%);
+  -webkit-backdrop-filter:blur(28px) saturate(160%);
+  max-height:calc(100vh - 40px);overflow-y:auto;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  animation:modalSlideUp .3s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes modalSlideUp{from{transform:translateY(20px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.modal-close{
+  position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.07);border:none;color:var(--paper);cursor:pointer;
+  font-size:22px;line-height:1;font-weight:300;transition:.2s;
+}
+.modal-close:hover{background:var(--orange);transform:rotate(90deg)}
+.modal-eyebrow{display:block;font-size:11px;color:var(--orange-soft);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:10px}
+.modal-title{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1.15;margin-bottom:10px}
+.modal-lead{color:var(--muted);font-size:14px;margin-bottom:22px}
+.modal form label{display:flex;flex-direction:column;gap:7px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:14px}
+.modal input,.modal select{
+  background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;
+  padding:13px 16px;color:var(--paper);font-family:var(--font-body);font-size:15px;font-weight:600;
+  outline:none;width:100%;transition:border-color .2s,box-shadow .2s;
+}
+.modal input::placeholder{color:rgba(255,255,255,.25)}
+.modal input:focus,.modal select:focus{border-color:rgba(247,107,43,.6);box-shadow:0 0 0 3px rgba(247,107,43,.18)}
+.modal select{
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F76B2B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:38px;
+}
+.modal select option{background:#1c1c22;color:var(--paper)}
+.phone-field{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;transition:border-color .2s,box-shadow .2s}
+.phone-field:focus-within{border-color:rgba(247,107,43,.6);box-shadow:0 0 0 3px rgba(247,107,43,.18)}
+.phone-prefix{padding:13px 0 13px 16px;font-size:15px;font-weight:700;color:var(--paper)}
+.phone-field input{background:none;border:none;box-shadow:none!important;padding-left:8px}
+.phone-error{display:none;color:#ff8f7a;font-size:12px;text-transform:none;letter-spacing:0;font-weight:600}
+.field-invalid .phone-error{display:block}
+.field-invalid .phone-field{border-color:rgba(255,120,90,.7)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal form .btn{width:100%;margin-top:6px}
+.modal-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px}
+.modal-success{text-align:center;padding:26px 0 10px}
+.modal-success-icon{
+  width:72px;height:72px;border-radius:50%;margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;
+  background:linear-gradient(135deg,var(--orange),var(--orange-deep));
+  box-shadow:0 10px 36px rgba(247,107,43,.45);
+}
+.modal-success h3{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:10px}
+.modal-success p{color:var(--muted);font-size:14.5px;margin-bottom:24px}
+@media (max-width:480px){
+  .form-row{grid-template-columns:1fr}
+  .modal-panel{padding:30px 22px}
+}
+
 /* ---------- reveal animations ---------- */
 .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:none}
@@ -444,7 +507,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <a href="#open-lesson">Открытый урок</a>
     </div>
     <a class="nav-phone" href="tel:+998781131808">+998 78 113 18 08</a>
-    <a class="btn btn-primary btn-sm" href="#open-lesson">Бесплатный урок</a>
+    <a class="btn btn-primary btn-sm" href="#open-lesson" data-modal-open>Бесплатный урок</a>
   </div>
 </nav>
 
@@ -460,7 +523,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
     <h1>Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span></h1>
     <p class="hero-sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#open-lesson">Записаться на бесплатный урок</a>
+      <a class="btn btn-primary" href="#open-lesson" data-modal-open>Записаться на бесплатный урок</a>
       <a class="btn btn-ghost" href="#courses">Смотреть направления</a>
     </div>
     <div class="hero-stats">
@@ -591,7 +654,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <h2>Начните с <span class="grad-text">бесплатного открытого урока</span></h2>
       <p class="cities">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i></p>
       <div class="cta-actions">
-        <a class="btn btn-primary" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">Записаться на открытый урок</a>
+        <a class="btn btn-primary" href="https://interno-open-lesson.vercel.app" data-modal-open>Записаться на открытый урок</a>
         <a class="btn btn-ghost" href="tel:+998781131808">Позвонить: +998 78 113 18 08</a>
       </div>
     </div>
@@ -635,6 +698,56 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
     </div>
   </div>
 </footer>
+
+<!-- ======== ПОПАП-ФОРМА ЗАЯВКИ ======== -->
+<div class="modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel liquid-glass">
+    <button class="modal-close" type="button" aria-label="Закрыть" data-modal-close>&times;</button>
+    <div class="modal-head">
+      <span class="modal-eyebrow">Бесплатный урок</span>
+      <h3 class="modal-title" id="leadModalTitle">Запишитесь на открытый урок</h3>
+      <p class="modal-lead">Оставьте контакты — перезвоним, подберём удобные дату и филиал.</p>
+    </div>
+    <form id="homepage_modal" novalidate>
+      <label>Имя
+        <input type="text" name="name" required placeholder="Aziz" autocomplete="name">
+      </label>
+      <label>Телефон
+        <span class="phone-field">
+          <span class="phone-prefix">+998</span>
+          <input type="tel" name="phone" required inputmode="tel" autocomplete="tel-national" placeholder="90 123 45 67" maxlength="12">
+        </span>
+        <span class="phone-error">Введите номер полностью — 9 цифр после +998</span>
+      </label>
+      <div class="form-row">
+        <label>Направление
+          <select name="course">
+            <option value="interior">Дизайн интерьера</option>
+            <option value="graphic">Графический дизайн</option>
+            <option value="data">Data-аналитика</option>
+            <option value="ai">Искусственный интеллект</option>
+          </select>
+        </label>
+        <label>Город
+          <select name="city">
+            <option value="tsh">Ташкент</option>
+            <option value="smr">Самарканд</option>
+            <option value="frg">Фергана</option>
+          </select>
+        </label>
+      </div>
+      <button class="btn btn-primary" type="submit">Записаться</button>
+      <p class="modal-note">Нажимая на кнопку, я соглашаюсь на обработку персональных данных</p>
+    </form>
+    <div class="modal-success" hidden>
+      <div class="modal-success-icon">✓</div>
+      <h3>Заявка отправлена!</h3>
+      <p>Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.</p>
+      <button class="btn btn-ghost" type="button" data-modal-close>Закрыть</button>
+    </div>
+  </div>
+</div>
 
 <script>
 // hero video: force autoplay (some browsers pause muted autoplay anyway)
@@ -714,6 +827,120 @@ const cio=new IntersectionObserver(es=>es.forEach(e=>{
   requestAnimationFrame(tick);
 }),{threshold:.6});
 document.querySelectorAll('[data-counter]').forEach(el=>cio.observe(el));
+
+// ===== Попап-форма заявки (конвейер лидов — как на лендинге открытого урока) =====
+const AMOCRM_FORM={
+  endpoint:'https://forms.amocrm.ru/queue/add',
+  form_id:'1705506',
+  hash:'37df3dcc789078355483c5cbdb3fe57b',
+  fields:{name:'fields[name_1]',phone:'fields[875427_1][1182433]',note:'fields[note_2]'},
+};
+const TG_NOTIFY='https://interno-open-lesson.vercel.app/api/notify';
+const COURSE_LABEL={interior:'Дизайн интерьера',graphic:'Графический дизайн',data:'Data-аналитика',ai:'Искусственный интеллект'};
+const CITY_LABEL={tsh:'Ташкент',smr:'Самарканд',frg:'Фергана'};
+const UTM_KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+const getUtm=()=>{
+  const p=new URLSearchParams(location.search),utm={};
+  UTM_KEYS.forEach(k=>{const v=p.get(k);if(v)utm[k]=v});
+  return utm;
+};
+
+const modal=document.getElementById('leadModal');
+const modalForm=document.getElementById('homepage_modal');
+const modalSuccess=modal.querySelector('.modal-success');
+let lastFocus=null;
+const openModal=()=>{
+  lastFocus=document.activeElement;
+  modalForm.hidden=false;
+  modalSuccess.hidden=true;
+  modal.classList.add('is-open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>modalForm.elements.name.focus(),100);
+};
+const closeModal=()=>{
+  modal.classList.remove('is-open');
+  document.body.style.overflow='';
+  if(lastFocus)lastFocus.focus();
+};
+document.querySelectorAll('[data-modal-open]').forEach(el=>
+  el.addEventListener('click',e=>{e.preventDefault();openModal()}));
+modal.querySelectorAll('[data-modal-close]').forEach(el=>
+  el.addEventListener('click',closeModal));
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&modal.classList.contains('is-open'))closeModal();
+});
+
+// маска телефона: +998 снаружи, в поле ровно 9 цифр «90 123 45 67»
+const phoneInput=modalForm.elements.phone;
+phoneInput.addEventListener('input',e=>{
+  let v=e.target.value.replace(/\D/g,'');
+  if(v.startsWith('998'))v=v.slice(3);
+  v=v.slice(0,9);
+  let out=v.slice(0,2);
+  if(v.length>2)out+=' '+v.slice(2,5);
+  if(v.length>5)out+=' '+v.slice(5,7);
+  if(v.length>7)out+=' '+v.slice(7,9);
+  e.target.value=out;
+  phoneInput.closest('label').classList.remove('field-invalid');
+});
+const phoneDigits=()=>phoneInput.value.replace(/\D/g,'');
+
+modalForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(phoneDigits().length!==9){
+    phoneInput.closest('label').classList.add('field-invalid');
+    phoneInput.focus();
+    return;
+  }
+  const name=modalForm.elements.name.value.trim();
+  const phone='+998'+phoneDigits();
+  const courseLabel=COURSE_LABEL[modalForm.elements.course.value];
+  const cityLabel=CITY_LABEL[modalForm.elements.city.value];
+  const utm=getUtm();
+  const btn=modalForm.querySelector('[type="submit"]');
+  btn.disabled=true;btn.textContent='Отправляем…';
+
+  // amoCRM: имя сделки в формате лендинга «Имя · Город · RU»; курс — в заметке и тегах
+  const fd=new FormData();
+  fd.append('form_id',AMOCRM_FORM.form_id);
+  fd.append('hash',AMOCRM_FORM.hash);
+  fd.append('user_origin','');
+  fd.append(AMOCRM_FORM.fields.name,name?`${name} · ${cityLabel} · RU`:`${cityLabel} · RU`);
+  fd.append(AMOCRM_FORM.fields.phone,phone);
+  const noteParts=[
+    `🎓 Курс: ${courseLabel}`,
+    `🏙 Город: ${cityLabel}   ·   🗣 Язык: Русский`,
+    '—',
+    `Источник: homepage_modal`,
+    `URL: ${location.href}`,
+  ];
+  if(document.referrer)noteParts.push(`Referrer: ${document.referrer}`);
+  const utmPairs=UTM_KEYS.map(k=>utm[k]?`${k}=${utm[k]}`:null).filter(Boolean);
+  if(utmPairs.length)noteParts.push(utmPairs.join(' · '));
+  fd.append(AMOCRM_FORM.fields.note,noteParts.join('\n'));
+  UTM_KEYS.forEach(k=>{if(utm[k])fd.append(k,utm[k])});
+  const tags=[cityLabel,'Язык: Русский',`Курс: ${courseLabel}`,'Форма: homepage_modal'];
+  fd.append('tags',tags.join(','));
+  tags.forEach(t=>fd.append('tags[]',t));
+
+  await Promise.allSettled([
+    fetch(AMOCRM_FORM.endpoint,{method:'POST',body:fd,mode:'no-cors',credentials:'omit'}),
+    fetch(TG_NOTIFY,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        name,phone,city:cityLabel,lang:'Русский',
+        source:`homepage_modal · ${courseLabel}`,
+        url:location.href,referrer:document.referrer||'',utm,
+      }),
+      keepalive:true,
+    }),
+  ]);
+
+  modalForm.hidden=true;
+  modalSuccess.hidden=false;
+  btn.disabled=false;btn.textContent='Записаться';
+});
 
 // 3D tilt + light-reactive блик на стекле (desktop, no reduced motion)
 const fine=matchMedia('(pointer:fine)').matches&&motionOK;

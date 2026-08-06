@@ -197,6 +197,7 @@ a{color:inherit;text-decoration:none}
 .ticker-track{display:flex;gap:44px;width:max-content;animation:ticker 30s linear infinite}
 .ticker span{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
 .ticker span i{font-style:normal;color:var(--orange);margin-right:44px}
+.ticker span em{font-style:normal}
 @keyframes ticker{to{transform:translateX(-50%)}}
 
 /* ---------- sections ---------- */
@@ -292,6 +293,43 @@ section{position:relative;z-index:2;padding:110px 0}
 .feature-icon img{width:100%;height:100%;object-fit:cover;transform:scale(1.25)}
 .feature h4{font-family:var(--font-display);font-size:16.5px;font-weight:700;margin-bottom:10px;line-height:1.3}
 .feature p{font-size:14.5px;color:var(--muted);font-weight:500}
+
+/* ---------- mentors ---------- */
+.mentors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.mentor{border-radius:28px;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+.mentor:hover{
+  --glass-border-bright:rgba(247,107,43,.6);
+  --glass-border-dim:rgba(247,107,43,.22);
+  transform:translateY(-6px);
+  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 18px 50px rgba(0,0,0,.45),0 0 44px rgba(247,107,43,.1);
+}
+.mentor-photo{aspect-ratio:16/10;overflow:hidden}
+.mentor-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s}
+.mentor:hover .mentor-photo img{transform:scale(1.04)}
+.mentor-info{padding:26px 28px 30px}
+.mentor-course{
+  display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--orange-soft);background:rgba(247,107,43,.1);
+  border:1px solid rgba(247,107,43,.28);border-radius:100px;padding:6px 13px;margin-bottom:16px;
+}
+.mentor-info h3{font-family:var(--font-display);font-weight:700;font-size:22px;margin-bottom:6px}
+.mentor-role{color:var(--orange-soft);font-size:14px;font-weight:700;margin-bottom:16px}
+.mentor-info ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.mentor-info li{position:relative;padding-left:20px;color:var(--muted);font-size:14.5px;font-weight:500}
+.mentor-info li::before{content:'◆';position:absolute;left:0;top:1px;font-size:10px;color:var(--orange)}
+
+/* ---------- lang switch ---------- */
+.lang-switch{
+  display:flex;gap:2px;padding:3px;border-radius:100px;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);
+}
+.lang-switch button{
+  border:none;cursor:pointer;border-radius:100px;padding:6px 12px;
+  font-family:var(--font-body);font-size:12.5px;font-weight:800;letter-spacing:.04em;
+  background:transparent;color:var(--muted);transition:.2s;
+}
+.lang-switch button.active{background:var(--orange);color:#fff;box-shadow:0 2px 12px rgba(247,107,43,.4)}
+.lang-switch button:not(.active):hover{color:var(--paper)}
 
 /* ---------- formats ---------- */
 .formats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -472,6 +510,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 @media (max-width:820px){
   .nav-links{display:none}
   .courses-grid{grid-template-columns:1fr}
+  .mentors-grid{grid-template-columns:1fr}
   section{padding:80px 0}
   .cta-panel{padding:50px 28px}
 }
@@ -501,13 +540,18 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
   <div class="nav-inner">
     <a class="nav-logo" href="#"><img src="assets/logo.svg" alt="INTERNO School"></a>
     <div class="nav-links">
-      <a href="#courses">Курсы</a>
-      <a href="#why">Почему мы</a>
-      <a href="#formats">Форматы</a>
-      <a href="#open-lesson">Открытый урок</a>
+      <a href="#courses" data-i18n="nav.courses">Курсы</a>
+      <a href="#why" data-i18n="nav.why">Почему мы</a>
+      <a href="#mentors" data-i18n="nav.mentors">Менторы</a>
+      <a href="#formats" data-i18n="nav.formats">Форматы</a>
+      <a href="#open-lesson" data-i18n="nav.openLesson">Открытый урок</a>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Язык">
+      <button type="button" data-lang="ru" class="active">RU</button>
+      <button type="button" data-lang="uz">UZ</button>
     </div>
     <a class="nav-phone" href="tel:+998781131808">+998 78 113 18 08</a>
-    <a class="btn btn-primary btn-sm" href="#open-lesson" data-modal-open>Бесплатный урок</a>
+    <a class="btn btn-primary btn-sm" href="#open-lesson" data-modal-open data-i18n="nav.cta">Бесплатный урок</a>
   </div>
 </nav>
 
@@ -519,18 +563,18 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
     </video>
   </div>
   <div class="hero-content">
-    <div class="hero-badge liquid-glass"><span class="dot"></span>Школа современных профессий · Ташкент / Самарканд / Фергана</div>
-    <h1>Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span></h1>
-    <p class="hero-sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.</p>
+    <div class="hero-badge liquid-glass"><span class="dot"></span><span data-i18n="hero.badge">Школа современных профессий · Ташкент / Самарканд / Фергана</span></div>
+    <h1 id="heroTitle">Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="#open-lesson" data-modal-open>Записаться на бесплатный урок</a>
-      <a class="btn btn-ghost" href="#courses">Смотреть направления</a>
+      <a class="btn btn-primary" href="#open-lesson" data-modal-open data-i18n="hero.cta1">Записаться на бесплатный урок</a>
+      <a class="btn btn-ghost" href="#courses" data-i18n="hero.cta2">Смотреть направления</a>
     </div>
     <div class="hero-stats">
-      <div class="stat liquid-glass"><b><em data-counter="4">0</em></b><span>направления обучения</span></div>
-      <div class="stat liquid-glass"><b><em data-counter="3">0</em></b><span>города Узбекистана</span></div>
-      <div class="stat liquid-glass"><b><em data-counter="36">0</em>+</b><span>уроков в программе курса</span></div>
-      <div class="stat liquid-glass"><b>0-0-<em data-counter="6">0</em></b><span>рассрочка до 6 месяцев</span></div>
+      <div class="stat liquid-glass"><b><em data-counter="4">0</em></b><span data-i18n="stat.courses">направления обучения</span></div>
+      <div class="stat liquid-glass"><b><em data-counter="3">0</em></b><span data-i18n="stat.cities">города Узбекистана</span></div>
+      <div class="stat liquid-glass"><b><em data-counter="36">0</em>+</b><span data-i18n="stat.lessons">уроков в программе курса</span></div>
+      <div class="stat liquid-glass"><b>0-0-<em data-counter="6">0</em></b><span data-i18n="stat.installment">рассрочка до 6 месяцев</span></div>
     </div>
   </div>
 </header>
@@ -538,8 +582,8 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 <!-- ======== TICKER ======== -->
 <div class="ticker">
   <div class="ticker-track">
-    <span><i>◆</i>Дизайн интерьера</span><span><i>◆</i>3ds Max</span><span><i>◆</i>Графический дизайн</span><span><i>◆</i>Figma</span><span><i>◆</i>Photoshop</span><span><i>◆</i>Data-аналитика</span><span><i>◆</i>Python</span><span><i>◆</i>SQL</span><span><i>◆</i>Power BI</span><span><i>◆</i>Искусственный интеллект</span><span><i>◆</i>Нейросети</span><span><i>◆</i>Telegram-боты</span>
-    <span><i>◆</i>Дизайн интерьера</span><span><i>◆</i>3ds Max</span><span><i>◆</i>Графический дизайн</span><span><i>◆</i>Figma</span><span><i>◆</i>Photoshop</span><span><i>◆</i>Data-аналитика</span><span><i>◆</i>Python</span><span><i>◆</i>SQL</span><span><i>◆</i>Power BI</span><span><i>◆</i>Искусственный интеллект</span><span><i>◆</i>Нейросети</span><span><i>◆</i>Telegram-боты</span>
+    <span><i>◆</i><em data-i18n="course.interior">Дизайн интерьера</em></span><span><i>◆</i><em>3ds Max</em></span><span><i>◆</i><em data-i18n="course.graphic">Графический дизайн</em></span><span><i>◆</i><em>Figma</em></span><span><i>◆</i><em>Photoshop</em></span><span><i>◆</i><em data-i18n="course.data">Data-аналитика</em></span><span><i>◆</i><em>Python</em></span><span><i>◆</i><em>SQL</em></span><span><i>◆</i><em>Power BI</em></span><span><i>◆</i><em data-i18n="course.ai">Искусственный интеллект</em></span><span><i>◆</i><em data-i18n="tick.neuro">Нейросети</em></span><span><i>◆</i><em data-i18n="tick.bots">Telegram-боты</em></span>
+    <span><i>◆</i><em data-i18n="course.interior">Дизайн интерьера</em></span><span><i>◆</i><em>3ds Max</em></span><span><i>◆</i><em data-i18n="course.graphic">Графический дизайн</em></span><span><i>◆</i><em>Figma</em></span><span><i>◆</i><em>Photoshop</em></span><span><i>◆</i><em data-i18n="course.data">Data-аналитика</em></span><span><i>◆</i><em>Python</em></span><span><i>◆</i><em>SQL</em></span><span><i>◆</i><em>Power BI</em></span><span><i>◆</i><em data-i18n="course.ai">Искусственный интеллект</em></span><span><i>◆</i><em data-i18n="tick.neuro">Нейросети</em></span><span><i>◆</i><em data-i18n="tick.bots">Telegram-боты</em></span>
   </div>
 </div>
 
@@ -547,50 +591,50 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 <section id="courses">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow">Направления обучения</span>
-      <h2 class="sec-title">Выбери профессию — остальному научим</h2>
-      <p class="sec-sub">Каждый курс — это практика с первого занятия, портфолио на выходе и поддержка менторов на всём пути.</p>
+      <span class="sec-eyebrow" data-i18n="courses.eyebrow">Направления обучения</span>
+      <h2 class="sec-title" data-i18n="courses.title">Выбери профессию — остальному научим</h2>
+      <p class="sec-sub" data-i18n="courses.sub">Каждый курс — это практика с первого занятия, портфолио на выходе и поддержка менторов на всём пути.</p>
     </div>
     <div class="courses-grid">
       <a class="course liquid-glass reveal" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-interior.png" alt="Дизайн интерьера"></div>
-          <span class="course-tag">Открытый урок</span>
+          <span class="course-tag" data-i18n="tag.open">Открытый урок</span>
         </div>
-        <h3>Дизайн интерьера</h3>
-        <div class="course-meta">офлайн · <i>Ташкент / Самарканд / Фергана</i></div>
-        <p>Флагманское направление школы: от идеи и планировки до 3D-визуализации и работы с реальным заказчиком.</p>
-        <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="course.interior">Дизайн интерьера</h3>
+        <div class="course-meta" data-i18n-html="meta.interior">офлайн · <i>Ташкент / Самарканд / Фергана</i></div>
+        <p data-i18n="desc.interior">Флагманское направление школы: от идеи и планировки до 3D-визуализации и работы с реальным заказчиком.</p>
+        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
       <a class="course liquid-glass reveal reveal-d1" href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-graphic.png" alt="Графический дизайн"></div>
-          <span class="course-tag">Курс</span>
+          <span class="course-tag" data-i18n="tag.course">Курс</span>
         </div>
-        <h3>Графический дизайн</h3>
-        <div class="course-meta"><i>16 недель</i> · 5 модулей</div>
-        <p>С нуля до первых заказов: айдентика, Photoshop, Figma, работа с брендами и упаковка портфолио.</p>
-        <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="course.graphic">Графический дизайн</h3>
+        <div class="course-meta" data-i18n-html="meta.graphic"><i>16 недель</i> · 5 модулей</div>
+        <p data-i18n="desc.graphic">С нуля до первых заказов: айдентика, Photoshop, Figma, работа с брендами и упаковка портфолио.</p>
+        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
       <a class="course liquid-glass reveal reveal-d1" href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-data.png" alt="Data-аналитика"></div>
-          <span class="course-tag">Курс</span>
+          <span class="course-tag" data-i18n="tag.course">Курс</span>
         </div>
-        <h3>Data-аналитика</h3>
-        <div class="course-meta"><i>3 месяца</i> · 36 уроков</div>
-        <p>Python, SQL и Power BI: собирайте, анализируйте и визуализируйте данные — станьте специалистом, которого ищут компании.</p>
-        <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="course.data">Data-аналитика</h3>
+        <div class="course-meta" data-i18n-html="meta.data"><i>3 месяца</i> · 36 уроков</div>
+        <p data-i18n="desc.data">Python, SQL и Power BI: собирайте, анализируйте и визуализируйте данные — станьте специалистом, которого ищут компании.</p>
+        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
       <a class="course liquid-glass reveal reveal-d2" href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener">
         <div class="course-top">
           <div class="course-icon"><img src="assets/icon-ai.png" alt="Искусственный интеллект"></div>
-          <span class="course-tag">Новый курс</span>
+          <span class="course-tag" data-i18n="tag.new">Новый курс</span>
         </div>
-        <h3>Искусственный интеллект</h3>
-        <div class="course-meta"><i>2 месяца</i> · 16 занятий · 6 модулей</div>
-        <p>Нейросети как рабочий инструмент: контент, автоматизация, Telegram-боты и практические AI-проекты.</p>
-        <span class="course-link">Подробнее о курсе <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3 data-i18n="course.ai">Искусственный интеллект</h3>
+        <div class="course-meta" data-i18n-html="meta.ai"><i>2 месяца</i> · 16 занятий · 6 модулей</div>
+        <p data-i18n="desc.ai">Нейросети как рабочий инструмент: контент, автоматизация, Telegram-боты и практические AI-проекты.</p>
+        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
     </div>
   </div>
@@ -600,31 +644,69 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 <section id="why">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow">Почему INTERNO</span>
-      <h2 class="sec-title">Учим так, чтобы вы работали, а не просто слушали</h2>
+      <span class="sec-eyebrow" data-i18n="why.eyebrow">Почему INTERNO</span>
+      <h2 class="sec-title" data-i18n="why.title">Учим так, чтобы вы работали, а не просто слушали</h2>
     </div>
     <div class="features-grid">
       <div class="feature feature--lg liquid-glass reveal">
         <div class="feature-icon"><img src="assets/icon-mentor.png" alt=""></div>
-        <h4>Менторы-практики</h4>
-        <p>Преподают действующие специалисты с реальными проектами — объясняют сложное простым языком, разбирают ваши работы и остаются на связи на протяжении всего курса.</p>
+        <h4 data-i18n="why.f1">Менторы-практики</h4>
+        <p data-i18n="why.f1d">Преподают действующие специалисты с реальными проектами — объясняют сложное простым языком, разбирают ваши работы и остаются на связи на протяжении всего курса.</p>
       </div>
       <div class="feature feature--wide liquid-glass reveal reveal-d1">
         <div class="feature-icon"><img src="assets/icon-platform.png" alt=""></div>
         <div>
-          <h4>Практика с первого дня</h4>
-          <p>Домашние задания на реальных кейсах и разбор работ — навык формируется руками.</p>
+          <h4 data-i18n="why.f2">Практика с первого дня</h4>
+          <p data-i18n="why.f2d">Домашние задания на реальных кейсах и разбор работ — навык формируется руками.</p>
         </div>
       </div>
       <div class="feature liquid-glass reveal reveal-d2">
         <div class="feature-icon"><img src="assets/icon-diploma.png" alt=""></div>
-        <h4>Сертификат школы</h4>
-        <p>Подтверждение навыков и готовое портфолио с проектами.</p>
+        <h4 data-i18n="why.f3">Сертификат школы</h4>
+        <p data-i18n="why.f3d">Подтверждение навыков и готовое портфолио с проектами.</p>
       </div>
       <div class="feature liquid-glass reveal reveal-d3">
         <div class="feature-icon"><img src="assets/icon-career.png" alt=""></div>
-        <h4>Путь к доходу</h4>
-        <p>Оформление портфолио, первые заказы и уверенный старт.</p>
+        <h4 data-i18n="why.f4">Путь к доходу</h4>
+        <p data-i18n="why.f4d">Оформление портфолио, первые заказы и уверенный старт.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== MENTORS ======== -->
+<section id="mentors">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow" data-i18n="mentors.eyebrow">Команда</span>
+      <h2 class="sec-title" data-i18n="mentors.title">Менторы, которые работают в профессии</h2>
+    </div>
+    <div class="mentors-grid">
+      <div class="mentor liquid-glass reveal">
+        <div class="mentor-photo"><img src="assets/mentor-asad.jpg" alt="Асад Халимов" loading="lazy"></div>
+        <div class="mentor-info">
+          <span class="mentor-course" data-i18n="mentors.asadCourse">Дизайн интерьера</span>
+          <h3 data-i18n="mentors.asadName">Асад Халимов</h3>
+          <p class="mentor-role" data-i18n="mentors.asadRole">Старший куратор · 7+ лет в дизайне</p>
+          <ul>
+            <li data-i18n="mentors.asad1">120+ реализованных проектов в Ташкенте, Самарканде, Алматы</li>
+            <li data-i18n="mentors.asad2">Обучил 800+ студентов — 60% работают в профессии</li>
+            <li data-i18n="mentors.asad3">Эксперт по Revit и AutoCAD</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mentor liquid-glass reveal reveal-d1">
+        <div class="mentor-photo"><img src="assets/mentor-asliddin.jpg" alt="Аслиддин Омонбоев" loading="lazy"></div>
+        <div class="mentor-info">
+          <span class="mentor-course" data-i18n="mentors.asliddinCourse">Искусственный интеллект</span>
+          <h3 data-i18n="mentors.asliddinName">Аслиддин Омонбоев</h3>
+          <p class="mentor-role" data-i18n="mentors.asliddinRole">Дата-аналитик и Python-разработчик</p>
+          <ul>
+            <li data-i18n="mentors.asliddin1">Дашборды Power BI, SQL и Pandas для решений на данных</li>
+            <li data-i18n="mentors.asliddin2">Автоматизирует бизнес Telegram-ботами: приём заявок, уведомления из API</li>
+            <li data-i18n="mentors.asliddin3">Учился в НИТУ МИСиС (Москва); с 2022 года — реальные проекты</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -634,14 +716,14 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 <section id="formats">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow">Форматы обучения</span>
-      <h2 class="sec-title">Выберите комфортный формат</h2>
+      <span class="sec-eyebrow" data-i18n="fmt.eyebrow">Форматы обучения</span>
+      <h2 class="sec-title" data-i18n="fmt.title">Выберите комфортный формат</h2>
     </div>
     <div class="formats-grid">
-      <div class="format liquid-glass reveal"><b>01</b><div class="format-icon"><img src="assets/icon-group.png" alt="" loading="lazy"></div><h4>В группе</h4><p>Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.</p></div>
-      <div class="format liquid-glass reveal reveal-d1"><b>02</b><div class="format-icon"><img src="assets/icon-building.png" alt="" loading="lazy"></div><h4>Офлайн</h4><p>Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.</p></div>
-      <div class="format liquid-glass reveal reveal-d2"><b>03</b><div class="format-icon"><img src="assets/icon-review.png" alt="" loading="lazy"></div><h4>Практикумы</h4><p>Разборы работ и живая обратная связь от ментора на каждом занятии.</p></div>
-      <div class="format liquid-glass reveal reveal-d3"><b>04</b><div class="format-icon"><img src="assets/icon-installment.png" alt="" loading="lazy"></div><h4>Рассрочка</h4><p>Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.</p></div>
+      <div class="format liquid-glass reveal"><b>01</b><div class="format-icon"><img src="assets/icon-group.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f1">В группе</h4><p data-i18n="fmt.f1d">Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.</p></div>
+      <div class="format liquid-glass reveal reveal-d1"><b>02</b><div class="format-icon"><img src="assets/icon-building.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f2">Офлайн</h4><p data-i18n="fmt.f2d">Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.</p></div>
+      <div class="format liquid-glass reveal reveal-d2"><b>03</b><div class="format-icon"><img src="assets/icon-review.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f3">Практикумы</h4><p data-i18n="fmt.f3d">Разборы работ и живая обратная связь от ментора на каждом занятии.</p></div>
+      <div class="format liquid-glass reveal reveal-d3"><b>04</b><div class="format-icon"><img src="assets/icon-installment.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f4">Рассрочка</h4><p data-i18n="fmt.f4d">Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.</p></div>
     </div>
   </div>
 </section>
@@ -651,11 +733,11 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
   <div class="wrap">
     <div class="cta-panel liquid-glass reveal">
       <img class="cta-cap" src="assets/float-cap.png" alt="" loading="lazy">
-      <h2>Начните с <span class="grad-text">бесплатного открытого урока</span></h2>
-      <p class="cities">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i></p>
+      <h2 data-i18n-html="cta.title">Начните с <span class="grad-text">бесплатного открытого урока</span></h2>
+      <p class="cities" data-i18n-html="cta.cities">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i></p>
       <div class="cta-actions">
-        <a class="btn btn-primary" href="https://interno-open-lesson.vercel.app" data-modal-open>Записаться на открытый урок</a>
-        <a class="btn btn-ghost" href="tel:+998781131808">Позвонить: +998 78 113 18 08</a>
+        <a class="btn btn-primary" href="https://interno-open-lesson.vercel.app" data-modal-open data-i18n="cta.btn1">Записаться на открытый урок</a>
+        <a class="btn btn-ghost" href="tel:+998781131808" data-i18n="cta.btn2">Позвонить: +998 78 113 18 08</a>
       </div>
     </div>
   </div>
@@ -667,30 +749,31 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="assets/logo.svg" alt="INTERNO School">
-        <p>Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.</p>
+        <p data-i18n="footer.about">Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.</p>
       </div>
       <div class="footer-col">
-        <h5>Курсы</h5>
-        <a href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">Дизайн интерьера</a>
-        <a href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">Графический дизайн</a>
-        <a href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">Data-аналитика</a>
-        <a href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener">Искусственный интеллект</a>
+        <h5 data-i18n="footer.courses">Курсы</h5>
+        <a href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener" data-i18n="course.interior">Дизайн интерьера</a>
+        <a href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener" data-i18n="course.graphic">Графический дизайн</a>
+        <a href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener" data-i18n="course.data">Data-аналитика</a>
+        <a href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener" data-i18n="course.ai">Искусственный интеллект</a>
       </div>
       <div class="footer-col">
-        <h5>Школа</h5>
-        <a href="#why">Почему мы</a>
-        <a href="#formats">Форматы</a>
-        <a href="#open-lesson">Открытый урок</a>
+        <h5 data-i18n="footer.school">Школа</h5>
+        <a href="#why" data-i18n="nav.why">Почему мы</a>
+        <a href="#mentors" data-i18n="nav.mentors">Менторы</a>
+        <a href="#formats" data-i18n="nav.formats">Форматы</a>
+        <a href="#open-lesson" data-i18n="nav.openLesson">Открытый урок</a>
       </div>
       <div class="footer-col">
-        <h5>Контакты</h5>
+        <h5 data-i18n="footer.contacts">Контакты</h5>
         <a href="tel:+998781131808">+998 78 113 18 08</a>
         <a href="https://t.me/interno_school" target="_blank" rel="noopener">Telegram</a>
         <a href="https://instagram.com/interno.school" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 INTERNO School. Все права защищены.</p>
+      <p data-i18n="footer.rights">© 2026 INTERNO School. Все права защищены.</p>
       <div class="socials">
         <a href="https://t.me/interno_school" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.6c.2-1-.7-1.8-1.6-1.4L2.7 10.1c-1 .4-1 1.9.1 2.2l4.5 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.6 4.6 3.4c.8.6 2 .2 2.2-.9l1.6-14.8zM8.2 13.1l9.6-6.2c.2-.2.5.1.3.3l-7.9 7.3-.3 3.2-1.7-4.6z"/></svg></a>
         <a href="https://instagram.com/interno.school" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 2c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.4.2-.7.3-1 .6-.3.3-.5.6-.6 1-.1.3-.3.7-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.4.3.7.6 1 .3.3.6.5 1 .6.3.1.7.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.4-.2.7-.3 1-.6.3-.3.5-.6.6-1 .1-.3.3-.7.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.4-.3-.7-.6-1-.3-.3-.6-.5-1-.6-.3-.1-.7-.3-1.8-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.4a5.4 5.4 0 1 1 0 10.8 5.4 5.4 0 0 1 0-10.8zm0 2a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zm5.6-3.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/></svg></a>
@@ -705,46 +788,46 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
   <div class="modal-panel liquid-glass">
     <button class="modal-close" type="button" aria-label="Закрыть" data-modal-close>&times;</button>
     <div class="modal-head">
-      <span class="modal-eyebrow">Бесплатный урок</span>
-      <h3 class="modal-title" id="leadModalTitle">Запишитесь на открытый урок</h3>
-      <p class="modal-lead">Оставьте контакты — перезвоним, подберём удобные дату и филиал.</p>
+      <span class="modal-eyebrow" data-i18n="modal.eyebrow">Бесплатный урок</span>
+      <h3 class="modal-title" id="leadModalTitle" data-i18n="modal.title">Запишитесь на открытый урок</h3>
+      <p class="modal-lead" data-i18n="modal.lead">Оставьте контакты — перезвоним, подберём удобные дату и филиал.</p>
     </div>
     <form id="homepage_modal" novalidate>
-      <label>Имя
+      <label><span data-i18n="form.name">Имя</span>
         <input type="text" name="name" required placeholder="Aziz" autocomplete="name">
       </label>
-      <label>Телефон
+      <label><span data-i18n="form.phone">Телефон</span>
         <span class="phone-field">
           <span class="phone-prefix">+998</span>
           <input type="tel" name="phone" required inputmode="tel" autocomplete="tel-national" placeholder="90 123 45 67" maxlength="12">
         </span>
-        <span class="phone-error">Введите номер полностью — 9 цифр после +998</span>
+        <span class="phone-error" data-i18n="form.phoneError">Введите номер полностью — 9 цифр после +998</span>
       </label>
       <div class="form-row">
-        <label>Направление
+        <label><span data-i18n="form.course">Направление</span>
           <select name="course">
-            <option value="interior">Дизайн интерьера</option>
-            <option value="graphic">Графический дизайн</option>
-            <option value="data">Data-аналитика</option>
-            <option value="ai">Искусственный интеллект</option>
+            <option value="interior" data-i18n="course.interior">Дизайн интерьера</option>
+            <option value="graphic" data-i18n="course.graphic">Графический дизайн</option>
+            <option value="data" data-i18n="course.data">Data-аналитика</option>
+            <option value="ai" data-i18n="course.ai">Искусственный интеллект</option>
           </select>
         </label>
-        <label>Город
+        <label><span data-i18n="form.city">Город</span>
           <select name="city">
-            <option value="tsh">Ташкент</option>
-            <option value="smr">Самарканд</option>
-            <option value="frg">Фергана</option>
+            <option value="tsh" data-i18n="city.tsh">Ташкент</option>
+            <option value="smr" data-i18n="city.smr">Самарканд</option>
+            <option value="frg" data-i18n="city.frg">Фергана</option>
           </select>
         </label>
       </div>
-      <button class="btn btn-primary" type="submit">Записаться</button>
-      <p class="modal-note">Нажимая на кнопку, я соглашаюсь на обработку персональных данных</p>
+      <button class="btn btn-primary" type="submit" data-i18n="form.submit">Записаться</button>
+      <p class="modal-note" data-i18n="form.note">Нажимая на кнопку, я соглашаюсь на обработку персональных данных</p>
     </form>
     <div class="modal-success" hidden>
       <div class="modal-success-icon">✓</div>
-      <h3>Заявка отправлена!</h3>
-      <p>Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.</p>
-      <button class="btn btn-ghost" type="button" data-modal-close>Закрыть</button>
+      <h3 data-i18n="success.title">Заявка отправлена!</h3>
+      <p data-i18n="success.text">Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.</p>
+      <button class="btn btn-ghost" type="button" data-modal-close data-i18n="success.close">Закрыть</button>
     </div>
   </div>
 </div>
@@ -776,10 +859,11 @@ const onScroll=()=>{
 };
 onScroll();addEventListener('scroll',onScroll,{passive:true});
 
-// кинетическая типографика: разбивка h1 на буквы
-const h1=document.querySelector('.hero h1');
+// кинетическая типографика: разбивка h1 на буквы (переиспользуется при смене языка)
+const h1=document.getElementById('heroTitle');
 let kLetters=[];
-if(h1&&motionOK){
+function initKinetic(){
+  if(!h1||!motionOK)return;
   h1.setAttribute('aria-label',h1.textContent.trim());
   let idx=0;
   const split=node=>{
@@ -810,6 +894,135 @@ if(h1&&motionOK){
   });
   kLetters=[...h1.querySelectorAll('.k-letter')];
 }
+initKinetic();
+
+// ===== RU/UZ =====
+const I18N={
+  ru:{
+    heroH1:'Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span>',
+    "nav.courses":"Курсы","nav.why":"Почему мы","nav.mentors":"Менторы","nav.formats":"Форматы","nav.openLesson":"Открытый урок","nav.cta":"Бесплатный урок",
+    "hero.badge":"Школа современных профессий · Ташкент / Самарканд / Фергана",
+    "hero.sub":"Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.",
+    "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Смотреть направления",
+    "stat.courses":"направления обучения","stat.cities":"города Узбекистана","stat.lessons":"уроков в программе курса","stat.installment":"рассрочка до 6 месяцев",
+    "course.interior":"Дизайн интерьера","course.graphic":"Графический дизайн","course.data":"Data-аналитика","course.ai":"Искусственный интеллект",
+    "tick.neuro":"Нейросети","tick.bots":"Telegram-боты",
+    "courses.eyebrow":"Направления обучения","courses.title":"Выбери профессию — остальному научим",
+    "courses.sub":"Каждый курс — это практика с первого занятия, портфолио на выходе и поддержка менторов на всём пути.",
+    "courses.more":"Подробнее о курсе",
+    "tag.open":"Открытый урок","tag.course":"Курс","tag.new":"Новый курс",
+    "meta.interior":"офлайн · <i>Ташкент / Самарканд / Фергана</i>",
+    "meta.graphic":"<i>16 недель</i> · 5 модулей",
+    "meta.data":"<i>3 месяца</i> · 36 уроков",
+    "meta.ai":"<i>2 месяца</i> · 16 занятий · 6 модулей",
+    "desc.interior":"Флагманское направление школы: от идеи и планировки до 3D-визуализации и работы с реальным заказчиком.",
+    "desc.graphic":"С нуля до первых заказов: айдентика, Photoshop, Figma, работа с брендами и упаковка портфолио.",
+    "desc.data":"Python, SQL и Power BI: собирайте, анализируйте и визуализируйте данные — станьте специалистом, которого ищут компании.",
+    "desc.ai":"Нейросети как рабочий инструмент: контент, автоматизация, Telegram-боты и практические AI-проекты.",
+    "why.eyebrow":"Почему INTERNO","why.title":"Учим так, чтобы вы работали, а не просто слушали",
+    "why.f1":"Менторы-практики","why.f1d":"Преподают действующие специалисты с реальными проектами — объясняют сложное простым языком, разбирают ваши работы и остаются на связи на протяжении всего курса.",
+    "why.f2":"Практика с первого дня","why.f2d":"Домашние задания на реальных кейсах и разбор работ — навык формируется руками.",
+    "why.f3":"Сертификат школы","why.f3d":"Подтверждение навыков и готовое портфолио с проектами.",
+    "why.f4":"Путь к доходу","why.f4d":"Оформление портфолио, первые заказы и уверенный старт.",
+    "mentors.eyebrow":"Команда","mentors.title":"Менторы, которые работают в профессии",
+    "mentors.asadCourse":"Дизайн интерьера","mentors.asadName":"Асад Халимов","mentors.asadRole":"Старший куратор · 7+ лет в дизайне",
+    "mentors.asad1":"120+ реализованных проектов в Ташкенте, Самарканде, Алматы",
+    "mentors.asad2":"Обучил 800+ студентов — 60% работают в профессии",
+    "mentors.asad3":"Эксперт по Revit и AutoCAD",
+    "mentors.asliddinCourse":"Искусственный интеллект","mentors.asliddinName":"Аслиддин Омонбоев","mentors.asliddinRole":"Дата-аналитик и Python-разработчик",
+    "mentors.asliddin1":"Дашборды Power BI, SQL и Pandas для решений на данных",
+    "mentors.asliddin2":"Автоматизирует бизнес Telegram-ботами: приём заявок, уведомления из API",
+    "mentors.asliddin3":"Учился в НИТУ МИСиС (Москва); с 2022 года — реальные проекты",
+    "fmt.eyebrow":"Форматы обучения","fmt.title":"Выберите комфортный формат",
+    "fmt.f1":"В группе","fmt.f1d":"Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.",
+    "fmt.f2":"Офлайн","fmt.f2d":"Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.",
+    "fmt.f3":"Практикумы","fmt.f3d":"Разборы работ и живая обратная связь от ментора на каждом занятии.",
+    "fmt.f4":"Рассрочка","fmt.f4d":"Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.",
+    "cta.title":'Начните с <span class="grad-text">бесплатного открытого урока</span>',
+    "cta.cities":"Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i>",
+    "cta.btn1":"Записаться на открытый урок","cta.btn2":"Позвонить: +998 78 113 18 08",
+    "footer.about":"Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.",
+    "footer.courses":"Курсы","footer.school":"Школа","footer.contacts":"Контакты",
+    "footer.rights":"© 2026 INTERNO School. Все права защищены.",
+    "modal.eyebrow":"Бесплатный урок","modal.title":"Запишитесь на открытый урок",
+    "modal.lead":"Оставьте контакты — перезвоним, подберём удобные дату и филиал.",
+    "form.name":"Имя","form.phone":"Телефон","form.phoneError":"Введите номер полностью — 9 цифр после +998",
+    "form.course":"Направление","form.city":"Город","form.submit":"Записаться",
+    "form.note":"Нажимая на кнопку, я соглашаюсь на обработку персональных данных",
+    "city.tsh":"Ташкент","city.smr":"Самарканд","city.frg":"Фергана",
+    "success.title":"Заявка отправлена!","success.text":"Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.","success.close":"Закрыть",
+  },
+  uz:{
+    heroH1:'<span class="grad-text">Boqadigan va ilhomlantiradigan</span> kasbni egallang',
+    "nav.courses":"Kurslar","nav.why":"Nega biz","nav.mentors":"Mentorlar","nav.formats":"Formatlar","nav.openLesson":"Ochiq dars","nav.cta":"Bepul dars",
+    "hero.badge":"Zamonaviy kasblar maktabi · Toshkent / Samarqand / Farg'ona",
+    "hero.sub":"Interyer dizayni, grafik dizayn, data-analitika va sun'iy intellekt — amaliyotchi mentorlar bilan oflayn ta'lim.",
+    "hero.cta1":"Bepul darsga yozilish","hero.cta2":"Yo'nalishlarni ko'rish",
+    "stat.courses":"ta ta'lim yo'nalishi","stat.cities":"ta O'zbekiston shahri","stat.lessons":"kurs dasturidagi darslar","stat.installment":"6 oygacha bo'lib to'lash",
+    "course.interior":"Interyer dizayni","course.graphic":"Grafik dizayn","course.data":"Data-analitika","course.ai":"Sun'iy intellekt",
+    "tick.neuro":"Neyrotarmoqlar","tick.bots":"Telegram-botlar",
+    "courses.eyebrow":"Ta'lim yo'nalishlari","courses.title":"Kasbni tanlang — qolganini o'rgatamiz",
+    "courses.sub":"Har bir kurs — birinchi darsdan amaliyot, yakunda portfolio va butun yo'l davomida mentorlar yordami.",
+    "courses.more":"Kurs haqida batafsil",
+    "tag.open":"Ochiq dars","tag.course":"Kurs","tag.new":"Yangi kurs",
+    "meta.interior":"oflayn · <i>Toshkent / Samarqand / Farg'ona</i>",
+    "meta.graphic":"<i>16 hafta</i> · 5 modul",
+    "meta.data":"<i>3 oy</i> · 36 dars",
+    "meta.ai":"<i>2 oy</i> · 16 mashg'ulot · 6 modul",
+    "desc.interior":"Maktabning flagman yo'nalishi: g'oya va planirovkadan 3D-vizualizatsiya hamda real buyurtmachi bilan ishlashgacha.",
+    "desc.graphic":"Noldan birinchi buyurtmalargacha: aydentika, Photoshop, Figma, brendlar bilan ishlash va portfolio yig'ish.",
+    "desc.data":"Python, SQL va Power BI: ma'lumotlarni yig'ing, tahlil qiling va vizuallashtiring — kompaniyalar izlayotgan mutaxassis bo'ling.",
+    "desc.ai":"Neyrotarmoqlar ish quroli sifatida: kontent, avtomatlashtirish, Telegram-botlar va amaliy AI-loyihalar.",
+    "why.eyebrow":"Nega INTERNO","why.title":"Siz shunchaki tinglamaysiz — birinchi kundan ishlaysiz",
+    "why.f1":"Amaliyotchi mentorlar","why.f1d":"Real loyihalarga ega amaldagi mutaxassislar dars beradi — murakkabni sodda tilda tushuntiradi, ishlaringizni tahlil qiladi va butun kurs davomida aloqada bo'ladi.",
+    "why.f2":"Birinchi kundan amaliyot","why.f2d":"Real keyslar asosidagi uy vazifalari va ishlarni tahlil qilish — ko'nikma qo'lda shakllanadi.",
+    "why.f3":"Maktab sertifikati","why.f3d":"Ko'nikmalar tasdig'i va loyihalardan iborat tayyor portfolio.",
+    "why.f4":"Daromad sari yo'l","why.f4d":"Portfolio rasmiylashtirish, birinchi buyurtmalar va ishonchli start.",
+    "mentors.eyebrow":"Jamoa","mentors.title":"Kasbda ishlayotgan mentorlar",
+    "mentors.asadCourse":"Interyer dizayni","mentors.asadName":"Asad Halimov","mentors.asadRole":"Bosh mentor · 7+ yil dizaynda",
+    "mentors.asad1":"Toshkent, Samarqand, Almatida 120+ amalga oshirilgan loyiha",
+    "mentors.asad2":"800+ talabani o'qitgan — 60%i kasb bo'yicha ishlaydi",
+    "mentors.asad3":"Revit va AutoCAD bo'yicha ekspert",
+    "mentors.asliddinCourse":"Sun'iy intellekt","mentors.asliddinName":"Asliddin Omonboyev","mentors.asliddinRole":"Data-analitik va Python-dasturchi",
+    "mentors.asliddin1":"Ma'lumotlarga asoslangan qarorlar uchun Power BI, SQL va Pandas dashboardlari",
+    "mentors.asliddin2":"Biznesni Telegram-botlar bilan avtomatlashtiradi: buyurtma qabul qilish, API xabarnomalari",
+    "mentors.asliddin3":"Moskvadagi NUST MISISda tahsil olgan; 2022-yildan beri real loyihalar",
+    "fmt.eyebrow":"Ta'lim formatlari","fmt.title":"Qulay formatni tanlang",
+    "fmt.f1":"Guruhda","fmt.f1d":"Kichik guruhlar, jamoaviy muhit va hamfikrlar bilan netvorking.",
+    "fmt.f2":"Oflayn","fmt.f2d":"Maktab auditoriyalarida mashg'ulotlar — Toshkent, Samarqand va Farg'ona.",
+    "fmt.f3":"Praktikumlar","fmt.f3d":"Har darsda ishlarni tahlil qilish va mentordan jonli fikr-mulohaza.",
+    "fmt.f4":"Bo'lib to'lash","fmt.f4d":"Hozir o'qing — bo'lib to'lang: 6 oygacha ustama to'lovsiz.",
+    "cta.title":'Bepul <span class="grad-text">ochiq darsdan</span> boshlang',
+    "cta.cities":"Keling, mentor bilan tanishing va kasbni sinab ko'ring — <i>Toshkent · Samarqand · Farg'ona</i>",
+    "cta.btn1":"Ochiq darsga yozilish","cta.btn2":"Qo'ng'iroq qilish: +998 78 113 18 08",
+    "footer.about":"Zamonaviy kasblar maktabi: dizayn, analitika va sun'iy intellekt. Toshkent · Samarqand · Farg'ona.",
+    "footer.courses":"Kurslar","footer.school":"Maktab","footer.contacts":"Kontaktlar",
+    "footer.rights":"© 2026 INTERNO School. Barcha huquqlar himoyalangan.",
+    "modal.eyebrow":"Bepul dars","modal.title":"Ochiq darsga yoziling",
+    "modal.lead":"Kontaktlaringizni qoldiring — qo'ng'iroq qilamiz, qulay sana va filialni tanlaymiz.",
+    "form.name":"Ism","form.phone":"Telefon","form.phoneError":"Raqamni to'liq kiriting — +998 dan keyin 9 raqam",
+    "form.course":"Yo'nalish","form.city":"Shahar","form.submit":"Yozilish",
+    "form.note":"Tugmani bosish orqali shaxsiy ma'lumotlarni qayta ishlashga rozilik bildiraman",
+    "city.tsh":"Toshkent","city.smr":"Samarqand","city.frg":"Farg'ona",
+    "success.title":"Ariza yuborildi!","success.text":"Yozuvni tasdiqlash uchun tez orada siz bilan bog'lanamiz.","success.close":"Yopish",
+  },
+};
+let lang='ru';
+try{lang=localStorage.getItem('interno_lang')||'ru'}catch(_){}
+if(!I18N[lang])lang='ru';
+function applyLang(l){
+  lang=l;
+  try{localStorage.setItem('interno_lang',l)}catch(_){}
+  document.documentElement.lang=l;
+  const t=I18N[l];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t[el.dataset.i18n];if(v!=null)el.textContent=v});
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{const v=t[el.dataset.i18nHtml];if(v!=null)el.innerHTML=v});
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  if(h1){h1.innerHTML=t.heroH1;initKinetic()}
+}
+document.querySelectorAll('.lang-switch button').forEach(b=>
+  b.addEventListener('click',()=>{if(b.dataset.lang!==lang)applyLang(b.dataset.lang)}));
+if(lang!=='ru')applyLang(lang);
 
 // reveal on scroll
 const io=new IntersectionObserver(es=>es.forEach(e=>{
@@ -838,6 +1051,7 @@ const AMOCRM_FORM={
 const TG_NOTIFY='https://interno-open-lesson.vercel.app/api/notify';
 const COURSE_LABEL={interior:'Дизайн интерьера',graphic:'Графический дизайн',data:'Data-аналитика',ai:'Искусственный интеллект'};
 const CITY_LABEL={tsh:'Ташкент',smr:'Самарканд',frg:'Фергана'};
+const LANG_LABEL={ru:'Русский',uz:'Oʻzbek'};
 const UTM_KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
 const getUtm=()=>{
   const p=new URLSearchParams(location.search),utm={};
@@ -905,11 +1119,12 @@ modalForm.addEventListener('submit',async e=>{
   fd.append('form_id',AMOCRM_FORM.form_id);
   fd.append('hash',AMOCRM_FORM.hash);
   fd.append('user_origin','');
-  fd.append(AMOCRM_FORM.fields.name,name?`${name} · ${cityLabel} · RU`:`${cityLabel} · RU`);
+  const langTag=lang.toUpperCase();
+  fd.append(AMOCRM_FORM.fields.name,name?`${name} · ${cityLabel} · ${langTag}`:`${cityLabel} · ${langTag}`);
   fd.append(AMOCRM_FORM.fields.phone,phone);
   const noteParts=[
     `🎓 Курс: ${courseLabel}`,
-    `🏙 Город: ${cityLabel}   ·   🗣 Язык: Русский`,
+    `🏙 Город: ${cityLabel}   ·   🗣 Язык: ${LANG_LABEL[lang]}`,
     '—',
     `Источник: homepage_modal`,
     `URL: ${location.href}`,
@@ -919,7 +1134,7 @@ modalForm.addEventListener('submit',async e=>{
   if(utmPairs.length)noteParts.push(utmPairs.join(' · '));
   fd.append(AMOCRM_FORM.fields.note,noteParts.join('\n'));
   UTM_KEYS.forEach(k=>{if(utm[k])fd.append(k,utm[k])});
-  const tags=[cityLabel,'Язык: Русский',`Курс: ${courseLabel}`,'Форма: homepage_modal'];
+  const tags=[cityLabel,`Язык: ${LANG_LABEL[lang]}`,`Курс: ${courseLabel}`,'Форма: homepage_modal'];
   fd.append('tags',tags.join(','));
   tags.forEach(t=>fd.append('tags[]',t));
 
@@ -929,7 +1144,7 @@ modalForm.addEventListener('submit',async e=>{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        name,phone,city:cityLabel,lang:'Русский',
+        name,phone,city:cityLabel,lang:LANG_LABEL[lang],
         source:`homepage_modal · ${courseLabel}`,
         url:location.href,referrer:document.referrer||'',utm,
       }),

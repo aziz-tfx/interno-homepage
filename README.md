@@ -26,7 +26,10 @@ python3 -m http.server 8734
 
 | Курс | Лендинг |
 |---|---|
-| Дизайн интерьера | https://interno-open-lesson.vercel.app |
-| Графический дизайн | https://github.com/aziz-tfx/interno-graphic-design (TODO: задеплоить и заменить ссылку в index.html) |
-| Data-аналитика | https://interno-data-analytics.vercel.app |
-| Искусственный интеллект | https://ai-praktik-landing.vercel.app |
+| Дизайн интерьера | https://interior.internoedu.uz |
+| Архитектура | https://architecture.internoedu.uz |
+| Графический дизайн | https://graphic.internoedu.uz |
+| Видеомонтаж | https://videomontaj.internoedu.uz |
+| Data-аналитика | https://data.internoedu.uz |
+| Искусственный интеллект | https://ai.internoedu.uz |
+| Бухгалтерия | https://buxgalteriya.internoedu.uz |

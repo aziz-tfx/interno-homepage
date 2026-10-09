@@ -151,10 +151,10 @@ section{position:relative;padding:96px 0}
 .hero-card small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);margin-bottom:6px}
 .hero-card b{display:block;font-family:var(--font-display);font-size:22px;font-weight:600;line-height:1.1;margin-bottom:6px}
 .hero-card span{font-size:12.5px;color:var(--muted-d)}
-.hero-tabs{display:grid;grid-template-columns:repeat(4,auto);gap:10px;margin-top:14px}
+.hero-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .hero-tabs button{
   background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.2);border-radius:6px;
-  padding:12px 10px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;
+  padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;flex:1 1 auto;
 }
 .hero-tabs button:hover{border-color:rgba(255,255,255,.5)}
 .hero-tabs button.active{background:var(--violet);border-color:var(--violet);color:#fff}
@@ -199,6 +199,13 @@ section{position:relative;padding:96px 0}
 .course-sm.dark{background:var(--violet-deep);border-color:transparent}
 .course-sm.dark .more{border-color:var(--lime)}
 .course-sm p{max-width:170px}
+.courses-more{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.course-x{aspect-ratio:16/12;background:var(--paper-2);border:1px solid var(--line-l)}
+.course-x .card-body{height:100%;display:flex;flex-direction:column}
+.course-x h3{font-size:24px}
+.course-x .more{margin-top:auto;align-self:flex-start;border-color:var(--violet)}
+.course-x.dark{background:var(--violet-deep);border-color:transparent}
+.course-x.dark .more{border-color:var(--lime)}
 
 /* ===== PORTFOLIO ===== */
 .case{display:grid;grid-template-columns:1.72fr 1fr;border-radius:var(--r);overflow:hidden;background:var(--ink-2);border:1px solid var(--line-d);margin-bottom:14px}
@@ -370,7 +377,8 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
   .courses-grid,.why-grid,.formats-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:minmax(260px,auto)}
   .course-main,.why-main,.fmt-main{grid-column:span 2;grid-row:auto;min-height:440px}
   .course-wide,.why-wide,.fmt-wide{grid-column:span 2}
-  .works{grid-template-columns:1fr 1fr}
+  .works,.courses-more{grid-template-columns:1fr 1fr}
+  .courses-more .course-x:last-child{grid-column:span 2;aspect-ratio:21/9}
   .works .work:last-child{grid-column:span 2;aspect-ratio:21/9}
   .mentors-grid{grid-template-columns:1fr}
   .cta-grid{grid-template-columns:1fr}
@@ -386,9 +394,9 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
   .nav .btn-sm{padding:10px 12px;font-size:12.5px}
   .hero{padding-top:28px}
   .hero-points li{padding:4px 12px 4px 0;border-left:none}
-  .hero-tabs{grid-template-columns:1fr 1fr}
   .hero-card{left:12px;right:12px;bottom:12px;max-width:none}
-  .courses-grid,.why-grid,.formats-grid,.works{grid-template-columns:1fr}
+  .courses-grid,.why-grid,.formats-grid,.works,.courses-more{grid-template-columns:1fr}
+  .courses-more .course-x:last-child{grid-column:auto;aspect-ratio:16/12}
   .course-main,.why-main,.fmt-main,.course-wide,.why-wide,.fmt-wide,.works .work:last-child{grid-column:auto}
   .works .work:last-child{aspect-ratio:16/11}
   .fade-left-light::before{background:linear-gradient(180deg,var(--paper-2) 38%,rgba(246,242,236,.75) 55%,transparent 80%)}
@@ -433,7 +441,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
     <div class="hero-text">
       <span class="tag" data-i18n="hero.tag">Школа современных профессий</span>
       <h1 class="display" data-i18n-html="hero.title">Освой профессию <span class="tape">на практике</span></h1>
-      <p class="hero-sub" data-i18n="hero.sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — обучение с менторами-практиками.</p>
+      <p class="hero-sub" data-i18n="hero.sub">Дизайн интерьера, архитектура, графический дизайн, видеомонтаж, аналитика данных, искусственный интеллект и бухгалтерия — обучение с менторами-практиками.</p>
       <div class="hero-cta">
         <a class="btn btn-lime" href="#open-lesson" data-modal-open><span data-i18n="hero.cta1">Записаться на бесплатный урок</span><svg class="arr"><use href="#arr"/></svg></a>
         <a class="btn btn-line" href="#courses" data-i18n="hero.cta2">Выбрать направление</a>
@@ -447,7 +455,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
     <div class="hero-media">
       <div class="hero-photo">
         <img id="heroImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png" alt="Студентка работает над проектом интерьера">
-        <a class="hero-card" id="heroCard" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
+        <a class="hero-card" id="heroCard" href="https://interior.internoedu.uz" target="_blank" rel="noopener">
           <small data-i18n="hero.cardLabel">Открытый урок</small>
           <b id="heroCardTitle">Дизайн интерьера</b>
           <span id="heroCardText">Практический проект с первого занятия</span>
@@ -455,9 +463,12 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
       </div>
       <div class="hero-tabs" role="tablist">
         <button type="button" class="active" data-tab="interior" data-i18n="tab.interior">Интерьер</button>
+        <button type="button" data-tab="arch" data-i18n="tab.arch">Архитектура</button>
         <button type="button" data-tab="graphic" data-i18n="tab.graphic">Графдизайн</button>
+        <button type="button" data-tab="video" data-i18n="tab.video">Видеомонтаж</button>
         <button type="button" data-tab="data" data-i18n="tab.data">Data-аналитика</button>
         <button type="button" data-tab="ai" data-i18n="tab.ai">Искусственный интеллект</button>
+        <button type="button" data-tab="acc" data-i18n="tab.acc">Бухгалтерия</button>
       </div>
     </div>
   </div>
@@ -477,7 +488,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
       </div>
     </div>
     <div class="courses-grid">
-      <a class="card course-main fade-left-dark on-dark reveal" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
+      <a class="card course-main fade-left-dark on-dark reveal" href="https://interior.internoedu.uz" target="_blank" rel="noopener">
         <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070412_12ddaa7f-7015-4f37-a9ef-3e6e80494124.png" alt="" loading="lazy">
         <div class="card-body">
           <span class="num num-lime">01</span>
@@ -488,7 +499,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
           <span class="more"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
       </a>
-      <a class="card course-wide fade-left-light on-light reveal d1" href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">
+      <a class="card course-wide fade-left-light on-light reveal d1" href="https://graphic.internoedu.uz" target="_blank" rel="noopener">
         <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png" alt="" loading="lazy" style="object-position:right center">
         <div class="card-body">
           <span class="num num-violet">02</span>
@@ -497,7 +508,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
           <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
       </a>
-      <a class="card course-sm fade-left-light on-light reveal d2" href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">
+      <a class="card course-sm fade-left-light on-light reveal d2" href="https://data.internoedu.uz" target="_blank" rel="noopener">
         <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_f958f445-d731-4522-a1a8-9959ee1d7902.png" alt="" loading="lazy" style="object-position:70% center">
         <div class="card-body">
           <span class="num num-lime">03</span>
@@ -506,12 +517,41 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
           <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
       </a>
-      <a class="card course-sm dark fade-left-dark on-dark reveal d3" href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener" style="--ink:var(--violet-deep)">
+      <a class="card course-sm dark fade-left-dark on-dark reveal d3" href="https://ai.internoedu.uz" target="_blank" rel="noopener" style="--ink:var(--violet-deep)">
         <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png" alt="" loading="lazy" style="object-position:70% center">
         <div class="card-body">
           <span class="num num-lime">04</span>
           <h3 data-i18n="course.ai">Искусственный интеллект</h3>
           <p data-i18n="desc.ai">Практическое применение AI-инструментов для работы и проектов.</p>
+          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
+        </div>
+      </a>
+    </div>
+    <div class="courses-more">
+      <a class="card course-x fade-top-light on-light reveal" href="https://architecture.internoedu.uz" target="_blank" rel="noopener">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_5e09c6c1-d022-4290-aa9e-587659e15f5a.png" alt="" loading="lazy">
+        <div class="card-body">
+          <span class="num num-violet">05</span>
+          <h3 data-i18n="course.arch">Архитектура</h3>
+          <p data-i18n="desc.arch">Чертежи, 3D-модель здания и проект для портфолио.</p>
+          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
+        </div>
+      </a>
+      <a class="card course-x dark fade-top-violet on-dark reveal d1" href="https://videomontaj.internoedu.uz" target="_blank" rel="noopener">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_ccf60b80-9d66-4e2f-8d01-903fa45b2205.png" alt="" loading="lazy">
+        <div class="card-body">
+          <span class="num num-lime">06</span>
+          <h3 data-i18n="course.video">Видеомонтаж</h3>
+          <p data-i18n="desc.video">Монтаж, цвет и звук: от сырого материала до готового ролика.</p>
+          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
+        </div>
+      </a>
+      <a class="card course-x fade-top-light on-light reveal d2" href="https://buxgalteriya.internoedu.uz" target="_blank" rel="noopener">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125751_a9fa912f-1795-4332-b4ec-4b72c185a3bd.png" alt="" loading="lazy">
+        <div class="card-body">
+          <span class="num num-violet">07</span>
+          <h3 data-i18n="course.acc">Бухгалтерия</h3>
+          <p data-i18n="desc.acc">Учёт, налоги и отчётность — профессия, которая нужна каждому бизнесу.</p>
           <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
       </a>
@@ -549,7 +589,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
           <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg><span data-i18n="works.s3">3D-визуализация</span></li>
         </ul>
         <div class="case-foot">
-          <a class="btn btn-violet" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener"><span data-i18n="works.case">Смотреть кейс</span><svg class="arr"><use href="#arr"/></svg></a>
+          <a class="btn btn-violet" href="https://interior.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="works.case">Смотреть кейс</span><svg class="arr"><use href="#arr"/></svg></a>
           <span class="case-count"><b>01</b> / 04</span>
         </div>
       </div>
@@ -683,7 +723,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
       <h2 class="display" data-i18n-html="cta.title">Начните с <span class="tape">бесплатного открытого урока</span></h2>
       <p class="cta-sub" data-i18n="cta.sub">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — Ташкент · Самарканд · Фергана.</p>
       <div class="cta-actions">
-        <a class="btn btn-lime" href="https://interno-open-lesson.vercel.app" data-modal-open><span data-i18n="cta.btn1">Записаться на открытый урок</span><svg class="arr"><use href="#arr"/></svg></a>
+        <a class="btn btn-lime" href="https://interior.internoedu.uz" data-modal-open><span data-i18n="cta.btn1">Записаться на открытый урок</span><svg class="arr"><use href="#arr"/></svg></a>
         <a class="btn btn-line" href="tel:+998781131808" data-i18n="cta.btn2">Позвонить: +998 78 113 18 08</a>
       </div>
       <p class="cta-note" data-i18n="cta.note">Выберите направление — остальное разберём вместе.</p>
@@ -698,14 +738,17 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="assets/logo.svg" alt="INTERNO — Школа современных профессий">
-        <p data-i18n="footer.about">Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.</p>
+        <p data-i18n="footer.about">Школа современных профессий: дизайн, архитектура, видеомонтаж, аналитика, ИИ и бухгалтерия. Ташкент · Самарканд · Фергана.</p>
       </div>
       <div class="footer-col">
         <h5 data-i18n="footer.courses">Курсы</h5>
-        <a href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener" data-i18n="course.interior">Дизайн интерьера</a>
-        <a href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener" data-i18n="course.graphic">Графический дизайн</a>
-        <a href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener" data-i18n="course.data">Data-аналитика</a>
-        <a href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener" data-i18n="course.ai">Искусственный интеллект</a>
+        <a href="https://interior.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.interior">Дизайн интерьера</a>
+        <a href="https://graphic.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.graphic">Графический дизайн</a>
+        <a href="https://data.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.data">Data-аналитика</a>
+        <a href="https://ai.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.ai">Искусственный интеллект</a>
+        <a href="https://architecture.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.arch">Архитектура</a>
+        <a href="https://videomontaj.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.video">Видеомонтаж</a>
+        <a href="https://buxgalteriya.internoedu.uz" target="_blank" rel="noopener" data-i18n="course.acc">Бухгалтерия</a>
       </div>
       <div class="footer-col">
         <h5 data-i18n="footer.school">Школа</h5>
@@ -753,6 +796,9 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
             <option value="graphic" data-i18n="course.graphic">Графический дизайн</option>
             <option value="data" data-i18n="course.data">Data-аналитика</option>
             <option value="ai" data-i18n="course.ai">Искусственный интеллект</option>
+            <option value="arch" data-i18n="course.arch">Архитектура</option>
+            <option value="video" data-i18n="course.video">Видеомонтаж</option>
+            <option value="acc" data-i18n="course.acc">Бухгалтерия</option>
           </select>
         </label>
         <label><span data-i18n="form.city">Город</span>
@@ -786,12 +832,20 @@ const I18N={
     "nav.courses":"Курсы","nav.why":"Почему мы","nav.mentors":"Менторы","nav.formats":"Форматы","nav.openLesson":"Открытый урок","nav.cta":"Бесплатный урок",
     "hero.tag":"Школа современных профессий",
     "hero.title":'Освой профессию <span class="tape">на практике</span>',
-    "hero.sub":"Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — обучение с менторами-практиками.",
+    "hero.sub":"Дизайн интерьера, архитектура, графический дизайн, видеомонтаж, аналитика данных, искусственный интеллект и бухгалтерия — обучение с менторами-практиками.",
     "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Выбрать направление",
     "hero.p1":"Офлайн-обучение","hero.p2":"Менторы-практики","hero.p3":"Проекты в портфолио",
     "hero.cardLabel":"Открытый урок",
     "tab.interior":"Интерьер","tab.graphic":"Графдизайн","tab.data":"Data-аналитика","tab.ai":"Искусственный интеллект",
     "course.interior":"Дизайн интерьера","course.graphic":"Графический дизайн","course.data":"Data-аналитика","course.ai":"Искусственный интеллект",
+    "tab.arch":"Архитектура","tab.video":"Видеомонтаж","tab.acc":"Бухгалтерия",
+    "course.arch":"Архитектура","course.video":"Видеомонтаж","course.acc":"Бухгалтерия",
+    "desc.arch":"Чертежи, 3D-модель здания и проект для портфолио.",
+    "desc.video":"Монтаж, цвет и звук: от сырого материала до готового ролика.",
+    "desc.acc":"Учёт, налоги и отчётность — профессия, которая нужна каждому бизнесу.",
+    "card.arch":"От эскиза до 3D-модели здания",
+    "card.video":"Ролики для брендов и соцсетей",
+    "card.acc":"Учёт, налоги и отчётность на практике",
     "course.offline":"Офлайн","cities.dots":"Ташкент · Самарканд · Фергана",
     "courses.tag":"Направления обучения","courses.title":"Выбери профессию — остальному научим",
     "courses.sub":"Каждый курс — это практика с первого занятия, проект для портфолио и поддержка менторов на всём пути.",
@@ -839,7 +893,7 @@ const I18N={
     "cta.sub":"Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — Ташкент · Самарканд · Фергана.",
     "cta.btn1":"Записаться на открытый урок","cta.btn2":"Позвонить: +998 78 113 18 08",
     "cta.note":"Выберите направление — остальное разберём вместе.",
-    "footer.about":"Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.",
+    "footer.about":"Школа современных профессий: дизайн, архитектура, видеомонтаж, аналитика, ИИ и бухгалтерия. Ташкент · Самарканд · Фергана.",
     "footer.courses":"Курсы","footer.school":"Школа","footer.contacts":"Контакты",
     "footer.rights":"© 2026 INTERNO School. Все права защищены.",
     "modal.eyebrow":"Бесплатный урок","modal.title":"Запишитесь на открытый урок",
@@ -854,12 +908,20 @@ const I18N={
     "nav.courses":"Kurslar","nav.why":"Nega biz","nav.mentors":"Mentorlar","nav.formats":"Formatlar","nav.openLesson":"Ochiq dars","nav.cta":"Bepul dars",
     "hero.tag":"Zamonaviy kasblar maktabi",
     "hero.title":'Kasbni <span class="tape">amaliyotda</span> egallang',
-    "hero.sub":"Interyer dizayni, grafik dizayn, data-analitika va sun'iy intellekt — amaliyotchi mentorlar bilan ta'lim.",
+    "hero.sub":"Interyer dizayni, arxitektura, grafik dizayn, videomontaj, data-analitika, sun'iy intellekt va buxgalteriya — amaliyotchi mentorlar bilan ta'lim.",
     "hero.cta1":"Bepul darsga yozilish","hero.cta2":"Yo'nalishni tanlash",
     "hero.p1":"Oflayn ta'lim","hero.p2":"Amaliyotchi mentorlar","hero.p3":"Portfolio uchun loyihalar",
     "hero.cardLabel":"Ochiq dars",
     "tab.interior":"Interyer","tab.graphic":"Grafik dizayn","tab.data":"Data-analitika","tab.ai":"Sun'iy intellekt",
     "course.interior":"Interyer dizayni","course.graphic":"Grafik dizayn","course.data":"Data-analitika","course.ai":"Sun'iy intellekt",
+    "tab.arch":"Arxitektura","tab.video":"Videomontaj","tab.acc":"Buxgalteriya",
+    "course.arch":"Arxitektura","course.video":"Videomontaj","course.acc":"Buxgalteriya",
+    "desc.arch":"Chizmalar, binoning 3D-modeli va portfolio uchun loyiha.",
+    "desc.video":"Montaj, rang va ovoz: xom materialdan tayyor rolikkacha.",
+    "desc.acc":"Hisob, soliqlar va hisobotlar — har bir biznesga kerak kasb.",
+    "card.arch":"Eskizdan binoning 3D-modeligacha",
+    "card.video":"Brendlar va ijtimoiy tarmoqlar uchun roliklar",
+    "card.acc":"Hisob, soliqlar va hisobotlar amalda",
     "course.offline":"Oflayn","cities.dots":"Toshkent · Samarqand · Farg'ona",
     "courses.tag":"Ta'lim yo'nalishlari","courses.title":"Kasbni tanlang — qolganini o'rgatamiz",
     "courses.sub":"Har bir kurs — birinchi darsdan amaliyot, portfolio uchun loyiha va butun yo'l davomida mentorlar yordami.",
@@ -907,7 +969,7 @@ const I18N={
     "cta.sub":"Keling, mentor bilan tanishing va kasbni sinab ko'ring — Toshkent · Samarqand · Farg'ona.",
     "cta.btn1":"Ochiq darsga yozilish","cta.btn2":"Qo'ng'iroq qilish: +998 78 113 18 08",
     "cta.note":"Yo'nalishni tanlang — qolganini birga hal qilamiz.",
-    "footer.about":"Zamonaviy kasblar maktabi: dizayn, analitika va sun'iy intellekt. Toshkent · Samarqand · Farg'ona.",
+    "footer.about":"Zamonaviy kasblar maktabi: dizayn, arxitektura, videomontaj, analitika, sun'iy intellekt va buxgalteriya. Toshkent · Samarqand · Farg'ona.",
     "footer.courses":"Kurslar","footer.school":"Maktab","footer.contacts":"Kontaktlar",
     "footer.rights":"© 2026 INTERNO School. Barcha huquqlar himoyalangan.",
     "modal.eyebrow":"Bepul dars","modal.title":"Ochiq darsga yoziling",
@@ -922,10 +984,13 @@ const I18N={
 
 // ===== hero: переключение направлений =====
 const HERO_TABS={
-  interior:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png',href:'https://interno-open-lesson.vercel.app'},
-  graphic:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png',href:'https://github.com/aziz-tfx/interno-graphic-design'},
-  data:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070456_312ae594-060e-411c-94f0-b03b953afbbd.png',href:'https://interno-data-analytics.vercel.app'},
-  ai:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png',href:'https://ai-praktik-landing.vercel.app'},
+  interior:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png',href:'https://interior.internoedu.uz'},
+  graphic:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png',href:'https://graphic.internoedu.uz'},
+  data:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070456_312ae594-060e-411c-94f0-b03b953afbbd.png',href:'https://data.internoedu.uz'},
+  arch:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_5e09c6c1-d022-4290-aa9e-587659e15f5a.png',href:'https://architecture.internoedu.uz'},
+  video:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_ccf60b80-9d66-4e2f-8d01-903fa45b2205.png',href:'https://videomontaj.internoedu.uz'},
+  acc:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125751_a9fa912f-1795-4332-b4ec-4b72c185a3bd.png',href:'https://buxgalteriya.internoedu.uz'},
+  ai:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png',href:'https://ai.internoedu.uz'},
 };
 const heroImg=document.getElementById('heroImg');
 const heroCard=document.getElementById('heroCard');
@@ -977,7 +1042,7 @@ const AMOCRM_FORM={
   fields:{name:'fields[name_1]',phone:'fields[875427_1][1182433]',note:'fields[note_2]'},
 };
 const TG_NOTIFY='https://interno-open-lesson.vercel.app/api/notify';
-const COURSE_LABEL={interior:'Дизайн интерьера',graphic:'Графический дизайн',data:'Data-аналитика',ai:'Искусственный интеллект'};
+const COURSE_LABEL={interior:'Дизайн интерьера',graphic:'Графический дизайн',data:'Data-аналитика',ai:'Искусственный интеллект',arch:'Архитектура',video:'Видеомонтаж',acc:'Бухгалтерия'};
 const CITY_LABEL={tsh:'Ташкент',smr:'Самарканд',frg:'Фергана'};
 const LANG_LABEL={ru:'Русский',uz:'Oʻzbek'};
 const UTM_KEYS=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];

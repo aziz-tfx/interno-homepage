@@ -1,17 +1,37 @@
 # INTERNO School — главная страница
 
-Хоум-пейдж школы современных профессий (референс структуры — proweb.uz): hero с видео-фоном, каталог направлений со ссылками на лендинги курсов, преимущества, форматы обучения, CTA открытого урока.
+Хоум-пейдж школы современных профессий с каталогом всех курсов. Визуальный язык скопирован
+с лендинга курса видеомонтажа (`interno-videomontaj-landing`): Oswald + Manrope, тёмный фон
+и кремовые секции, лаймовый маркер в заголовках, фиолетовые теги, нумерованные фото-карточки,
+парящие 3D-объекты, sticky-кнопка на мобильных.
 
 ## Структура
 
 Один самодостаточный `index.html` (стили и скрипты инлайном) + папка `assets/`:
 
-- `assets/icon-*.png` — 3D-иконки, сгенерированы в Higgsfield (Recraft V4.1) в едином стиле бренда
-- `assets/hero-bg.png` — постер hero-фона (16:9, 2K)
-- `assets/hero-loop.mp4` — анимированный hero-фон (Kling 3.0 Turbo, image-to-video)
+- `assets/course-*.jpg` — фото для карточек курсов (взяты с лендингов соответствующих курсов)
+- `assets/classroom.jpg`, `class.jpg`, `career.jpg` — фото класса и студентов (с лендингов видеомонтажа и бухгалтерии)
+- `assets/mentor-*.jpg` — фото менторов
+- `assets/float-cap.png`, `obj-trophy.png`, `obj-laptop.png` — 3D-объекты (Higgsfield)
 - `assets/logo.svg` — логотип школы
 
-Деплой на любой статический хостинг: Vercel, Netlify, GitHub Pages.
+Фото для карточек «Графический дизайн», «Искусственный интеллект», блока «Практика с первого дня»
+и рендер для «Архитектуры» подключены с CDN Higgsfield (как на лендинге архитектуры) — при желании
+скачайте их в `assets/` и замените ссылки в `index.html`.
+
+## Секции
+
+1. Hero — оффер, CTA, карточка открытого урока со статистикой школы
+2. Направления — bento-сетка из 8 курсов со ссылками на лендинги
+3. Почему INTERNO — формат обучения, цифры школы
+4. Города — Ташкент, Самарканд, Фергана
+5. Менторы
+6. FAQ
+7. Финальный CTA с формой заявки (amoCRM + Telegram, тот же конвейер, что на лендингах)
+8. Футер
+
+RU/UZ: русские тексты собираются из разметки, узбекские — в словаре `I18N.uz` в `<script>`.
+Язык: `?lang=uz` → `localStorage` → `ru`.
 
 ## Локальный запуск
 
@@ -23,7 +43,13 @@ python3 -m http.server 8734
 
 | Курс | Лендинг |
 |---|---|
-| Дизайн интерьера | https://interno-open-lesson.vercel.app |
-| Графический дизайн | https://github.com/aziz-tfx/interno-graphic-design (TODO: задеплоить и заменить ссылку в index.html) |
-| Data-аналитика | https://interno-data-analytics.vercel.app |
-| Искусственный интеллект | https://ai-praktik-landing.vercel.app |
+| Дизайн интерьера | https://interior.internoedu.uz |
+| Видеомонтаж и моушн-дизайн | https://videomontaj.internoedu.uz |
+| Графический дизайн | https://graphic.internoedu.uz |
+| Искусственный интеллект | https://ai.internoedu.uz |
+| Архитектура | https://architecture.internoedu.uz |
+| Data-аналитика | https://data.internoedu.uz |
+| Бухгалтерия | https://buxgalteriya.internoedu.uz |
+| Финансы бизнеса (онлайн-урок) | https://finance.internoedu.uz |
+
+Деплой на любой статический хостинг: Vercel, Netlify, GitHub Pages.

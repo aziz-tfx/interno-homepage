@@ -12,7 +12,7 @@
 - `assets/course-*.jpg` — фото для карточек курсов (взяты с лендингов соответствующих курсов)
 - `assets/classroom.jpg`, `class.jpg`, `career.jpg` — фото класса и студентов (с лендингов видеомонтажа и бухгалтерии)
 - `assets/mentor-*.jpg` — фото менторов
-- `assets/float-cap.png`, `obj-trophy.png`, `obj-laptop.png` — 3D-объекты (Higgsfield)
+- `assets/float-cap.png`, `obj-trophy.png` — 3D-объекты (Higgsfield)
 - `assets/logo.svg` — логотип школы
 
 Фото для карточек «Графический дизайн», «Искусственный интеллект», блока «Практика с первого дня»

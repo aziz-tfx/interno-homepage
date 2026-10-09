@@ -7,538 +7,411 @@
 <meta name="description" content="Дизайн интерьера, графический дизайн, data-аналитика и искусственный интеллект. Офлайн в Ташкенте, Самарканде и Фергане. Начните с бесплатного открытого урока.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070709;
-  --bg-soft:#0B0B0E;
-  --panel:#111116;
-  --orange:#F76B2B;
-  --orange-soft:#FF8B4D;
-  --orange-deep:#E55720;
-  --paper:#F4EFE8;
-  --muted:#9a9aa4;
-  --line:rgba(255,255,255,.08);
-  /* Liquid glass — настройки с лендинга дизайна интерьера (interno-open-lesson, тема .dark) */
-  --glass-bg:rgba(255,255,255,.03);
-  --glass-blur:12px;
-  --glass-shadow-inset:rgba(255,255,255,.1);
-  --glass-border-bright:rgba(255,255,255,.45);
-  --glass-border-dim:rgba(255,255,255,.15);
-  --glass-border-width:1.4px;
-  --font-display:'Unbounded',sans-serif;
+  --ink:#0A090D;
+  --ink-2:#121117;
+  --ink-3:#1A1820;
+  --paper:#EEE9E1;
+  --paper-2:#F6F2EC;
+  --cream:#F3EEE6;
+  --violet:#5B2BE0;
+  --violet-deep:#24183F;
+  --lime:#D6F23B;
+  --muted-d:#9C99A6;   /* вторичный текст на тёмном */
+  --muted-l:#5E5A55;   /* вторичный текст на светлом */
+  --line-d:rgba(255,255,255,.1);
+  --line-l:rgba(10,9,13,.12);
+  --r:14px;
+  --font-display:'Oswald',sans-serif;
   --font-body:'Manrope',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  background:var(--bg);
-  color:var(--paper);
-  font-family:var(--font-body);
-  font-size:17px;
-  line-height:1.6;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+  background:var(--ink);color:var(--cream);
+  font-family:var(--font-body);font-size:16px;line-height:1.55;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
 }
-::selection{background:rgba(247,107,43,.4)}
+::selection{background:var(--lime);color:var(--ink)}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+button{font:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
 
-/* ===== LIQUID GLASS (как на лендинге дизайна интерьера) ===== */
-.liquid-glass{
-  background:var(--glass-bg);
-  background-blend-mode:luminosity;
-  backdrop-filter:blur(var(--glass-blur));
-  -webkit-backdrop-filter:blur(var(--glass-blur));
-  border:none;
-  box-shadow:inset 0 1px 1px var(--glass-shadow-inset);
-  position:relative;
-  overflow:hidden;
+/* ===== секции: чередование тёмных и «бумажных» ===== */
+section{position:relative;padding:96px 0}
+.s-dark{background:var(--ink);color:var(--cream)}
+.s-light{
+  background-color:var(--paper);color:var(--ink);
+  /* лёгкая бумажная фактура */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.liquid-glass::before{
-  content:'';
-  position:absolute;inset:0;border-radius:inherit;
-  padding:var(--glass-border-width);
-  background:linear-gradient(180deg,
-    var(--glass-border-bright) 0%,
-    var(--glass-border-dim) 20%,
-    transparent 40%,
-    transparent 60%,
-    var(--glass-border-dim) 80%,
-    var(--glass-border-bright) 100%);
-  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-  pointer-events:none;
-  z-index:1;
-}
-.liquid-glass > *{position:relative;z-index:2}
 
-/* ---------- ambient glow orbs ---------- */
-.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.5;will-change:transform}
-.orb-1{width:520px;height:520px;background:radial-gradient(circle,rgba(247,107,43,.32),transparent 65%);top:-140px;left:-120px}
-.orb-2{width:640px;height:640px;background:radial-gradient(circle,rgba(255,139,77,.18),transparent 65%);top:40vh;right:-220px}
-.orb-3{width:460px;height:460px;background:radial-gradient(circle,rgba(247,107,43,.22),transparent 65%);bottom:-160px;left:30vw}
-
-/* ---------- nav ---------- */
-.nav{
-  position:fixed;inset:0 0 auto 0;z-index:50;
-  transition:background .35s,border-color .35s,backdrop-filter .35s;
-  border-bottom:1px solid transparent;
+/* ===== типографика ===== */
+.display{
+  font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+  line-height:.98;letter-spacing:-.005em;
 }
-.nav.scrolled{
-  background:rgba(7,7,9,.62);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-bottom-color:var(--line);
+.sec-title{font-size:clamp(36px,4.5vw,64px)}
+.tag{
+  display:inline-block;background:var(--violet);color:#fff;
+  font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 12px;transform:rotate(-2deg);margin-bottom:18px;
 }
-.nav-inner{display:flex;align-items:center;gap:32px;height:72px;max-width:1200px;margin:0 auto;padding:0 24px}
-.nav-logo img{height:20px;width:auto}
-.nav-links{display:flex;gap:26px;margin-left:auto}
-.nav-links a{font-size:14.5px;font-weight:600;color:var(--muted);transition:color .2s}
-.nav-links a:hover{color:var(--paper)}
-.nav-phone{font-size:14.5px;font-weight:700;color:var(--paper);white-space:nowrap}
-.nav-phone:hover{color:var(--orange-soft)}
+/* «скотч»-маркер с рваными краями */
+.tape{
+  position:relative;display:inline-block;color:var(--ink);padding:0 .14em;margin:0 -.04em;
+  z-index:0;
+}
+.tape::before{
+  content:'';position:absolute;z-index:-1;inset:.06em -.08em -.02em -.1em;
+  background:var(--lime);transform:rotate(-1.2deg);
+  clip-path:polygon(0 8%,3% 0,22% 5%,41% 1%,63% 6%,84% 0,100% 4%,99% 40%,100% 92%,82% 100%,61% 95%,38% 100%,17% 96%,2% 100%,1% 55%);
+}
+.sec-head{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
+.sec-aside{max-width:400px;font-size:15px;font-weight:500}
+.s-dark .sec-aside{color:var(--muted-d)}
+.s-light .sec-aside{color:var(--muted-l)}
+.link-arrow{
+  display:inline-flex;align-items:center;gap:10px;margin-top:22px;
+  font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding-bottom:6px;border-bottom:2px solid currentColor;transition:gap .25s,color .25s;
+}
+.link-arrow:hover{gap:16px}
+.s-light .link-arrow{color:var(--ink);border-color:rgba(10,9,13,.25)}
+.s-dark .link-arrow{color:var(--cream);border-color:rgba(255,255,255,.25)}
+.arr{width:18px;height:18px;flex-shrink:0}
 
-/* ---------- buttons ---------- */
+/* ===== кнопки ===== */
 .btn{
-  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  font-family:var(--font-body);font-weight:700;font-size:16px;
-  padding:16px 30px;border-radius:16px;border:none;cursor:pointer;
-  transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s;
-  overflow:hidden;white-space:nowrap;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  font-weight:700;font-size:15px;padding:16px 26px;border-radius:6px;
+  border:1.5px solid transparent;cursor:pointer;white-space:nowrap;
+  transition:transform .2s,background .2s,border-color .2s,box-shadow .2s;
 }
-.btn-primary{
-  background:linear-gradient(135deg,var(--orange) 0%,var(--orange-deep) 100%);
-  color:#fff;
-  box-shadow:0 8px 32px rgba(247,107,43,.38),inset 0 1px 0 rgba(255,255,255,.25);
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(247,107,43,.55),inset 0 1px 0 rgba(255,255,255,.25)}
-.btn-primary::after{
-  content:'';position:absolute;top:0;left:-80%;width:50%;height:100%;
-  background:linear-gradient(105deg,transparent,rgba(255,255,255,.35),transparent);
-  transform:skewX(-20deg);transition:left .6s;
-}
-.btn-primary:hover::after{left:130%}
-.btn-ghost{
-  background:rgba(255,255,255,.05);color:var(--paper);
-  border:1px solid var(--line);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-}
-.btn-ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18)}
-.btn-sm{padding:11px 20px;font-size:14px;border-radius:12px}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--ink)}
+.btn-lime:hover{box-shadow:0 10px 30px rgba(214,242,59,.25)}
+.btn-violet{background:var(--violet);color:#fff}
+.btn-violet:hover{box-shadow:0 10px 30px rgba(91,43,224,.4)}
+.btn-line{background:transparent;color:var(--cream);border-color:rgba(255,255,255,.28)}
+.btn-line:hover{border-color:var(--cream)}
+.btn-sm{padding:11px 18px;font-size:13.5px}
 
-/* ---------- hero ---------- */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.hero-media{position:absolute;inset:0;z-index:0}
-.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover}
-.hero-media::after{
-  content:'';position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 46%,transparent 20%,rgba(7,7,9,.55) 70%,rgba(7,7,9,.92) 100%),
-    linear-gradient(180deg,rgba(7,7,9,.55) 0%,rgba(7,7,9,.15) 30%,rgba(7,7,9,.2) 70%,var(--bg) 98%);
+/* ===== номера-бейджи ===== */
+.num{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:30px;height:24px;padding:0 6px;font-size:11.5px;font-weight:800;
+  align-self:flex-start;width:max-content;
 }
-.hero-content{position:relative;z-index:2;text-align:center;padding:140px 24px 80px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:13.5px;font-weight:600;letter-spacing:.04em;color:var(--paper);
-  border-radius:100px;
-  padding:9px 20px;margin-bottom:34px;
-}
-.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange);animation:pulse 2.2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
-.hero h1{
-  font-family:var(--font-display);font-weight:800;
-  font-size:clamp(34px,5.4vw,72px);line-height:1.08;letter-spacing:-.01em;
-  max-width:960px;margin:0 auto 26px;
-}
-/* Кинетическая типографика: побуквенный вход + реакция на курсор */
-.k-word{display:inline-block;white-space:nowrap}
-.k-letter{display:inline-block;will-change:transform;transition:transform .3s cubic-bezier(.22,1,.36,1)}
-@media (prefers-reduced-motion:no-preference){
-  /* backwards, а не both: после входа анимация отпускает transform,
-     иначе to{transform:none} перекрывает inline-сдвиги магнитного эффекта */
-  .k-letter{animation:letterIn .7s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(var(--i)*28ms)}
-}
-@keyframes letterIn{
-  from{opacity:0;transform:translateY(.6em) rotate(6deg) scale(.8)}
-  to{opacity:1;transform:none}
-}
-.grad-text .k-letter{
-  background-image:linear-gradient(100deg,var(--orange-soft) 0%,var(--orange) 45%,#ffb488 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.grad-text{
-  background:linear-gradient(100deg,var(--orange-soft) 0%,var(--orange) 45%,#ffb488 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 0 26px rgba(247,107,43,.45));
-}
-.hero-sub{font-size:clamp(16px,1.6vw,20px);color:#c9c5be;max-width:620px;margin:0 auto 42px;font-weight:500}
-.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:70px}
-.hero-stats{
-  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
-}
-.stat{
-  min-width:170px;padding:18px 26px;border-radius:20px;
-  text-align:left;
-}
-.stat b{display:block;font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--paper)}
-.stat span{font-size:13.5px;color:var(--muted);font-weight:600}
-.stat b em{font-style:normal;color:var(--orange-soft)}
+.num-lime{background:var(--lime);color:var(--ink)}
+.num-violet{background:var(--violet);color:#fff}
 
-/* ---------- ticker ---------- */
-.ticker{
-  position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:rgba(255,255,255,.02);overflow:hidden;padding:18px 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-}
-.ticker-track{display:flex;gap:44px;width:max-content;animation:ticker 30s linear infinite}
-.ticker span{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
-.ticker span i{font-style:normal;color:var(--orange);margin-right:44px}
-.ticker span em{font-style:normal}
-@keyframes ticker{to{transform:translateX(-50%)}}
+/* ===== NAV ===== */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,9,13,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--line-d)}
+.nav-inner{display:flex;align-items:center;gap:28px;height:76px;max-width:1240px;margin:0 auto;padding:0 24px}
+.nav-logo img{height:40px;width:auto}
+.nav-links{display:flex;gap:28px;margin-left:auto}
+.nav-links a{font-size:13.5px;font-weight:600;color:var(--muted-d);transition:color .2s}
+.nav-links a:hover{color:var(--cream)}
+.lang-switch{display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;color:var(--muted-d)}
+.lang-switch button{background:none;border:none;color:inherit;cursor:pointer;padding:4px 2px;font-weight:800;letter-spacing:.04em}
+.lang-switch button.active{color:var(--cream)}
+.lang-switch span{opacity:.4}
+.nav-phone{font-size:14px;font-weight:700;white-space:nowrap}
+.nav-phone:hover{color:var(--lime)}
 
-/* ---------- sections ---------- */
-section{position:relative;z-index:2;padding:110px 0}
-.sec-head{margin-bottom:56px}
-.sec-eyebrow{
-  display:inline-block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--orange-soft);margin-bottom:16px;
+/* ===== HERO ===== */
+.hero{padding:40px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1.06fr 1fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(46px,5.3vw,80px);margin-bottom:28px}
+.hero h1 .tape{white-space:nowrap}
+.hero-sub{font-size:17px;color:#C9C4BC;max-width:470px;margin-bottom:34px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.hero-points{display:flex;flex-wrap:wrap;gap:0;list-style:none}
+.hero-points li{
+  display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--muted-d);padding:0 18px;border-left:1px solid var(--line-d);
 }
-.sec-title{font-family:var(--font-display);font-weight:700;font-size:clamp(26px,3.4vw,44px);line-height:1.15;max-width:760px}
-.sec-sub{color:var(--muted);max-width:560px;margin-top:16px;font-weight:500}
+.hero-points li:first-child{padding-left:0;border-left:none}
+.hero-points li::before{content:'';width:7px;height:7px;background:var(--violet)}
+.hero-media{position:relative}
+.hero-photo{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:5/4;background:var(--ink-3)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .45s}
+.hero-photo img.is-fading{opacity:0}
+.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,9,13,.55))}
+.hero-card{
+  position:absolute;left:18px;bottom:18px;z-index:2;max-width:300px;
+  background:rgba(10,9,13,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line-d);border-radius:10px;padding:16px 18px;
+}
+.hero-card small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);margin-bottom:6px}
+.hero-card b{display:block;font-family:var(--font-display);font-size:22px;font-weight:600;line-height:1.1;margin-bottom:6px}
+.hero-card span{font-size:12.5px;color:var(--muted-d)}
+.hero-tabs{display:grid;grid-template-columns:repeat(4,auto);gap:10px;margin-top:14px}
+.hero-tabs button{
+  background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.2);border-radius:6px;
+  padding:12px 10px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;
+}
+.hero-tabs button:hover{border-color:rgba(255,255,255,.5)}
+.hero-tabs button.active{background:var(--violet);border-color:var(--violet);color:#fff}
 
-/* ---------- course cards ---------- */
-.courses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.course{
-  border-radius:28px;padding:34px;
-  display:flex;flex-direction:column;gap:0;
-  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;
-  transform-style:preserve-3d;will-change:transform;
-}
-.course:hover{
-  --glass-border-bright:rgba(247,107,43,.65);
-  --glass-border-dim:rgba(247,107,43,.25);
-  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 24px 70px rgba(0,0,0,.5),0 0 60px rgba(247,107,43,.12);
-}
-/* Light-reactive glass: блик следует за курсором (--mx/--my ставит JS) */
-.course::after,.feature::after,.format::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
-  background:radial-gradient(circle 300px at var(--mx,50%) var(--my,50%),
-    rgba(247,107,43,.17),rgba(255,255,255,.05) 45%,transparent 72%);
-  opacity:0;transition:opacity .35s;
-}
-.course:hover::after,.feature:hover::after,.format:hover::after{opacity:1}
-.course-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px}
-.course-icon{
-  width:112px;height:112px;border-radius:24px;overflow:hidden;flex-shrink:0;
-  border:1px solid var(--line);
-  box-shadow:0 12px 34px rgba(0,0,0,.45),0 0 34px rgba(247,107,43,.14);
-  transform:translateZ(40px);
-  animation:floaty 5.5s ease-in-out infinite;
-}
-.course:nth-child(2) .course-icon{animation-delay:-1.4s}
-.course:nth-child(3) .course-icon{animation-delay:-2.8s}
-.course:nth-child(4) .course-icon{animation-delay:-4.2s}
-@keyframes floaty{0%,100%{transform:translateZ(40px) translateY(0)}50%{transform:translateZ(40px) translateY(-9px)}}
-.course-icon img{width:100%;height:100%;object-fit:cover;transform:scale(1.22)}
-.course-tag{
-  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--orange-soft);background:rgba(247,107,43,.1);
-  border:1px solid rgba(247,107,43,.28);border-radius:100px;padding:7px 14px;white-space:nowrap;
-}
-.course h3{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1.2;margin:22px 0 8px}
-.course-meta{font-size:13.5px;font-weight:700;color:var(--muted);letter-spacing:.02em;margin-bottom:14px}
-.course-meta i{font-style:normal;color:var(--orange-soft)}
-.course p{color:var(--muted);font-size:15.5px;font-weight:500;margin-bottom:22px;flex-grow:1}
-.course-link{
-  display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:15px;color:var(--paper);
-  transition:gap .25s,color .25s;
-}
-.course-link:hover{gap:15px;color:var(--orange-soft)}
-.course-link svg{transition:transform .25s}
-.course-link:hover svg{transform:translateX(2px)}
+/* ===== общие фото-карточки (bento) ===== */
+.card{position:relative;border-radius:var(--r);overflow:hidden;isolation:isolate;display:flex;flex-direction:column}
+.card > img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.card:hover > img.bg{transform:scale(1.04)}
+.card::before{content:'';position:absolute;inset:0;z-index:-1}
+.card-body{position:relative;padding:26px}
+.card h3{font-family:var(--font-display);font-weight:700;text-transform:uppercase;line-height:1;margin:14px 0 10px}
+.card p{font-size:13.5px;font-weight:500;max-width:300px}
+.card .more{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;padding-bottom:5px;border-bottom:2px solid;transition:gap .25s}
+.card:hover .more{gap:16px}
+/* затемнение под текст: слева / сверху */
+.fade-left-dark::before{background:linear-gradient(90deg,var(--ink) 30%,rgba(10,9,13,.75) 48%,transparent 72%)}
+.fade-left-light::before{background:linear-gradient(90deg,var(--paper-2) 34%,rgba(246,242,236,.8) 50%,transparent 70%)}
+.fade-top-light::before{background:linear-gradient(180deg,var(--paper-2) 30%,rgba(246,242,236,.75) 48%,transparent 66%)}
+.fade-top-dark::before{background:linear-gradient(180deg,rgba(10,9,13,.92) 22%,rgba(10,9,13,.6) 46%,transparent 70%)}
+.fade-top-violet::before{background:linear-gradient(180deg,var(--violet-deep) 28%,rgba(36,24,63,.7) 48%,transparent 70%)}
+.fade-bottom-dark::before{background:linear-gradient(0deg,rgba(10,9,13,.95) 18%,rgba(10,9,13,.5) 45%,transparent 70%)}
+.on-light{color:var(--ink)}
+.on-light p{color:var(--muted-l)}
+.on-dark{color:var(--cream)}
+.on-dark p{color:#BDB8C4}
 
-/* ---------- features: bento-сетка ---------- */
-.features-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(190px,auto);gap:18px}
-.feature{
-  border-radius:24px;padding:28px 24px;
-  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;
-}
-.feature--lg{
-  grid-column:span 2;grid-row:span 2;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:36px 32px;
-}
-.feature--lg .feature-icon{width:128px;height:128px;border-radius:28px;margin-bottom:auto}
-.feature--lg h4{font-size:24px;margin-top:26px}
-.feature--lg p{font-size:16px;max-width:420px}
-.feature--wide{
-  grid-column:span 2;
-  display:flex;align-items:center;gap:24px;
-}
-.feature--wide .feature-icon{margin-bottom:0;flex-shrink:0}
-.feature:hover{
-  --glass-border-bright:rgba(247,107,43,.6);
-  --glass-border-dim:rgba(247,107,43,.22);
-  transform:translateY(-8px);
-  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 18px 50px rgba(0,0,0,.45),0 0 44px rgba(247,107,43,.1);
-}
-.feature-icon{
-  width:76px;height:76px;border-radius:18px;overflow:hidden;margin-bottom:20px;
-  border:1px solid var(--line);box-shadow:0 8px 26px rgba(0,0,0,.4),0 0 26px rgba(247,107,43,.12);
-}
-.feature-icon img{width:100%;height:100%;object-fit:cover;transform:scale(1.25)}
-.feature h4{font-family:var(--font-display);font-size:16.5px;font-weight:700;margin-bottom:10px;line-height:1.3}
-.feature p{font-size:14.5px;color:var(--muted);font-weight:500}
+/* ===== COURSES ===== */
+.courses-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:240px 260px;gap:14px}
+.course-main{grid-row:span 2;background:var(--ink)}
+.course-main .card-body{padding:34px;height:100%;display:flex;flex-direction:column}
+.course-main h3{font-size:clamp(30px,3vw,42px);margin-top:20px}
+.course-main .pill{display:inline-block;background:var(--violet);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;margin:6px 0 18px;align-self:flex-start}
+.course-main .cities{margin-top:26px;padding-top:18px;border-top:1px solid var(--line-d);font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);max-width:240px}
+.course-main .more{margin-top:auto;align-self:flex-start;border-color:var(--lime)}
+.course-wide{grid-column:span 2;background:var(--paper-2);border:1px solid var(--line-l)}
+.course-wide h3{font-size:30px}
+.course-wide .more{margin-top:18px;border-color:var(--violet)}
+.course-sm{background:var(--paper-2);border:1px solid var(--line-l)}
+.course-sm .card-body{height:100%;display:flex;flex-direction:column}
+.course-sm h3{font-size:24px}
+.course-sm .more{margin-top:auto;align-self:flex-start;border-color:var(--violet)}
+.course-sm.dark{background:var(--violet-deep);border-color:transparent}
+.course-sm.dark .more{border-color:var(--lime)}
+.course-sm p{max-width:170px}
 
-/* ---------- mentors ---------- */
-.mentors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-.mentor{border-radius:28px;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
-.mentor:hover{
-  --glass-border-bright:rgba(247,107,43,.6);
-  --glass-border-dim:rgba(247,107,43,.22);
-  transform:translateY(-6px);
-  box-shadow:inset 0 1px 1px var(--glass-shadow-inset),0 18px 50px rgba(0,0,0,.45),0 0 44px rgba(247,107,43,.1);
+/* ===== PORTFOLIO ===== */
+.case{display:grid;grid-template-columns:1.72fr 1fr;border-radius:var(--r);overflow:hidden;background:var(--ink-2);border:1px solid var(--line-d);margin-bottom:14px}
+.case-media{position:relative;display:grid;grid-template-rows:1fr auto;min-height:440px}
+.case-media .render{width:100%;height:100%;object-fit:cover;min-height:300px}
+.case-media .board{width:100%;aspect-ratio:21/6;object-fit:cover;border-top:6px solid var(--ink-2)}
+.case-flag{
+  position:absolute;left:-4px;top:22px;z-index:2;background:var(--lime);color:var(--ink);
+  font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 14px;transform:rotate(-3deg);display:flex;align-items:center;gap:10px;
 }
+.case-info{padding:34px 30px;display:flex;flex-direction:column}
+.case-info small{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-d)}
+.case-info h3{font-size:clamp(34px,3.4vw,46px);margin:10px 0 8px}
+.case-info h3 sup{font-size:.5em}
+.case-info .kind{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.case-info p{font-size:14px;color:var(--muted-d);margin-bottom:22px}
+.case-steps{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.case-steps li{
+  display:flex;align-items:center;gap:14px;padding:12px 14px;border:1px solid var(--line-d);border-radius:8px;
+  font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;transition:border-color .2s,background .2s;
+}
+.case-steps li:hover{border-color:rgba(214,242,59,.5);background:rgba(214,242,59,.04)}
+.case-steps svg{width:18px;height:18px;stroke:var(--muted-d);flex-shrink:0}
+.case-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.case-count{font-size:13px;font-weight:800;color:var(--muted-d)}
+.case-count b{color:var(--cream)}
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.work{aspect-ratio:16/11;background:var(--ink-2);border:1px solid var(--line-d)}
+.work h3{font-size:22px;margin:12px 0 4px}
+.work p{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.work .card-body{padding:20px 22px}
+
+/* ===== WHY ===== */
+.why-grid{display:grid;grid-template-columns:1fr .55fr .55fr;grid-template-rows:250px 320px;gap:14px}
+.why-main{grid-row:span 2;background:var(--paper-2)}
+.why-main h3{font-size:clamp(28px,2.6vw,36px)}
+.why-wide{grid-column:span 2;background:var(--paper-2)}
+.why-wide h3{font-size:28px}
+.why-sm h3{font-size:22px}
+.why-sm{background:var(--paper-2)}
+.why-sm.dark{background:var(--violet-deep)}
+
+/* ===== MENTORS ===== */
+.mentors-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.mentor{border-radius:var(--r);overflow:hidden;background:var(--ink-2);border:1px solid var(--line-d);transition:border-color .3s,transform .3s}
+.mentor:hover{border-color:rgba(91,43,224,.6);transform:translateY(-4px)}
 .mentor-photo{aspect-ratio:16/10;overflow:hidden}
-.mentor-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s}
+.mentor-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s}
 .mentor:hover .mentor-photo img{transform:scale(1.04)}
-.mentor-info{padding:26px 28px 30px}
-.mentor-course{
-  display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--orange-soft);background:rgba(247,107,43,.1);
-  border:1px solid rgba(247,107,43,.28);border-radius:100px;padding:6px 13px;margin-bottom:16px;
-}
-.mentor-info h3{font-family:var(--font-display);font-weight:700;font-size:22px;margin-bottom:6px}
-.mentor-role{color:var(--orange-soft);font-size:14px;font-weight:700;margin-bottom:16px}
-.mentor-info ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.mentor-info li{position:relative;padding-left:20px;color:var(--muted);font-size:14.5px;font-weight:500}
-.mentor-info li::before{content:'◆';position:absolute;left:0;top:1px;font-size:10px;color:var(--orange)}
+.mentor-info{padding:22px 26px 28px}
+.mentor-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.mentor-course{background:var(--violet);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px}
+.mentor-info h3{font-size:clamp(32px,3.4vw,46px);margin-bottom:10px}
+.mentor-role{color:var(--muted-d);font-size:14.5px;font-weight:600;margin-bottom:18px}
+.mentor-info ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.mentor-info li{position:relative;padding-left:20px;color:#C9C4BC;font-size:14px}
+.mentor-info li::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--violet)}
 
-/* ---------- lang switch ---------- */
-.lang-switch{
-  display:flex;gap:2px;padding:3px;border-radius:100px;
-  background:rgba(255,255,255,.05);border:1px solid var(--line);
-}
-.lang-switch button{
-  border:none;cursor:pointer;border-radius:100px;padding:6px 12px;
-  font-family:var(--font-body);font-size:12.5px;font-weight:800;letter-spacing:.04em;
-  background:transparent;color:var(--muted);transition:.2s;
-}
-.lang-switch button.active{background:var(--orange);color:#fff;box-shadow:0 2px 12px rgba(247,107,43,.4)}
-.lang-switch button:not(.active):hover{color:var(--paper)}
+/* ===== FORMATS ===== */
+.formats-grid{display:grid;grid-template-columns:1fr .55fr .55fr;grid-template-rows:260px 300px;gap:14px}
+.fmt-main{grid-row:span 2}
+.fmt-wide{grid-column:span 2}
+.fmt h3{display:inline-block;background:var(--violet);color:#fff;padding:6px 14px 4px;margin:0 0 12px}
+.fmt-main h3{font-size:clamp(30px,3vw,42px)}
+.fmt-wide h3{background:none;padding:0;font-size:clamp(34px,3.4vw,48px)}
+.fmt-sm h3{font-size:22px}
+.fmt .card-body{height:100%;display:flex;flex-direction:column}
+.fmt .bottom{margin-top:auto}
+.fmt-sm.violet{background:var(--violet-deep)}
+.formats-foot{margin-top:24px}
 
-/* ---------- formats ---------- */
-.formats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.format{
-  border-radius:24px;padding:30px 26px;
-  transition:transform .3s;
-}
-.format:hover{
-  --glass-border-bright:rgba(247,107,43,.6);
-  --glass-border-dim:rgba(247,107,43,.22);
-  transform:translateY(-6px);
-}
-.format b{
-  position:absolute;top:22px;right:24px;
-  font-family:var(--font-display);font-size:36px;font-weight:800;line-height:1;
-  background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.05));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.format-icon{
-  width:72px;height:72px;border-radius:16px;overflow:hidden;margin-bottom:18px;
-  border:1px solid var(--line);
-  box-shadow:0 8px 22px rgba(0,0,0,.4),0 0 22px rgba(247,107,43,.12);
-}
-.format-icon img{width:100%;height:100%;object-fit:cover;transform:scale(1.25)}
-.format h4{font-family:var(--font-display);font-size:17px;font-weight:700;margin-bottom:8px}
-.format p{font-size:14px;color:var(--muted);font-weight:500}
+/* ===== CTA ===== */
+.cta{padding:0;overflow:hidden;border-top:1px solid var(--line-d)}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.cta-text{padding:90px 24px 90px max(24px,calc((100vw - 1240px)/2 + 24px));position:relative;z-index:2}
+.cta h2{font-size:clamp(44px,5.6vw,80px);margin-bottom:26px}
+.cta h2 .tape{line-height:1.08}
+.cta-sub{color:#C9C4BC;font-size:16.5px;max-width:430px;margin-bottom:32px}
+.cta-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.cta-note{font-size:13.5px;color:var(--muted-d)}
+.cta-photo{position:relative}
+.cta-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(10,9,13,.4) 30%,transparent 60%)}
 
-/* ---------- open lesson CTA ---------- */
-.cta-panel{
-  border-radius:36px;padding:70px 60px;
-  text-align:center;
-  /* глубокое стекло — как у модалки лендинга интерьера */
-  background:rgba(22,22,22,.55);
-  backdrop-filter:blur(28px) saturate(160%);
-  -webkit-backdrop-filter:blur(28px) saturate(160%);
-}
-.cta-panel::after{
-  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
-  background:
-    radial-gradient(ellipse 60% 90% at 50% -20%,rgba(247,107,43,.22),transparent 60%),
-    radial-gradient(ellipse 40% 60% at 85% 110%,rgba(255,139,77,.14),transparent 60%);
-}
-.cta-cap{
-  position:absolute;right:-36px;bottom:-46px;z-index:1;
-  width:clamp(170px,24vw,300px);pointer-events:none;
-  transform:rotate(-8deg);
-  filter:drop-shadow(0 20px 40px rgba(0,0,0,.5));
-}
-@media (prefers-reduced-motion:no-preference){
-  .cta-cap{animation:capFloat 7.5s ease-in-out infinite}
-}
-@keyframes capFloat{
-  0%,100%{transform:rotate(-8deg) translateY(0)}
-  50%{transform:rotate(-3deg) translateY(-16px)}
-}
-.cta-panel h2{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.6vw,46px);line-height:1.12;max-width:720px;margin:0 auto 18px;position:relative}
-.cta-panel .cities{position:relative;color:var(--muted);font-weight:600;margin-bottom:38px;font-size:16px}
-.cta-panel .cities i{font-style:normal;color:var(--orange-soft)}
-.cta-actions{position:relative;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* ===== FOOTER ===== */
+footer{background:#0D0C11;border-top:1px solid var(--line-d);padding:64px 0 34px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand img{height:52px;width:auto;margin-bottom:20px}
+.footer-brand p{font-size:14px;color:var(--muted-d);max-width:290px}
+footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.footer-col a{display:block;font-size:14px;color:var(--muted-d);margin-bottom:12px;transition:color .2s}
+.footer-col a:hover{color:var(--lime)}
+.footer-bottom{font-size:13px;color:var(--muted-d)}
 
-/* ---------- footer ---------- */
-footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:64px 0 40px;background:rgba(255,255,255,.015)}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:48px}
-.footer-brand img{height:20px;width:auto;margin-bottom:18px}
-.footer-brand p{font-size:14px;color:var(--muted);font-weight:500;max-width:280px}
-footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--paper);margin-bottom:18px}
-.footer-col a{display:block;font-size:14.5px;color:var(--muted);font-weight:600;margin-bottom:12px;transition:color .2s}
-.footer-col a:hover{color:var(--orange-soft)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
-.footer-bottom p{font-size:13.5px;color:var(--muted);font-weight:500}
-.socials{display:flex;gap:12px}
-.socials a{
-  width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,.05);border:1px solid var(--line);transition:all .25s;
-}
-.socials a:hover{background:rgba(247,107,43,.15);border-color:rgba(247,107,43,.4);transform:translateY(-3px)}
-.socials svg{width:18px;height:18px;fill:var(--paper)}
-
-/* ---------- попап-форма заявки ---------- */
+/* ===== попап-форма заявки ===== */
 .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .modal.is-open{display:flex;animation:modalFadeIn .25s ease}
 @keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
-.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .modal-panel{
   position:relative;z-index:1;width:100%;max-width:440px;
-  border-radius:28px;padding:36px 32px;
-  background:rgba(22,22,22,.6);
-  backdrop-filter:blur(28px) saturate(160%);
-  -webkit-backdrop-filter:blur(28px) saturate(160%);
-  max-height:calc(100vh - 40px);overflow-y:auto;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  border-radius:var(--r);padding:36px 32px;background:var(--ink-2);border:1px solid var(--line-d);
+  max-height:calc(100vh - 40px);overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.6);
   animation:modalSlideUp .3s cubic-bezier(.2,.8,.3,1);
 }
-@keyframes modalSlideUp{from{transform:translateY(20px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+@keyframes modalSlideUp{from{transform:translateY(20px) scale(.97);opacity:0}to{transform:none;opacity:1}}
 .modal-close{
-  position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.07);border:none;color:var(--paper);cursor:pointer;
-  font-size:22px;line-height:1;font-weight:300;transition:.2s;
+  position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:6px;
+  background:rgba(255,255,255,.07);border:none;color:var(--cream);cursor:pointer;
+  font-size:22px;line-height:1;transition:.2s;
 }
-.modal-close:hover{background:var(--orange);transform:rotate(90deg)}
-.modal-eyebrow{display:block;font-size:11px;color:var(--orange-soft);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:10px}
-.modal-title{font-family:var(--font-display);font-weight:700;font-size:24px;line-height:1.15;margin-bottom:10px}
-.modal-lead{color:var(--muted);font-size:14px;margin-bottom:22px}
-.modal form label{display:flex;flex-direction:column;gap:7px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:14px}
+.modal-close:hover{background:var(--violet)}
+.modal .tag{margin-bottom:14px}
+.modal-title{font-size:34px;margin-bottom:10px}
+.modal-lead{color:var(--muted-d);font-size:14px;margin-bottom:22px}
+.modal form label{display:flex;flex-direction:column;gap:7px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted-d);margin-bottom:14px}
 .modal input,.modal select{
-  background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;
-  padding:13px 16px;color:var(--paper);font-family:var(--font-body);font-size:15px;font-weight:600;
+  background:rgba(255,255,255,.05);border:1px solid var(--line-d);border-radius:6px;
+  padding:13px 16px;color:var(--cream);font-family:var(--font-body);font-size:15px;font-weight:600;
   outline:none;width:100%;transition:border-color .2s,box-shadow .2s;
 }
 .modal input::placeholder{color:rgba(255,255,255,.25)}
-.modal input:focus,.modal select:focus{border-color:rgba(247,107,43,.6);box-shadow:0 0 0 3px rgba(247,107,43,.18)}
+.modal input:focus,.modal select:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(214,242,59,.15)}
 .modal select{
   appearance:none;-webkit-appearance:none;cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F76B2B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D6F23B' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 16px center;padding-right:38px;
 }
-.modal select option{background:#1c1c22;color:var(--paper)}
-.phone-field{display:flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;transition:border-color .2s,box-shadow .2s}
-.phone-field:focus-within{border-color:rgba(247,107,43,.6);box-shadow:0 0 0 3px rgba(247,107,43,.18)}
-.phone-prefix{padding:13px 0 13px 16px;font-size:15px;font-weight:700;color:var(--paper)}
+.modal select option{background:#1c1b22;color:var(--cream)}
+.phone-field{display:flex;align-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line-d);border-radius:6px;transition:border-color .2s,box-shadow .2s}
+.phone-field:focus-within{border-color:var(--lime);box-shadow:0 0 0 3px rgba(214,242,59,.15)}
+.phone-prefix{padding:13px 0 13px 16px;font-size:15px;font-weight:700;color:var(--cream)}
 .phone-field input{background:none;border:none;box-shadow:none!important;padding-left:8px}
 .phone-error{display:none;color:#ff8f7a;font-size:12px;text-transform:none;letter-spacing:0;font-weight:600}
 .field-invalid .phone-error{display:block}
 .field-invalid .phone-field{border-color:rgba(255,120,90,.7)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .modal form .btn{width:100%;margin-top:6px}
-.modal-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px}
+.modal-note{font-size:11.5px;color:var(--muted-d);text-align:center;margin-top:14px}
 .modal-success{text-align:center;padding:26px 0 10px}
 .modal-success-icon{
-  width:72px;height:72px;border-radius:50%;margin:0 auto 20px;
-  display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;
-  background:linear-gradient(135deg,var(--orange),var(--orange-deep));
-  box-shadow:0 10px 36px rgba(247,107,43,.45);
+  width:68px;height:68px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;
+  font-size:32px;font-weight:800;color:var(--ink);background:var(--lime);transform:rotate(-3deg);
 }
-.modal-success h3{font-family:var(--font-display);font-size:22px;font-weight:700;margin-bottom:10px}
-.modal-success p{color:var(--muted);font-size:14.5px;margin-bottom:24px}
-@media (max-width:480px){
-  .form-row{grid-template-columns:1fr}
-  .modal-panel{padding:30px 22px}
-}
+.modal-success h3{font-size:30px;margin-bottom:10px}
+.modal-success p{color:var(--muted-d);font-size:14.5px;margin-bottom:24px}
 
-/* ---------- reveal animations ---------- */
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+/* ===== появление при скролле ===== */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:none}
-.reveal-d1{transition-delay:.08s}
-.reveal-d2{transition-delay:.16s}
-.reveal-d3{transition-delay:.24s}
-
-/* ---------- scroll-triggered 3D (прогрессивное улучшение) ---------- */
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline: view()){
-    .course-icon img,.feature-icon img,.format-icon img{
-      animation:iconTurn linear both;
-      animation-timeline:view();
-      animation-range:entry 0% cover 65%;
-    }
-    @keyframes iconTurn{
-      from{transform:scale(1.22) rotate(-10deg) translateY(6%)}
-      to{transform:scale(1.22) rotate(4deg) translateY(0)}
-    }
-  }
-}
-
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none}
 }
 
-/* ---------- responsive ---------- */
-@media (max-width:1000px){
-  .features-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:auto}
-  .feature--lg{grid-column:span 2;grid-row:span 1}
-  .feature--lg .feature-icon{width:96px;height:96px;margin-bottom:20px}
-  .formats-grid{grid-template-columns:repeat(2,1fr)}
+/* ===== адаптив ===== */
+@media (max-width:1080px){
+  .nav-links{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-media{max-width:720px}
+  .case{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  section{padding:72px 0}
+  .sec-head{grid-template-columns:1fr;gap:18px}
+  .courses-grid,.why-grid,.formats-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:minmax(260px,auto)}
+  .course-main,.why-main,.fmt-main{grid-column:span 2;grid-row:auto;min-height:440px}
+  .course-wide,.why-wide,.fmt-wide{grid-column:span 2}
+  .works{grid-template-columns:1fr 1fr}
+  .works .work:last-child{grid-column:span 2;aspect-ratio:21/9}
+  .mentors-grid{grid-template-columns:1fr}
+  .cta-grid{grid-template-columns:1fr}
+  .cta-text{padding:72px 24px 40px}
+  .cta-photo{min-height:320px}
+  .cta-photo::after{background:linear-gradient(180deg,var(--ink) 0%,transparent 40%)}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
-@media (max-width:820px){
-  .nav-links{display:none}
-  .courses-grid{grid-template-columns:1fr}
-  .mentors-grid{grid-template-columns:1fr}
-  section{padding:80px 0}
-  .cta-panel{padding:50px 28px}
-}
-@media (max-width:560px){
-  .cta-cap{width:150px;right:-24px;bottom:-30px}
-  .features-grid{grid-template-columns:1fr}
-  .feature--lg,.feature--wide{grid-column:span 1;grid-row:span 1}
-  .feature--wide{flex-direction:column;align-items:flex-start;gap:0}
-  .feature--wide .feature-icon{margin-bottom:20px}
-  .formats-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .hero-stats{gap:10px}
-  .stat{min-width:calc(50% - 10px);padding:14px 18px}
-  .course-icon{width:88px;height:88px}
+@media (max-width:600px){
   .nav-phone{display:none}
+  .nav-inner{gap:16px;height:66px}
+  .nav-logo img{height:32px}
+  .nav .btn-sm{padding:10px 12px;font-size:12.5px}
+  .hero{padding-top:28px}
+  .hero-points li{padding:4px 12px 4px 0;border-left:none}
+  .hero-tabs{grid-template-columns:1fr 1fr}
+  .hero-card{left:12px;right:12px;bottom:12px;max-width:none}
+  .courses-grid,.why-grid,.formats-grid,.works{grid-template-columns:1fr}
+  .course-main,.why-main,.fmt-main,.course-wide,.why-wide,.fmt-wide,.works .work:last-child{grid-column:auto}
+  .works .work:last-child{aspect-ratio:16/11}
+  .fade-left-light::before{background:linear-gradient(180deg,var(--paper-2) 38%,rgba(246,242,236,.75) 55%,transparent 80%)}
+  .fade-left-dark::before{background:linear-gradient(180deg,var(--ink) 40%,rgba(10,9,13,.7) 58%,transparent 85%)}
+  .case-media{min-height:0}
+  .case-info{padding:26px 22px}
+  .footer-grid{grid-template-columns:1fr}
+  .course-sm p,.card p{max-width:none}
+  .form-row{grid-template-columns:1fr}
+  .modal-panel{padding:30px 22px}
 }
 </style>
 </head>
 <body>
 
-<div class="orb orb-1" data-depth="30"></div>
-<div class="orb orb-2" data-depth="-40"></div>
-<div class="orb orb-3" data-depth="20"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
 
 <!-- ======== NAV ======== -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="#"><img src="assets/logo.svg" alt="INTERNO School"></a>
+    <a class="nav-logo" href="#"><img src="assets/logo.svg" alt="INTERNO — Школа современных профессий"></a>
     <div class="nav-links">
       <a href="#courses" data-i18n="nav.courses">Курсы</a>
       <a href="#why" data-i18n="nav.why">Почему мы</a>
@@ -547,146 +420,204 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
       <a href="#open-lesson" data-i18n="nav.openLesson">Открытый урок</a>
     </div>
     <div class="lang-switch" role="group" aria-label="Язык">
-      <button type="button" data-lang="ru" class="active">RU</button>
-      <button type="button" data-lang="uz">UZ</button>
+      <button type="button" data-lang="ru" class="active">RU</button><span>/</span><button type="button" data-lang="uz">UZ</button>
     </div>
     <a class="nav-phone" href="tel:+998781131808">+998 78 113 18 08</a>
-    <a class="btn btn-primary btn-sm" href="#open-lesson" data-modal-open data-i18n="nav.cta">Бесплатный урок</a>
+    <a class="btn btn-violet btn-sm" href="#open-lesson" data-modal-open data-i18n="nav.cta">Бесплатный урок</a>
   </div>
 </nav>
 
 <!-- ======== HERO ======== -->
-<header class="hero">
-  <div class="hero-media">
-    <video autoplay muted loop playsinline poster="assets/hero-bg.png">
-      <source src="assets/hero-loop.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge liquid-glass"><span class="dot"></span><span data-i18n="hero.badge">Школа современных профессий · Ташкент / Самарканд / Фергана</span></div>
-    <h1 id="heroTitle">Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span></h1>
-    <p class="hero-sub" data-i18n="hero.sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#open-lesson" data-modal-open data-i18n="hero.cta1">Записаться на бесплатный урок</a>
-      <a class="btn btn-ghost" href="#courses" data-i18n="hero.cta2">Смотреть направления</a>
+<header class="hero s-dark">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="tag" data-i18n="hero.tag">Школа современных профессий</span>
+      <h1 class="display" data-i18n-html="hero.title">Освой профессию <span class="tape">на практике</span></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — обучение с менторами-практиками.</p>
+      <div class="hero-cta">
+        <a class="btn btn-lime" href="#open-lesson" data-modal-open><span data-i18n="hero.cta1">Записаться на бесплатный урок</span><svg class="arr"><use href="#arr"/></svg></a>
+        <a class="btn btn-line" href="#courses" data-i18n="hero.cta2">Выбрать направление</a>
+      </div>
+      <ul class="hero-points">
+        <li data-i18n="hero.p1">Офлайн-обучение</li>
+        <li data-i18n="hero.p2">Менторы-практики</li>
+        <li data-i18n="hero.p3">Проекты в портфолио</li>
+      </ul>
     </div>
-    <div class="hero-stats">
-      <div class="stat liquid-glass"><b><em data-counter="4">0</em></b><span data-i18n="stat.courses">направления обучения</span></div>
-      <div class="stat liquid-glass"><b><em data-counter="3">0</em></b><span data-i18n="stat.cities">города Узбекистана</span></div>
-      <div class="stat liquid-glass"><b><em data-counter="36">0</em>+</b><span data-i18n="stat.lessons">уроков в программе курса</span></div>
-      <div class="stat liquid-glass"><b>0-0-<em data-counter="6">0</em></b><span data-i18n="stat.installment">рассрочка до 6 месяцев</span></div>
+    <div class="hero-media">
+      <div class="hero-photo">
+        <img id="heroImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png" alt="Студентка работает над проектом интерьера">
+        <a class="hero-card" id="heroCard" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
+          <small data-i18n="hero.cardLabel">Открытый урок</small>
+          <b id="heroCardTitle">Дизайн интерьера</b>
+          <span id="heroCardText">Практический проект с первого занятия</span>
+        </a>
+      </div>
+      <div class="hero-tabs" role="tablist">
+        <button type="button" class="active" data-tab="interior" data-i18n="tab.interior">Интерьер</button>
+        <button type="button" data-tab="graphic" data-i18n="tab.graphic">Графдизайн</button>
+        <button type="button" data-tab="data" data-i18n="tab.data">Data-аналитика</button>
+        <button type="button" data-tab="ai" data-i18n="tab.ai">Искусственный интеллект</button>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- ======== TICKER ======== -->
-<div class="ticker">
-  <div class="ticker-track">
-    <span><i>◆</i><em data-i18n="course.interior">Дизайн интерьера</em></span><span><i>◆</i><em>3ds Max</em></span><span><i>◆</i><em data-i18n="course.graphic">Графический дизайн</em></span><span><i>◆</i><em>Figma</em></span><span><i>◆</i><em>Photoshop</em></span><span><i>◆</i><em data-i18n="course.data">Data-аналитика</em></span><span><i>◆</i><em>Python</em></span><span><i>◆</i><em>SQL</em></span><span><i>◆</i><em>Power BI</em></span><span><i>◆</i><em data-i18n="course.ai">Искусственный интеллект</em></span><span><i>◆</i><em data-i18n="tick.neuro">Нейросети</em></span><span><i>◆</i><em data-i18n="tick.bots">Telegram-боты</em></span>
-    <span><i>◆</i><em data-i18n="course.interior">Дизайн интерьера</em></span><span><i>◆</i><em>3ds Max</em></span><span><i>◆</i><em data-i18n="course.graphic">Графический дизайн</em></span><span><i>◆</i><em>Figma</em></span><span><i>◆</i><em>Photoshop</em></span><span><i>◆</i><em data-i18n="course.data">Data-аналитика</em></span><span><i>◆</i><em>Python</em></span><span><i>◆</i><em>SQL</em></span><span><i>◆</i><em>Power BI</em></span><span><i>◆</i><em data-i18n="course.ai">Искусственный интеллект</em></span><span><i>◆</i><em data-i18n="tick.neuro">Нейросети</em></span><span><i>◆</i><em data-i18n="tick.bots">Telegram-боты</em></span>
-  </div>
-</div>
-
 <!-- ======== COURSES ======== -->
-<section id="courses">
+<section id="courses" class="s-light">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow" data-i18n="courses.eyebrow">Направления обучения</span>
-      <h2 class="sec-title" data-i18n="courses.title">Выбери профессию — остальному научим</h2>
-      <p class="sec-sub" data-i18n="courses.sub">Каждый курс — это практика с первого занятия, портфолио на выходе и поддержка менторов на всём пути.</p>
+      <div>
+        <span class="tag" data-i18n="courses.tag">Направления обучения</span>
+        <h2 class="display sec-title" data-i18n="courses.title">Выбери профессию — остальному научим</h2>
+      </div>
+      <div class="sec-aside">
+        <p data-i18n="courses.sub">Каждый курс — это практика с первого занятия, проект для портфолио и поддержка менторов на всём пути.</p>
+        <a class="link-arrow" href="#formats"><span data-i18n="courses.compare">Сравнить все курсы</span><svg class="arr"><use href="#arr"/></svg></a>
+      </div>
     </div>
     <div class="courses-grid">
-      <a class="course liquid-glass reveal" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
-        <div class="course-top">
-          <div class="course-icon"><img src="assets/icon-interior.png" alt="Дизайн интерьера"></div>
-          <span class="course-tag" data-i18n="tag.open">Открытый урок</span>
+      <a class="card course-main fade-left-dark on-dark reveal" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070412_12ddaa7f-7015-4f37-a9ef-3e6e80494124.png" alt="" loading="lazy">
+        <div class="card-body">
+          <span class="num num-lime">01</span>
+          <h3 data-i18n="course.interior">Дизайн интерьера</h3>
+          <span class="pill" data-i18n="course.offline">Офлайн</span>
+          <p data-i18n="desc.interior">Планировка, 3D-визуализация и проект для портфолио.</p>
+          <div class="cities" data-i18n="cities.dots">Ташкент · Самарканд · Фергана</div>
+          <span class="more"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
-        <h3 data-i18n="course.interior">Дизайн интерьера</h3>
-        <div class="course-meta" data-i18n-html="meta.interior">офлайн · <i>Ташкент / Самарканд / Фергана</i></div>
-        <p data-i18n="desc.interior">Флагманское направление школы: от идеи и планировки до 3D-визуализации и работы с реальным заказчиком.</p>
-        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <a class="course liquid-glass reveal reveal-d1" href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">
-        <div class="course-top">
-          <div class="course-icon"><img src="assets/icon-graphic.png" alt="Графический дизайн"></div>
-          <span class="course-tag" data-i18n="tag.course">Курс</span>
+      <a class="card course-wide fade-left-light on-light reveal d1" href="https://github.com/aziz-tfx/interno-graphic-design" target="_blank" rel="noopener">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png" alt="" loading="lazy" style="object-position:right center">
+        <div class="card-body">
+          <span class="num num-violet">02</span>
+          <h3 data-i18n="course.graphic">Графический дизайн</h3>
+          <p data-i18n="desc.graphic">Айдентика, упаковка и digital-макеты.</p>
+          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
-        <h3 data-i18n="course.graphic">Графический дизайн</h3>
-        <div class="course-meta" data-i18n-html="meta.graphic"><i>16 недель</i> · 5 модулей</div>
-        <p data-i18n="desc.graphic">С нуля до первых заказов: айдентика, Photoshop, Figma, работа с брендами и упаковка портфолио.</p>
-        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <a class="course liquid-glass reveal reveal-d1" href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">
-        <div class="course-top">
-          <div class="course-icon"><img src="assets/icon-data.png" alt="Data-аналитика"></div>
-          <span class="course-tag" data-i18n="tag.course">Курс</span>
+      <a class="card course-sm fade-left-light on-light reveal d2" href="https://interno-data-analytics.vercel.app" target="_blank" rel="noopener">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_f958f445-d731-4522-a1a8-9959ee1d7902.png" alt="" loading="lazy" style="object-position:70% center">
+        <div class="card-body">
+          <span class="num num-lime">03</span>
+          <h3 data-i18n="course.data">Data-аналитика</h3>
+          <p data-i18n="desc.data">Python, SQL и Power BI: от данных до дашборда.</p>
+          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
-        <h3 data-i18n="course.data">Data-аналитика</h3>
-        <div class="course-meta" data-i18n-html="meta.data"><i>3 месяца</i> · 36 уроков</div>
-        <p data-i18n="desc.data">Python, SQL и Power BI: собирайте, анализируйте и визуализируйте данные — станьте специалистом, которого ищут компании.</p>
-        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
-      <a class="course liquid-glass reveal reveal-d2" href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener">
-        <div class="course-top">
-          <div class="course-icon"><img src="assets/icon-ai.png" alt="Искусственный интеллект"></div>
-          <span class="course-tag" data-i18n="tag.new">Новый курс</span>
+      <a class="card course-sm dark fade-left-dark on-dark reveal d3" href="https://ai-praktik-landing.vercel.app" target="_blank" rel="noopener" style="--ink:var(--violet-deep)">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png" alt="" loading="lazy" style="object-position:70% center">
+        <div class="card-body">
+          <span class="num num-lime">04</span>
+          <h3 data-i18n="course.ai">Искусственный интеллект</h3>
+          <p data-i18n="desc.ai">Практическое применение AI-инструментов для работы и проектов.</p>
+          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
         </div>
-        <h3 data-i18n="course.ai">Искусственный интеллект</h3>
-        <div class="course-meta" data-i18n-html="meta.ai"><i>2 месяца</i> · 16 занятий · 6 модулей</div>
-        <p data-i18n="desc.ai">Нейросети как рабочий инструмент: контент, автоматизация, Telegram-боты и практические AI-проекты.</p>
-        <span class="course-link"><span data-i18n="courses.more">Подробнее о курсе</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ======== WHY ======== -->
-<section id="why">
+<!-- ======== PORTFOLIO ======== -->
+<section id="works" class="s-dark">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow" data-i18n="why.eyebrow">Почему INTERNO</span>
-      <h2 class="sec-title" data-i18n="why.title">Учим так, чтобы вы работали, а не просто слушали</h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature feature--lg liquid-glass reveal">
-        <div class="feature-icon"><img src="assets/icon-mentor.png" alt=""></div>
-        <h4 data-i18n="why.f1">Менторы-практики</h4>
-        <p data-i18n="why.f1d">Преподают действующие специалисты с реальными проектами — объясняют сложное простым языком, разбирают ваши работы и остаются на связи на протяжении всего курса.</p>
+      <div>
+        <span class="tag" data-i18n="works.tag">Портфолио</span>
+        <h2 class="display sec-title" data-i18n="works.title">Работы, которые говорят за себя</h2>
       </div>
-      <div class="feature feature--wide liquid-glass reveal reveal-d1">
-        <div class="feature-icon"><img src="assets/icon-platform.png" alt=""></div>
-        <div>
-          <h4 data-i18n="why.f2">Практика с первого дня</h4>
-          <p data-i18n="why.f2d">Домашние задания на реальных кейсах и разбор работ — навык формируется руками.</p>
+      <div class="sec-aside">
+        <p data-i18n="works.sub">Не просто теория: на курсе студенты проходят путь от задачи до готового проекта для портфолио.</p>
+        <a class="link-arrow" href="#open-lesson" data-modal-open><span data-i18n="works.all">Смотреть все работы</span><svg class="arr"><use href="#arr"/></svg></a>
+      </div>
+    </div>
+    <div class="case reveal">
+      <div class="case-media">
+        <span class="case-flag"><span data-i18n="works.plan">План</span><svg class="arr"><use href="#arr"/></svg><span data-i18n="works.viz">Визуализация</span></span>
+        <img class="render" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070455_d97fbe7d-93b7-4288-b57b-08b3a4cdad86.png" alt="3D-визуализация гостиной — учебный проект" loading="lazy">
+        <img class="board" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070501_84f52801-11ad-4f44-bd8f-83a6d00adfc2.png" alt="Планировка и коллаж материалов" loading="lazy">
+      </div>
+      <div class="case-info">
+        <small data-i18n="works.caseLabel">Учебный проект</small>
+        <h3 class="display" data-i18n-html="works.caseTitle">Квартира 78 м<sup>2</sup></h3>
+        <div class="kind" data-i18n="course.interior">Дизайн интерьера</div>
+        <p data-i18n="works.caseText">Планировка, подбор материалов и финальная 3D-визуализация пространства.</p>
+        <ul class="case-steps">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18"/><path d="M3 12h9V3M12 12v9"/></svg><span data-i18n="works.s1">Планировка</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg><span data-i18n="works.s2">Коллаж материалов</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg><span data-i18n="works.s3">3D-визуализация</span></li>
+        </ul>
+        <div class="case-foot">
+          <a class="btn btn-violet" href="https://interno-open-lesson.vercel.app" target="_blank" rel="noopener"><span data-i18n="works.case">Смотреть кейс</span><svg class="arr"><use href="#arr"/></svg></a>
+          <span class="case-count"><b>01</b> / 04</span>
         </div>
       </div>
-      <div class="feature liquid-glass reveal reveal-d2">
-        <div class="feature-icon"><img src="assets/icon-diploma.png" alt=""></div>
-        <h4 data-i18n="why.f3">Сертификат школы</h4>
-        <p data-i18n="why.f3d">Подтверждение навыков и готовое портфолио с проектами.</p>
+    </div>
+    <div class="works">
+      <div class="card work fade-top-dark on-dark reveal">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070258_7e4fa768-4dc3-4062-97e3-f291afc1e4e2.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-violet">02</span><h3 data-i18n="course.graphic">Графический дизайн</h3><p data-i18n="works.w2">Айдентика и упаковка</p></div>
       </div>
-      <div class="feature liquid-glass reveal reveal-d3">
-        <div class="feature-icon"><img src="assets/icon-career.png" alt=""></div>
-        <h4 data-i18n="why.f4">Путь к доходу</h4>
-        <p data-i18n="why.f4d">Оформление портфолио, первые заказы и уверенный старт.</p>
+      <div class="card work fade-top-dark on-dark reveal d1">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070456_312ae594-060e-411c-94f0-b03b953afbbd.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-violet">03</span><h3 data-i18n="course.data">Data-аналитика</h3><p data-i18n="works.w3">Интерактивный дашборд</p></div>
+      </div>
+      <div class="card work fade-top-dark on-dark reveal d2">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070507_1af3534b-cd08-4df0-ad76-f7b4c9e20819.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-violet">04</span><h3 data-i18n="course.ai">Искусственный интеллект</h3><p data-i18n="works.w4">Автоматизация рабочего процесса</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== WHY ======== -->
+<section id="why" class="s-light">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="tag" data-i18n="why.tag">Почему INTERNO</span>
+        <h2 class="display sec-title" data-i18n="why.title">Учим так, чтобы вы работали, а не просто слушали</h2>
+      </div>
+      <div class="sec-aside"><p data-i18n="why.sub">Курс строится вокруг действий: разобраться, сделать, получить обратную связь и собрать сильный проект в портфолио.</p></div>
+    </div>
+    <div class="why-grid">
+      <div class="card why-main fade-top-light on-light reveal">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_6f7a3403-73b1-4a59-a3a6-2444b406f348.png" alt="" loading="lazy" style="object-position:center 70%">
+        <div class="card-body"><span class="num num-lime">01</span><h3 data-i18n="why.f1">Менторы-практики</h3><p data-i18n="why.f1d">Действующие специалисты разбирают работы, объясняют сложное простым языком и остаются на связи в процессе обучения.</p></div>
+      </div>
+      <div class="card why-wide fade-left-light on-light reveal d1">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070258_1b06e639-0961-46ee-bbbd-492f1b6b32fa.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-violet">02</span><h3 data-i18n="why.f2">Практика с первого дня</h3><p data-i18n="why.f2d">Домашние задания на реальных кейсах и регулярные разборы работ.</p></div>
+      </div>
+      <div class="card why-sm fade-top-light on-light reveal d2">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070907_6435e7cb-e1eb-40ed-a66c-7cd6af630a35.png" alt="" loading="lazy" style="object-position:center bottom">
+        <div class="card-body"><span class="num num-lime">03</span><h3 data-i18n="why.f3">Портфолио и сертификат</h3><p data-i18n="why.f3d">Готовые работы, которые можно показать работодателю или клиенту.</p></div>
+      </div>
+      <div class="card why-sm dark fade-top-violet on-dark reveal d3">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070907_5eb8128c-120a-49e6-a2e0-e95a876d269e.png" alt="" loading="lazy" style="object-position:center bottom">
+        <div class="card-body"><span class="num num-violet">04</span><h3 data-i18n="why.f4">Путь к первым заказам</h3><p data-i18n="why.f4d">Поможем оформить портфолио и уверенно начать работать по профессии.</p></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ======== MENTORS ======== -->
-<section id="mentors">
+<section id="mentors" class="s-dark">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow" data-i18n="mentors.eyebrow">Команда</span>
-      <h2 class="sec-title" data-i18n="mentors.title">Менторы, которые работают в профессии</h2>
+      <div>
+        <span class="tag" data-i18n="mentors.tag">Команда</span>
+        <h2 class="display sec-title" data-i18n="mentors.title">Менторы, которые работают в профессии</h2>
+      </div>
+      <div class="sec-aside"><p data-i18n="mentors.sub">Не теоретики со стороны. Практики, которые знают требования рынка, инструменты и реальные задачи клиентов.</p></div>
     </div>
     <div class="mentors-grid">
-      <div class="mentor liquid-glass reveal">
+      <div class="mentor reveal">
         <div class="mentor-photo"><img src="assets/mentor-asad.jpg" alt="Асад Халимов" loading="lazy"></div>
         <div class="mentor-info">
-          <span class="mentor-course" data-i18n="mentors.asadCourse">Дизайн интерьера</span>
-          <h3 data-i18n="mentors.asadName">Асад Халимов</h3>
+          <div class="mentor-top"><span class="mentor-course" data-i18n="mentors.asadCourse">Дизайн интерьера</span><span class="num num-lime">01</span></div>
+          <h3 class="display" data-i18n="mentors.asadName">Асад Халимов</h3>
           <p class="mentor-role" data-i18n="mentors.asadRole">Старший куратор · 7+ лет в дизайне</p>
           <ul>
             <li data-i18n="mentors.asad1">120+ реализованных проектов в Ташкенте, Самарканде, Алматы</li>
@@ -695,11 +626,11 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
           </ul>
         </div>
       </div>
-      <div class="mentor liquid-glass reveal reveal-d1">
+      <div class="mentor reveal d1">
         <div class="mentor-photo"><img src="assets/mentor-asliddin.jpg" alt="Аслиддин Омонбоев" loading="lazy"></div>
         <div class="mentor-info">
-          <span class="mentor-course" data-i18n="mentors.asliddinCourse">Искусственный интеллект</span>
-          <h3 data-i18n="mentors.asliddinName">Аслиддин Омонбоев</h3>
+          <div class="mentor-top"><span class="mentor-course" data-i18n="mentors.asliddinCourse">Искусственный интеллект</span><span class="num num-lime">02</span></div>
+          <h3 class="display" data-i18n="mentors.asliddinName">Аслиддин Омонбоев</h3>
           <p class="mentor-role" data-i18n="mentors.asliddinRole">Дата-аналитик и Python-разработчик</p>
           <ul>
             <li data-i18n="mentors.asliddin1">Дашборды Power BI, SQL и Pandas для решений на данных</li>
@@ -713,33 +644,51 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
 </section>
 
 <!-- ======== FORMATS ======== -->
-<section id="formats">
+<section id="formats" class="s-light">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow" data-i18n="fmt.eyebrow">Форматы обучения</span>
-      <h2 class="sec-title" data-i18n="fmt.title">Выберите комфортный формат</h2>
+      <div>
+        <span class="tag" data-i18n="fmt.tag">Форматы обучения</span>
+        <h2 class="display sec-title" data-i18n="fmt.title">Выберите комфортный формат обучения</h2>
+      </div>
+      <div class="sec-aside"><p data-i18n="fmt.sub">Учитесь в живой среде, получайте обратную связь и двигайтесь к результату в понятном темпе.</p></div>
     </div>
     <div class="formats-grid">
-      <div class="format liquid-glass reveal"><b>01</b><div class="format-icon"><img src="assets/icon-group.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f1">В группе</h4><p data-i18n="fmt.f1d">Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.</p></div>
-      <div class="format liquid-glass reveal reveal-d1"><b>02</b><div class="format-icon"><img src="assets/icon-building.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f2">Офлайн</h4><p data-i18n="fmt.f2d">Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.</p></div>
-      <div class="format liquid-glass reveal reveal-d2"><b>03</b><div class="format-icon"><img src="assets/icon-review.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f3">Практикумы</h4><p data-i18n="fmt.f3d">Разборы работ и живая обратная связь от ментора на каждом занятии.</p></div>
-      <div class="format liquid-glass reveal reveal-d3"><b>04</b><div class="format-icon"><img src="assets/icon-installment.png" alt="" loading="lazy"></div><h4 data-i18n="fmt.f4">Рассрочка</h4><p data-i18n="fmt.f4d">Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.</p></div>
+      <div class="card fmt fmt-main fade-bottom-dark on-dark reveal">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070907_2cf85802-74fc-48c8-9360-40d708a482d3.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-lime">01</span><div class="bottom"><h3 data-i18n="fmt.f1">В группе</h3><p data-i18n="fmt.f1d">Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.</p></div></div>
+      </div>
+      <div class="card fmt fmt-wide fade-left-dark on-dark reveal d1">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070907_4b5e3303-3fba-41c4-a0b6-2eb3d08b6344.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-violet">02</span><div class="bottom"><h3 class="display" data-i18n="fmt.f2">Офлайн</h3><p data-i18n="fmt.f2d">Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.</p></div></div>
+      </div>
+      <div class="card fmt fmt-sm fade-bottom-dark on-dark reveal d2">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070959_61a8f9f7-3c74-4ab8-8e9e-5c30978d4f18.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-lime">03</span><div class="bottom"><h3 data-i18n="fmt.f3">Практикумы</h3><p data-i18n="fmt.f3d">Разборы работ и живая обратная связь от ментора на каждом занятии.</p></div></div>
+      </div>
+      <div class="card fmt fmt-sm violet fade-bottom-dark on-dark reveal d3" style="--ink:var(--violet-deep)">
+        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070959_0a727893-27e9-425b-8af0-abe224ae0e27.png" alt="" loading="lazy">
+        <div class="card-body"><span class="num num-violet">04</span><div class="bottom"><h3 data-i18n="fmt.f4">Рассрочка</h3><p data-i18n="fmt.f4d">Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.</p></div></div>
+      </div>
     </div>
+    <div class="formats-foot reveal"><a class="link-arrow" href="#open-lesson" data-modal-open><span data-i18n="fmt.more">Узнать подробнее о форматах</span><svg class="arr"><use href="#arr"/></svg></a></div>
   </div>
 </section>
 
 <!-- ======== OPEN LESSON CTA ======== -->
-<section id="open-lesson">
-  <div class="wrap">
-    <div class="cta-panel liquid-glass reveal">
-      <img class="cta-cap" src="assets/float-cap.png" alt="" loading="lazy">
-      <h2 data-i18n-html="cta.title">Начните с <span class="grad-text">бесплатного открытого урока</span></h2>
-      <p class="cities" data-i18n-html="cta.cities">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i></p>
+<section id="open-lesson" class="cta s-dark">
+  <div class="cta-grid">
+    <div class="cta-text reveal">
+      <span class="tag" data-i18n="cta.tag">Первый шаг</span>
+      <h2 class="display" data-i18n-html="cta.title">Начните с <span class="tape">бесплатного открытого урока</span></h2>
+      <p class="cta-sub" data-i18n="cta.sub">Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — Ташкент · Самарканд · Фергана.</p>
       <div class="cta-actions">
-        <a class="btn btn-primary" href="https://interno-open-lesson.vercel.app" data-modal-open data-i18n="cta.btn1">Записаться на открытый урок</a>
-        <a class="btn btn-ghost" href="tel:+998781131808" data-i18n="cta.btn2">Позвонить: +998 78 113 18 08</a>
+        <a class="btn btn-lime" href="https://interno-open-lesson.vercel.app" data-modal-open><span data-i18n="cta.btn1">Записаться на открытый урок</span><svg class="arr"><use href="#arr"/></svg></a>
+        <a class="btn btn-line" href="tel:+998781131808" data-i18n="cta.btn2">Позвонить: +998 78 113 18 08</a>
       </div>
+      <p class="cta-note" data-i18n="cta.note">Выберите направление — остальное разберём вместе.</p>
     </div>
+    <div class="cta-photo"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070959_8be353a7-8f8b-4eeb-9656-da74f1aaaaec.png" alt="" loading="lazy"></div>
   </div>
 </section>
 
@@ -748,7 +697,7 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="assets/logo.svg" alt="INTERNO School">
+        <img src="assets/logo.svg" alt="INTERNO — Школа современных профессий">
         <p data-i18n="footer.about">Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.</p>
       </div>
       <div class="footer-col">
@@ -772,24 +721,18 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
         <a href="https://instagram.com/interno.school" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p data-i18n="footer.rights">© 2026 INTERNO School. Все права защищены.</p>
-      <div class="socials">
-        <a href="https://t.me/interno_school" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21.9 4.6c.2-1-.7-1.8-1.6-1.4L2.7 10.1c-1 .4-1 1.9.1 2.2l4.5 1.4 1.7 5.4c.3.9 1.4 1.1 2 .4l2.5-2.6 4.6 3.4c.8.6 2 .2 2.2-.9l1.6-14.8zM8.2 13.1l9.6-6.2c.2-.2.5.1.3.3l-7.9 7.3-.3 3.2-1.7-4.6z"/></svg></a>
-        <a href="https://instagram.com/interno.school" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.3-.1 1.7-.1 4.9-.1zm0 2c-3.1 0-3.5 0-4.8.1-1.1.1-1.5.2-1.8.3-.4.2-.7.3-1 .6-.3.3-.5.6-.6 1-.1.3-.3.7-.3 1.8-.1 1.3-.1 1.6-.1 4.8s0 3.5.1 4.8c.1 1.1.2 1.5.3 1.8.2.4.3.7.6 1 .3.3.6.5 1 .6.3.1.7.3 1.8.3 1.3.1 1.6.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.5-.2 1.8-.3.4-.2.7-.3 1-.6.3-.3.5-.6.6-1 .1-.3.3-.7.3-1.8.1-1.3.1-1.6.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.5-.3-1.8-.2-.4-.3-.7-.6-1-.3-.3-.6-.5-1-.6-.3-.1-.7-.3-1.8-.3-1.3-.1-1.7-.1-4.8-.1zm0 3.4a5.4 5.4 0 1 1 0 10.8 5.4 5.4 0 0 1 0-10.8zm0 2a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zm5.6-3.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/></svg></a>
-      </div>
-    </div>
+    <p class="footer-bottom" data-i18n="footer.rights">© 2026 INTERNO School. Все права защищены.</p>
   </div>
 </footer>
 
 <!-- ======== ПОПАП-ФОРМА ЗАЯВКИ ======== -->
 <div class="modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
   <div class="modal-backdrop" data-modal-close></div>
-  <div class="modal-panel liquid-glass">
+  <div class="modal-panel">
     <button class="modal-close" type="button" aria-label="Закрыть" data-modal-close>&times;</button>
     <div class="modal-head">
-      <span class="modal-eyebrow" data-i18n="modal.eyebrow">Бесплатный урок</span>
-      <h3 class="modal-title" id="leadModalTitle" data-i18n="modal.title">Запишитесь на открытый урок</h3>
+      <span class="tag" data-i18n="modal.eyebrow">Бесплатный урок</span>
+      <h3 class="modal-title display" id="leadModalTitle" data-i18n="modal.title">Запишитесь на открытый урок</h3>
       <p class="modal-lead" data-i18n="modal.lead">Оставьте контакты — перезвоним, подберём удобные дату и филиал.</p>
     </div>
     <form id="homepage_modal" novalidate>
@@ -820,111 +763,62 @@ footer h5{font-family:var(--font-display);font-size:13px;font-weight:700;letter-
           </select>
         </label>
       </div>
-      <button class="btn btn-primary" type="submit" data-i18n="form.submit">Записаться</button>
+      <button class="btn btn-lime" type="submit" data-i18n="form.submit">Записаться</button>
       <p class="modal-note" data-i18n="form.note">Нажимая на кнопку, я соглашаюсь на обработку персональных данных</p>
     </form>
     <div class="modal-success" hidden>
       <div class="modal-success-icon">✓</div>
-      <h3 data-i18n="success.title">Заявка отправлена!</h3>
+      <h3 class="display" data-i18n="success.title">Заявка отправлена!</h3>
       <p data-i18n="success.text">Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.</p>
-      <button class="btn btn-ghost" type="button" data-modal-close data-i18n="success.close">Закрыть</button>
+      <button class="btn btn-line" type="button" data-modal-close data-i18n="success.close">Закрыть</button>
     </div>
   </div>
 </div>
 
 <script>
-// hero video: force autoplay (some browsers pause muted autoplay anyway)
-const heroVideo=document.querySelector('.hero-media video');
-if(heroVideo&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
-  const tryPlay=()=>heroVideo.play().catch(()=>{});
-  tryPlay();
-  addEventListener('pointerdown',tryPlay,{once:true});
-  addEventListener('scroll',tryPlay,{once:true,passive:true});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)tryPlay()});
-}
-
-const motionOK=!matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-// nav scroll state + параллакс hero при скролле (тренд: scroll-triggered 3D)
 const nav=document.getElementById('nav');
-const heroContent=document.querySelector('.hero-content');
-const heroMedia=document.querySelector('.hero-media');
-const onScroll=()=>{
-  nav.classList.toggle('scrolled',scrollY>30);
-  if(motionOK&&heroContent&&scrollY<=innerHeight){
-    heroContent.style.transform=`translateY(${scrollY*.22}px)`;
-    heroContent.style.opacity=Math.max(1-scrollY/(innerHeight*.95),0);
-    heroMedia.style.transform=`translateY(${scrollY*.1}px) scale(${1+scrollY/innerHeight*.1})`;
-  }
-};
+const onScroll=()=>nav.classList.toggle('scrolled',scrollY>10);
 onScroll();addEventListener('scroll',onScroll,{passive:true});
-
-// кинетическая типографика: разбивка h1 на буквы (переиспользуется при смене языка)
-const h1=document.getElementById('heroTitle');
-let kLetters=[];
-function initKinetic(){
-  if(!h1||!motionOK)return;
-  h1.setAttribute('aria-label',h1.textContent.trim());
-  let idx=0;
-  const split=node=>{
-    [...node.childNodes].forEach(child=>{
-      if(child.nodeType===3){
-        const frag=document.createDocumentFragment();
-        child.textContent.split(/(\s+)/).forEach(tok=>{
-          if(!tok)return;
-          if(!tok.trim()){frag.appendChild(document.createTextNode(tok));return}
-          const w=document.createElement('span');w.className='k-word';
-          [...tok].forEach(ch=>{
-            const s=document.createElement('span');
-            s.className='k-letter';s.textContent=ch;s.style.setProperty('--i',idx++);
-            w.appendChild(s);
-          });
-          frag.appendChild(w);
-        });
-        node.replaceChild(frag,child);
-      }else if(child.nodeType===1)split(child);
-    });
-  };
-  split(h1);
-  // непрерывный градиент поверх побуквенной разбивки
-  const gl=[...h1.querySelectorAll('.grad-text .k-letter')];
-  gl.forEach((s,i)=>{
-    s.style.backgroundSize=gl.length*100+'% 100%';
-    s.style.backgroundPosition=(gl.length>1?i/(gl.length-1)*100:0)+'% 0';
-  });
-  kLetters=[...h1.querySelectorAll('.k-letter')];
-}
-initKinetic();
 
 // ===== RU/UZ =====
 const I18N={
   ru:{
-    heroH1:'Освой профессию, которая <span class="grad-text">кормит и вдохновляет</span>',
     "nav.courses":"Курсы","nav.why":"Почему мы","nav.mentors":"Менторы","nav.formats":"Форматы","nav.openLesson":"Открытый урок","nav.cta":"Бесплатный урок",
-    "hero.badge":"Школа современных профессий · Ташкент / Самарканд / Фергана",
-    "hero.sub":"Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — офлайн-обучение с менторами-практиками.",
-    "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Смотреть направления",
-    "stat.courses":"направления обучения","stat.cities":"города Узбекистана","stat.lessons":"уроков в программе курса","stat.installment":"рассрочка до 6 месяцев",
+    "hero.tag":"Школа современных профессий",
+    "hero.title":'Освой профессию <span class="tape">на практике</span>',
+    "hero.sub":"Дизайн интерьера, графический дизайн, аналитика данных и искусственный интеллект — обучение с менторами-практиками.",
+    "hero.cta1":"Записаться на бесплатный урок","hero.cta2":"Выбрать направление",
+    "hero.p1":"Офлайн-обучение","hero.p2":"Менторы-практики","hero.p3":"Проекты в портфолио",
+    "hero.cardLabel":"Открытый урок",
+    "tab.interior":"Интерьер","tab.graphic":"Графдизайн","tab.data":"Data-аналитика","tab.ai":"Искусственный интеллект",
     "course.interior":"Дизайн интерьера","course.graphic":"Графический дизайн","course.data":"Data-аналитика","course.ai":"Искусственный интеллект",
-    "tick.neuro":"Нейросети","tick.bots":"Telegram-боты",
-    "courses.eyebrow":"Направления обучения","courses.title":"Выбери профессию — остальному научим",
-    "courses.sub":"Каждый курс — это практика с первого занятия, портфолио на выходе и поддержка менторов на всём пути.",
-    "courses.more":"Подробнее о курсе",
-    "tag.open":"Открытый урок","tag.course":"Курс","tag.new":"Новый курс",
-    "meta.interior":"офлайн · <i>Ташкент / Самарканд / Фергана</i>",
-    "meta.graphic":"<i>16 недель</i> · 5 модулей",
-    "meta.data":"<i>3 месяца</i> · 36 уроков",
-    "meta.ai":"<i>2 месяца</i> · 16 занятий · 6 модулей",
-    "desc.interior":"Флагманское направление школы: от идеи и планировки до 3D-визуализации и работы с реальным заказчиком.",
-    "desc.graphic":"С нуля до первых заказов: айдентика, Photoshop, Figma, работа с брендами и упаковка портфолио.",
-    "desc.data":"Python, SQL и Power BI: собирайте, анализируйте и визуализируйте данные — станьте специалистом, которого ищут компании.",
-    "desc.ai":"Нейросети как рабочий инструмент: контент, автоматизация, Telegram-боты и практические AI-проекты.",
-    "why.eyebrow":"Почему INTERNO","why.title":"Учим так, чтобы вы работали, а не просто слушали",
-    "why.f1":"Менторы-практики","why.f1d":"Преподают действующие специалисты с реальными проектами — объясняют сложное простым языком, разбирают ваши работы и остаются на связи на протяжении всего курса.",
-    "why.f2":"Практика с первого дня","why.f2d":"Домашние задания на реальных кейсах и разбор работ — навык формируется руками.",
-    "why.f3":"Сертификат школы","why.f3d":"Подтверждение навыков и готовое портфолио с проектами.",
-    "why.f4":"Путь к доходу","why.f4d":"Оформление портфолио, первые заказы и уверенный старт.",
-    "mentors.eyebrow":"Команда","mentors.title":"Менторы, которые работают в профессии",
+    "course.offline":"Офлайн","cities.dots":"Ташкент · Самарканд · Фергана",
+    "courses.tag":"Направления обучения","courses.title":"Выбери профессию — остальному научим",
+    "courses.sub":"Каждый курс — это практика с первого занятия, проект для портфолио и поддержка менторов на всём пути.",
+    "courses.compare":"Сравнить все курсы","courses.more":"Подробнее о курсе","courses.short":"Подробнее",
+    "desc.interior":"Планировка, 3D-визуализация и проект для портфолио.",
+    "desc.graphic":"Айдентика, упаковка и digital-макеты.",
+    "desc.data":"Python, SQL и Power BI: от данных до дашборда.",
+    "desc.ai":"Практическое применение AI-инструментов для работы и проектов.",
+    "card.interior":"Практический проект с первого занятия",
+    "card.graphic":"Айдентика бренда за 16 недель",
+    "card.data":"36 уроков: Python, SQL, Power BI",
+    "card.ai":"Нейросети и Telegram-боты за 2 месяца",
+    "works.tag":"Портфолио","works.title":"Работы, которые говорят за себя",
+    "works.sub":"Не просто теория: на курсе студенты проходят путь от задачи до готового проекта для портфолио.",
+    "works.all":"Смотреть все работы","works.plan":"План","works.viz":"Визуализация",
+    "works.caseLabel":"Учебный проект","works.caseTitle":"Квартира 78 м<sup>2</sup>",
+    "works.caseText":"Планировка, подбор материалов и финальная 3D-визуализация пространства.",
+    "works.s1":"Планировка","works.s2":"Коллаж материалов","works.s3":"3D-визуализация","works.case":"Смотреть кейс",
+    "works.w2":"Айдентика и упаковка","works.w3":"Интерактивный дашборд","works.w4":"Автоматизация рабочего процесса",
+    "why.tag":"Почему INTERNO","why.title":"Учим так, чтобы вы работали, а не просто слушали",
+    "why.sub":"Курс строится вокруг действий: разобраться, сделать, получить обратную связь и собрать сильный проект в портфолио.",
+    "why.f1":"Менторы-практики","why.f1d":"Действующие специалисты разбирают работы, объясняют сложное простым языком и остаются на связи в процессе обучения.",
+    "why.f2":"Практика с первого дня","why.f2d":"Домашние задания на реальных кейсах и регулярные разборы работ.",
+    "why.f3":"Портфолио и сертификат","why.f3d":"Готовые работы, которые можно показать работодателю или клиенту.",
+    "why.f4":"Путь к первым заказам","why.f4d":"Поможем оформить портфолио и уверенно начать работать по профессии.",
+    "mentors.tag":"Команда","mentors.title":"Менторы, которые работают в профессии",
+    "mentors.sub":"Не теоретики со стороны. Практики, которые знают требования рынка, инструменты и реальные задачи клиентов.",
     "mentors.asadCourse":"Дизайн интерьера","mentors.asadName":"Асад Халимов","mentors.asadRole":"Старший куратор · 7+ лет в дизайне",
     "mentors.asad1":"120+ реализованных проектов в Ташкенте, Самарканде, Алматы",
     "mentors.asad2":"Обучил 800+ студентов — 60% работают в профессии",
@@ -933,14 +827,18 @@ const I18N={
     "mentors.asliddin1":"Дашборды Power BI, SQL и Pandas для решений на данных",
     "mentors.asliddin2":"Автоматизирует бизнес Telegram-ботами: приём заявок, уведомления из API",
     "mentors.asliddin3":"Учился в НИТУ МИСиС (Москва); с 2022 года — реальные проекты",
-    "fmt.eyebrow":"Форматы обучения","fmt.title":"Выберите комфортный формат",
+    "fmt.tag":"Форматы обучения","fmt.title":"Выберите комфортный формат обучения",
+    "fmt.sub":"Учитесь в живой среде, получайте обратную связь и двигайтесь к результату в понятном темпе.",
     "fmt.f1":"В группе","fmt.f1d":"Небольшие группы, командная атмосфера и нетворкинг с единомышленниками.",
     "fmt.f2":"Офлайн","fmt.f2d":"Занятия в аудиториях школы — Ташкент, Самарканд и Фергана.",
     "fmt.f3":"Практикумы","fmt.f3d":"Разборы работ и живая обратная связь от ментора на каждом занятии.",
     "fmt.f4":"Рассрочка","fmt.f4d":"Учитесь сейчас — платите частями: рассрочка до 6 месяцев без переплат.",
-    "cta.title":'Начните с <span class="grad-text">бесплатного открытого урока</span>',
-    "cta.cities":"Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — <i>Ташкент · Самарканд · Фергана</i>",
+    "fmt.more":"Узнать подробнее о форматах",
+    "cta.tag":"Первый шаг",
+    "cta.title":'Начните с <span class="tape">бесплатного открытого урока</span>',
+    "cta.sub":"Приходите, познакомьтесь с ментором и попробуйте профессию на вкус — Ташкент · Самарканд · Фергана.",
     "cta.btn1":"Записаться на открытый урок","cta.btn2":"Позвонить: +998 78 113 18 08",
+    "cta.note":"Выберите направление — остальное разберём вместе.",
     "footer.about":"Школа современных профессий: дизайн, аналитика и искусственный интеллект. Ташкент · Самарканд · Фергана.",
     "footer.courses":"Курсы","footer.school":"Школа","footer.contacts":"Контакты",
     "footer.rights":"© 2026 INTERNO School. Все права защищены.",
@@ -953,32 +851,42 @@ const I18N={
     "success.title":"Заявка отправлена!","success.text":"Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.","success.close":"Закрыть",
   },
   uz:{
-    heroH1:'<span class="grad-text">Boqadigan va ilhomlantiradigan</span> kasbni egallang',
     "nav.courses":"Kurslar","nav.why":"Nega biz","nav.mentors":"Mentorlar","nav.formats":"Formatlar","nav.openLesson":"Ochiq dars","nav.cta":"Bepul dars",
-    "hero.badge":"Zamonaviy kasblar maktabi · Toshkent / Samarqand / Farg'ona",
-    "hero.sub":"Interyer dizayni, grafik dizayn, data-analitika va sun'iy intellekt — amaliyotchi mentorlar bilan oflayn ta'lim.",
-    "hero.cta1":"Bepul darsga yozilish","hero.cta2":"Yo'nalishlarni ko'rish",
-    "stat.courses":"ta ta'lim yo'nalishi","stat.cities":"ta O'zbekiston shahri","stat.lessons":"kurs dasturidagi darslar","stat.installment":"6 oygacha bo'lib to'lash",
+    "hero.tag":"Zamonaviy kasblar maktabi",
+    "hero.title":'Kasbni <span class="tape">amaliyotda</span> egallang',
+    "hero.sub":"Interyer dizayni, grafik dizayn, data-analitika va sun'iy intellekt — amaliyotchi mentorlar bilan ta'lim.",
+    "hero.cta1":"Bepul darsga yozilish","hero.cta2":"Yo'nalishni tanlash",
+    "hero.p1":"Oflayn ta'lim","hero.p2":"Amaliyotchi mentorlar","hero.p3":"Portfolio uchun loyihalar",
+    "hero.cardLabel":"Ochiq dars",
+    "tab.interior":"Interyer","tab.graphic":"Grafik dizayn","tab.data":"Data-analitika","tab.ai":"Sun'iy intellekt",
     "course.interior":"Interyer dizayni","course.graphic":"Grafik dizayn","course.data":"Data-analitika","course.ai":"Sun'iy intellekt",
-    "tick.neuro":"Neyrotarmoqlar","tick.bots":"Telegram-botlar",
-    "courses.eyebrow":"Ta'lim yo'nalishlari","courses.title":"Kasbni tanlang — qolganini o'rgatamiz",
-    "courses.sub":"Har bir kurs — birinchi darsdan amaliyot, yakunda portfolio va butun yo'l davomida mentorlar yordami.",
-    "courses.more":"Kurs haqida batafsil",
-    "tag.open":"Ochiq dars","tag.course":"Kurs","tag.new":"Yangi kurs",
-    "meta.interior":"oflayn · <i>Toshkent / Samarqand / Farg'ona</i>",
-    "meta.graphic":"<i>16 hafta</i> · 5 modul",
-    "meta.data":"<i>3 oy</i> · 36 dars",
-    "meta.ai":"<i>2 oy</i> · 16 mashg'ulot · 6 modul",
-    "desc.interior":"Maktabning flagman yo'nalishi: g'oya va planirovkadan 3D-vizualizatsiya hamda real buyurtmachi bilan ishlashgacha.",
-    "desc.graphic":"Noldan birinchi buyurtmalargacha: aydentika, Photoshop, Figma, brendlar bilan ishlash va portfolio yig'ish.",
-    "desc.data":"Python, SQL va Power BI: ma'lumotlarni yig'ing, tahlil qiling va vizuallashtiring — kompaniyalar izlayotgan mutaxassis bo'ling.",
-    "desc.ai":"Neyrotarmoqlar ish quroli sifatida: kontent, avtomatlashtirish, Telegram-botlar va amaliy AI-loyihalar.",
-    "why.eyebrow":"Nega INTERNO","why.title":"Siz shunchaki tinglamaysiz — birinchi kundan ishlaysiz",
-    "why.f1":"Amaliyotchi mentorlar","why.f1d":"Real loyihalarga ega amaldagi mutaxassislar dars beradi — murakkabni sodda tilda tushuntiradi, ishlaringizni tahlil qiladi va butun kurs davomida aloqada bo'ladi.",
-    "why.f2":"Birinchi kundan amaliyot","why.f2d":"Real keyslar asosidagi uy vazifalari va ishlarni tahlil qilish — ko'nikma qo'lda shakllanadi.",
-    "why.f3":"Maktab sertifikati","why.f3d":"Ko'nikmalar tasdig'i va loyihalardan iborat tayyor portfolio.",
-    "why.f4":"Daromad sari yo'l","why.f4d":"Portfolio rasmiylashtirish, birinchi buyurtmalar va ishonchli start.",
-    "mentors.eyebrow":"Jamoa","mentors.title":"Kasbda ishlayotgan mentorlar",
+    "course.offline":"Oflayn","cities.dots":"Toshkent · Samarqand · Farg'ona",
+    "courses.tag":"Ta'lim yo'nalishlari","courses.title":"Kasbni tanlang — qolganini o'rgatamiz",
+    "courses.sub":"Har bir kurs — birinchi darsdan amaliyot, portfolio uchun loyiha va butun yo'l davomida mentorlar yordami.",
+    "courses.compare":"Barcha kurslarni solishtirish","courses.more":"Kurs haqida batafsil","courses.short":"Batafsil",
+    "desc.interior":"Planirovka, 3D-vizualizatsiya va portfolio uchun loyiha.",
+    "desc.graphic":"Aydentika, qadoq va digital-maketlar.",
+    "desc.data":"Python, SQL va Power BI: ma'lumotdan dashboardgacha.",
+    "desc.ai":"Ish va loyihalar uchun AI-vositalarni amalda qo'llash.",
+    "card.interior":"Birinchi darsdan amaliy loyiha",
+    "card.graphic":"16 haftada brend aydentikasi",
+    "card.data":"36 dars: Python, SQL, Power BI",
+    "card.ai":"2 oyda neyrotarmoqlar va Telegram-botlar",
+    "works.tag":"Portfolio","works.title":"O'zi gapiradigan ishlar",
+    "works.sub":"Shunchaki nazariya emas: kursda talabalar vazifadan portfolio uchun tayyor loyihagacha yo'l bosadi.",
+    "works.all":"Barcha ishlarni ko'rish","works.plan":"Reja","works.viz":"Vizualizatsiya",
+    "works.caseLabel":"O'quv loyihasi","works.caseTitle":"Kvartira 78 m<sup>2</sup>",
+    "works.caseText":"Planirovka, materiallarni tanlash va makonning yakuniy 3D-vizualizatsiyasi.",
+    "works.s1":"Planirovka","works.s2":"Materiallar kollaji","works.s3":"3D-vizualizatsiya","works.case":"Keysni ko'rish",
+    "works.w2":"Aydentika va qadoq","works.w3":"Interaktiv dashboard","works.w4":"Ish jarayonini avtomatlashtirish",
+    "why.tag":"Nega INTERNO","why.title":"Siz shunchaki tinglamaysiz — ishlashni o'rganasiz",
+    "why.sub":"Kurs harakatlar atrofida quriladi: tushunish, bajarish, fikr-mulohaza olish va portfolio uchun kuchli loyiha yig'ish.",
+    "why.f1":"Amaliyotchi mentorlar","why.f1d":"Amaldagi mutaxassislar ishlarni tahlil qiladi, murakkabni sodda tushuntiradi va o'qish davomida aloqada bo'ladi.",
+    "why.f2":"Birinchi kundan amaliyot","why.f2d":"Real keyslar asosidagi uy vazifalari va muntazam ish tahlillari.",
+    "why.f3":"Portfolio va sertifikat","why.f3d":"Ish beruvchi yoki mijozga ko'rsatish mumkin bo'lgan tayyor ishlar.",
+    "why.f4":"Birinchi buyurtmalar sari","why.f4d":"Portfolioni rasmiylashtirish va kasbda ishonchli boshlashga yordam beramiz.",
+    "mentors.tag":"Jamoa","mentors.title":"Kasbda ishlayotgan mentorlar",
+    "mentors.sub":"Chetdagi nazariyachilar emas. Bozor talablari, vositalar va mijozlarning real vazifalarini biladigan amaliyotchilar.",
     "mentors.asadCourse":"Interyer dizayni","mentors.asadName":"Asad Halimov","mentors.asadRole":"Bosh mentor · 7+ yil dizaynda",
     "mentors.asad1":"Toshkent, Samarqand, Almatida 120+ amalga oshirilgan loyiha",
     "mentors.asad2":"800+ talabani o'qitgan — 60%i kasb bo'yicha ishlaydi",
@@ -987,14 +895,18 @@ const I18N={
     "mentors.asliddin1":"Ma'lumotlarga asoslangan qarorlar uchun Power BI, SQL va Pandas dashboardlari",
     "mentors.asliddin2":"Biznesni Telegram-botlar bilan avtomatlashtiradi: buyurtma qabul qilish, API xabarnomalari",
     "mentors.asliddin3":"Moskvadagi NUST MISISda tahsil olgan; 2022-yildan beri real loyihalar",
-    "fmt.eyebrow":"Ta'lim formatlari","fmt.title":"Qulay formatni tanlang",
+    "fmt.tag":"Ta'lim formatlari","fmt.title":"Qulay ta'lim formatini tanlang",
+    "fmt.sub":"Jonli muhitda o'qing, fikr-mulohaza oling va natijaga tushunarli sur'atda boring.",
     "fmt.f1":"Guruhda","fmt.f1d":"Kichik guruhlar, jamoaviy muhit va hamfikrlar bilan netvorking.",
     "fmt.f2":"Oflayn","fmt.f2d":"Maktab auditoriyalarida mashg'ulotlar — Toshkent, Samarqand va Farg'ona.",
     "fmt.f3":"Praktikumlar","fmt.f3d":"Har darsda ishlarni tahlil qilish va mentordan jonli fikr-mulohaza.",
     "fmt.f4":"Bo'lib to'lash","fmt.f4d":"Hozir o'qing — bo'lib to'lang: 6 oygacha ustama to'lovsiz.",
-    "cta.title":'Bepul <span class="grad-text">ochiq darsdan</span> boshlang',
-    "cta.cities":"Keling, mentor bilan tanishing va kasbni sinab ko'ring — <i>Toshkent · Samarqand · Farg'ona</i>",
+    "fmt.more":"Formatlar haqida batafsil",
+    "cta.tag":"Birinchi qadam",
+    "cta.title":'<span class="tape">Bepul ochiq darsdan</span> boshlang',
+    "cta.sub":"Keling, mentor bilan tanishing va kasbni sinab ko'ring — Toshkent · Samarqand · Farg'ona.",
     "cta.btn1":"Ochiq darsga yozilish","cta.btn2":"Qo'ng'iroq qilish: +998 78 113 18 08",
+    "cta.note":"Yo'nalishni tanlang — qolganini birga hal qilamiz.",
     "footer.about":"Zamonaviy kasblar maktabi: dizayn, analitika va sun'iy intellekt. Toshkent · Samarqand · Farg'ona.",
     "footer.courses":"Kurslar","footer.school":"Maktab","footer.contacts":"Kontaktlar",
     "footer.rights":"© 2026 INTERNO School. Barcha huquqlar himoyalangan.",
@@ -1007,6 +919,33 @@ const I18N={
     "success.title":"Ariza yuborildi!","success.text":"Yozuvni tasdiqlash uchun tez orada siz bilan bog'lanamiz.","success.close":"Yopish",
   },
 };
+
+// ===== hero: переключение направлений =====
+const HERO_TABS={
+  interior:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png',href:'https://interno-open-lesson.vercel.app'},
+  graphic:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png',href:'https://github.com/aziz-tfx/interno-graphic-design'},
+  data:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070456_312ae594-060e-411c-94f0-b03b953afbbd.png',href:'https://interno-data-analytics.vercel.app'},
+  ai:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png',href:'https://ai-praktik-landing.vercel.app'},
+};
+const heroImg=document.getElementById('heroImg');
+const heroCard=document.getElementById('heroCard');
+let heroTab='interior';
+function renderHeroCard(){
+  const t=I18N[lang];
+  document.getElementById('heroCardTitle').textContent=t['course.'+heroTab];
+  document.getElementById('heroCardText').textContent=t['card.'+heroTab];
+  heroCard.href=HERO_TABS[heroTab].href;
+}
+document.querySelectorAll('.hero-tabs button').forEach(b=>b.addEventListener('click',()=>{
+  if(b.dataset.tab===heroTab)return;
+  heroTab=b.dataset.tab;
+  document.querySelectorAll('.hero-tabs button').forEach(x=>x.classList.toggle('active',x===b));
+  heroImg.classList.add('is-fading');
+  setTimeout(()=>{heroImg.src=HERO_TABS[heroTab].img;heroImg.classList.remove('is-fading')},250);
+  renderHeroCard();
+}));
+Object.values(HERO_TABS).forEach(t=>{const i=new Image();i.src=t.img});
+
 let lang='ru';
 try{lang=localStorage.getItem('interno_lang')||'ru'}catch(_){}
 if(!I18N[lang])lang='ru';
@@ -1018,7 +957,7 @@ function applyLang(l){
   document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t[el.dataset.i18n];if(v!=null)el.textContent=v});
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{const v=t[el.dataset.i18nHtml];if(v!=null)el.innerHTML=v});
   document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
-  if(h1){h1.innerHTML=t.heroH1;initKinetic()}
+  renderHeroCard();
 }
 document.querySelectorAll('.lang-switch button').forEach(b=>
   b.addEventListener('click',()=>{if(b.dataset.lang!==lang)applyLang(b.dataset.lang)}));
@@ -1029,17 +968,6 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}
 }),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// animated counters
-const cio=new IntersectionObserver(es=>es.forEach(e=>{
-  if(!e.isIntersecting)return;cio.unobserve(e.target);
-  const el=e.target,end=+el.dataset.counter,t0=performance.now(),dur=1400;
-  const tick=t=>{const p=Math.min((t-t0)/dur,1);
-    el.textContent=Math.round(end*(1-Math.pow(1-p,3)));
-    if(p<1)requestAnimationFrame(tick)};
-  requestAnimationFrame(tick);
-}),{threshold:.6});
-document.querySelectorAll('[data-counter]').forEach(el=>cio.observe(el));
 
 // ===== Попап-форма заявки (конвейер лидов — как на лендинге открытого урока) =====
 const AMOCRM_FORM={
@@ -1077,7 +1005,12 @@ const closeModal=()=>{
   if(lastFocus)lastFocus.focus();
 };
 document.querySelectorAll('[data-modal-open]').forEach(el=>
-  el.addEventListener('click',e=>{e.preventDefault();openModal()}));
+  el.addEventListener('click',e=>{
+    e.preventDefault();
+    // предвыбор направления, если заявка открыта из hero
+    if(el.closest('.hero'))modalForm.elements.course.value=heroTab;
+    openModal();
+  }));
 modal.querySelectorAll('[data-modal-close]').forEach(el=>
   el.addEventListener('click',closeModal));
 addEventListener('keydown',e=>{
@@ -1154,49 +1087,8 @@ modalForm.addEventListener('submit',async e=>{
 
   modalForm.hidden=true;
   modalSuccess.hidden=false;
-  btn.disabled=false;btn.textContent='Записаться';
+  btn.disabled=false;btn.textContent=I18N[lang]['form.submit'];
 });
-
-// 3D tilt + light-reactive блик на стекле (desktop, no reduced motion)
-const fine=matchMedia('(pointer:fine)').matches&&motionOK;
-if(fine){
-  document.querySelectorAll('.course,.feature,.format').forEach(card=>{
-    card.addEventListener('mousemove',e=>{
-      const r=card.getBoundingClientRect();
-      const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-      card.style.setProperty('--mx',x*100+'%');
-      card.style.setProperty('--my',y*100+'%');
-      if(card.classList.contains('course'))
-        card.style.transform=`perspective(900px) rotateY(${(x-.5)*6}deg) rotateX(${-(y-.5)*6}deg) translateY(-4px)`;
-    });
-    card.addEventListener('mouseleave',()=>{card.style.transform=''});
-  });
-
-  // магнитная реакция букв заголовка на курсор
-  const hero=document.querySelector('.hero');
-  if(kLetters.length&&hero){
-    hero.addEventListener('mousemove',e=>{
-      kLetters.forEach(l=>{
-        const r=l.getBoundingClientRect();
-        const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
-        const d=Math.hypot(dx,dy),R=180;
-        if(d<R&&d>0){
-          const f=(1-d/R)*22;
-          l.style.transform=`translate(${-dx/d*f}px,${-dy/d*f}px) rotate(${-dx/d*(1-d/R)*8}deg)`;
-        }else if(l.style.transform)l.style.transform='';
-      });
-    },{passive:true});
-    hero.addEventListener('mouseleave',()=>kLetters.forEach(l=>{l.style.transform=''}));
-  }
-  // parallax orbs
-  addEventListener('mousemove',e=>{
-    const cx=e.clientX/innerWidth-.5,cy=e.clientY/innerHeight-.5;
-    document.querySelectorAll('.orb').forEach(o=>{
-      const d=+o.dataset.depth;
-      o.style.transform=`translate(${cx*d}px,${cy*d}px)`;
-    });
-  },{passive:true});
-}
 </script>
 </body>
 </html>

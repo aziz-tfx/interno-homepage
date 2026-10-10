@@ -33,3 +33,11 @@ python3 -m http.server 8734
 | Data-аналитика | https://data.internoedu.uz |
 | Искусственный интеллект | https://ai.internoedu.uz |
 | Бухгалтерия | https://buxgalteriya.internoedu.uz |
+
+## Заявки → amoCRM
+
+Все кнопки записи (`data-modal-open`) открывают одну форму `#homepage_modal`. Заявка уходит в
+форму amoForms **1751306**: сначала через `api/lead.js` (Vercel Function проверяет ответ amo,
+`error_code === 0`), а если функция недоступна — напрямую из браузера на `forms.amo-forms.ru`.
+Параллельно уходит уведомление в Telegram. Имена полей (`AMO_FIELDS`) — общие поля аккаунта;
+если форму в amo пересоздадут с другими полями, обновите их в `api/lead.js` и `index.html`.

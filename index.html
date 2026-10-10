@@ -1035,10 +1035,12 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 // ===== Попап-форма заявки (конвейер лидов — как на лендинге открытого урока) =====
+// amoCRM: форма amoForms 1751306. Основной путь — /api/lead (сервер проверяет ответ amo),
+// запасной — прямая отправка из браузера, если функция недоступна.
 const AMOCRM_FORM={
-  endpoint:'https://forms.amocrm.ru/queue/add',
-  form_id:'1705506',
-  hash:'37df3dcc789078355483c5cbdb3fe57b',
+  endpoint:'https://forms.amo-forms.ru/queue/add',
+  form_id:'1751306',
+  hash:'4549f2f048329fb3c80e459b5b469bee',
   fields:{name:'fields[name_1]',phone:'fields[875427_1][1182433]',note:'fields[note_2]'},
 };
 const TG_NOTIFY='https://interno-open-lesson.vercel.app/api/notify';
@@ -1112,14 +1114,9 @@ modalForm.addEventListener('submit',async e=>{
   const btn=modalForm.querySelector('[type="submit"]');
   btn.disabled=true;btn.textContent='Отправляем…';
 
-  // amoCRM: имя сделки в формате лендинга «Имя · Город · RU»; курс — в заметке и тегах
-  const fd=new FormData();
-  fd.append('form_id',AMOCRM_FORM.form_id);
-  fd.append('hash',AMOCRM_FORM.hash);
-  fd.append('user_origin','');
+  // amoCRM: имя сделки в формате лендинга «Имя · Город · RU»; курс — в заметке
   const langTag=lang.toUpperCase();
-  fd.append(AMOCRM_FORM.fields.name,name?`${name} · ${cityLabel} · ${langTag}`:`${cityLabel} · ${langTag}`);
-  fd.append(AMOCRM_FORM.fields.phone,phone);
+  const dealName=name?`${name} · ${cityLabel} · ${langTag}`:`${cityLabel} · ${langTag}`;
   const noteParts=[
     `🎓 Курс: ${courseLabel}`,
     `🏙 Город: ${cityLabel}   ·   🗣 Язык: ${LANG_LABEL[lang]}`,
@@ -1130,14 +1127,29 @@ modalForm.addEventListener('submit',async e=>{
   if(document.referrer)noteParts.push(`Referrer: ${document.referrer}`);
   const utmPairs=UTM_KEYS.map(k=>utm[k]?`${k}=${utm[k]}`:null).filter(Boolean);
   if(utmPairs.length)noteParts.push(utmPairs.join(' · '));
-  fd.append(AMOCRM_FORM.fields.note,noteParts.join('\n'));
-  UTM_KEYS.forEach(k=>{if(utm[k])fd.append(k,utm[k])});
-  const tags=[cityLabel,`Язык: ${LANG_LABEL[lang]}`,`Курс: ${courseLabel}`,'Форма: homepage_modal'];
-  fd.append('tags',tags.join(','));
-  tags.forEach(t=>fd.append('tags[]',t));
+  const note=noteParts.join('\n');
+
+  const sendAmoDirect=()=>{
+    const fd=new FormData();
+    fd.append(AMOCRM_FORM.fields.name,dealName);
+    fd.append(AMOCRM_FORM.fields.phone,phone);
+    fd.append(AMOCRM_FORM.fields.note,note);
+    fd.append('form_id',AMOCRM_FORM.form_id);
+    fd.append('hash',AMOCRM_FORM.hash);
+    fd.append('user_origin','{}');
+    return fetch(AMOCRM_FORM.endpoint,{method:'POST',body:fd,mode:'no-cors',credentials:'omit'});
+  };
+  const sendAmo=async()=>{
+    try{
+      const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:name||cityLabel,phone,dealName,note})});
+      if(r.ok)return;
+    }catch(_){}
+    await sendAmoDirect();
+  };
 
   await Promise.allSettled([
-    fetch(AMOCRM_FORM.endpoint,{method:'POST',body:fd,mode:'no-cors',credentials:'omit'}),
+    sendAmo(),
     fetch(TG_NOTIFY,{
       method:'POST',
       headers:{'Content-Type':'application/json'},

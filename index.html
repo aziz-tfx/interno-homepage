@@ -124,40 +124,61 @@ section{position:relative;padding:96px 0}
 .nav-phone{font-size:14px;font-weight:700;white-space:nowrap}
 .nav-phone:hover{color:var(--lime)}
 
-/* ===== HERO ===== */
-.hero{padding:40px 0 72px}
-.hero-grid{display:grid;grid-template-columns:1.06fr 1fr;gap:44px;align-items:center}
-.hero h1{font-size:clamp(46px,5.3vw,80px);margin-bottom:28px}
+/* ===== HERO: одна комната — семь профессий ===== */
+.hero{position:relative;display:flex;flex-direction:column;min-height:max(620px,calc(100svh - 76px));padding:0;overflow:hidden;isolation:isolate}
+.hero-stage{position:absolute;inset:0;z-index:-1;background:var(--ink)}
+.hero-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-stage picture{display:contents}
+.hero-fade{opacity:0;transition:opacity .7s ease}
+.hero-fade.on{opacity:1}
+.hero-vid{opacity:0}
+.hero-vid.on{opacity:1}
+/* затемнение под текст слева и под табы снизу */
+.hero-stage::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(10,9,13,.88) 0%,rgba(10,9,13,.55) 34%,rgba(10,9,13,0) 62%),
+    linear-gradient(0deg,rgba(10,9,13,.85) 0%,rgba(10,9,13,0) 26%),
+    linear-gradient(180deg,rgba(10,9,13,.6) 0%,rgba(10,9,13,0) 14%);
+}
+.hero-inner{flex:1;display:flex;align-items:center;width:100%;padding-top:48px;padding-bottom:32px}
+.hero-text{max-width:620px}
+.hero h1{font-size:clamp(46px,6vw,92px);margin-bottom:26px}
 .hero h1 .tape{white-space:nowrap}
-.hero-sub{font-size:17px;color:#C9C4BC;max-width:470px;margin-bottom:34px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.hero-sub{font-size:17px;color:#D4CFD9;max-width:470px;margin-bottom:32px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+.hero .btn-line{background:rgba(10,9,13,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .hero-points{display:flex;flex-wrap:wrap;gap:0;list-style:none}
 .hero-points li{
   display:flex;align-items:center;gap:9px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--muted-d);padding:0 18px;border-left:1px solid var(--line-d);
+  color:#B3AEBC;padding:0 18px;border-left:1px solid var(--line-d);
 }
 .hero-points li:first-child{padding-left:0;border-left:none}
-.hero-points li::before{content:'';width:7px;height:7px;background:var(--violet)}
-.hero-media{position:relative}
-.hero-photo{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:5/4;background:var(--ink-3)}
-.hero-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .45s}
-.hero-photo img.is-fading{opacity:0}
-.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,9,13,.55))}
-.hero-card{
-  position:absolute;left:18px;bottom:18px;z-index:2;max-width:300px;
-  background:rgba(10,9,13,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-  border:1px solid var(--line-d);border-radius:10px;padding:16px 18px;
-}
-.hero-card small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);margin-bottom:6px}
-.hero-card b{display:block;font-family:var(--font-display);font-size:22px;font-weight:600;line-height:1.1;margin-bottom:6px}
-.hero-card span{font-size:12.5px;color:var(--muted-d)}
-.hero-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.hero-points li::before{content:'';width:7px;height:7px;background:var(--lime)}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;width:100%;padding-bottom:28px}
+.hero-tabs{display:flex;flex-wrap:wrap;gap:8px;max-width:780px}
 .hero-tabs button{
-  background:transparent;color:var(--cream);border:1px solid rgba(255,255,255,.2);border-radius:6px;
-  padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;flex:1 1 auto;
+  position:relative;overflow:hidden;
+  background:rgba(10,9,13,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:var(--cream);border:1px solid rgba(255,255,255,.2);border-radius:999px;
+  padding:11px 18px;font-size:13.5px;font-weight:700;cursor:pointer;transition:background .25s,border-color .25s,color .25s;
 }
-.hero-tabs button:hover{border-color:rgba(255,255,255,.5)}
-.hero-tabs button.active{background:var(--violet);border-color:var(--violet);color:#fff}
+.hero-tabs button:hover{border-color:rgba(255,255,255,.55)}
+.hero-tabs button.active{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+/* полоска таймера автопоказа на активном табе */
+.hero-tabs button::after{content:'';position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--violet)}
+.hero-tabs button.timing::after{animation:heroTimer var(--dur,5s) linear forwards}
+@keyframes heroTimer{to{width:100%}}
+.hero-card{
+  flex-shrink:0;display:block;width:300px;
+  background:rgba(10,9,13,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--line-d);border-radius:12px;padding:16px 18px;transition:border-color .25s,transform .25s;
+}
+.hero-card:hover{border-color:rgba(214,242,59,.55);transform:translateY(-2px)}
+.hero-card small{display:flex;justify-content:space-between;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:8px}
+.hero-card b{display:block;font-family:var(--font-display);font-size:24px;font-weight:600;line-height:1.05;text-transform:uppercase;margin-bottom:6px}
+.hero-card span{display:block;font-size:13px;color:#BDB8C4}
+.hero-card .arr{color:var(--lime)}
 
 /* ===== общие фото-карточки (bento) ===== */
 .card{position:relative;border-radius:var(--r);overflow:hidden;isolation:isolate;display:flex;flex-direction:column}
@@ -181,31 +202,37 @@ section{position:relative;padding:96px 0}
 .on-dark{color:var(--cream)}
 .on-dark p{color:#BDB8C4}
 
-/* ===== COURSES ===== */
-.courses-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:240px 260px;gap:14px}
-.course-main{grid-row:span 2;background:var(--ink)}
-.course-main .card-body{padding:34px;height:100%;display:flex;flex-direction:column}
-.course-main h3{font-size:clamp(30px,3vw,42px);margin-top:20px}
-.course-main .pill{display:inline-block;background:var(--violet);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;margin:6px 0 18px;align-self:flex-start}
-.course-main .cities{margin-top:26px;padding-top:18px;border-top:1px solid var(--line-d);font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cream);max-width:240px}
-.course-main .more{margin-top:auto;align-self:flex-start;border-color:var(--lime)}
-.course-wide{grid-column:span 2;background:var(--paper-2);border:1px solid var(--line-l)}
-.course-wide h3{font-size:30px}
-.course-wide .more{margin-top:18px;border-color:var(--violet)}
-.course-sm{background:var(--paper-2);border:1px solid var(--line-l)}
-.course-sm .card-body{height:100%;display:flex;flex-direction:column}
-.course-sm h3{font-size:24px}
-.course-sm .more{margin-top:auto;align-self:flex-start;border-color:var(--violet)}
-.course-sm.dark{background:var(--violet-deep);border-color:transparent}
-.course-sm.dark .more{border-color:var(--lime)}
-.course-sm p{max-width:170px}
-.courses-more{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-.course-x{aspect-ratio:16/12;background:var(--paper-2);border:1px solid var(--line-l)}
-.course-x .card-body{height:100%;display:flex;flex-direction:column}
-.course-x h3{font-size:24px}
-.course-x .more{margin-top:auto;align-self:flex-start;border-color:var(--violet)}
-.course-x.dark{background:var(--violet-deep);border-color:transparent}
-.course-x.dark .more{border-color:var(--lime)}
+/* ===== COURSES: раскрывающиеся полосы ===== */
+.pros{display:flex;gap:10px;height:clamp(500px,64vh,620px);list-style:none}
+.pro{
+  position:relative;flex:1 1 0;min-width:0;border-radius:var(--r);overflow:hidden;isolation:isolate;
+  background:var(--ink);color:var(--cream);transition:flex-grow .7s cubic-bezier(.22,1,.36,1);
+}
+.pro.open{flex-grow:4.6}
+.pro > img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  filter:saturate(.55) brightness(.62);transition:filter .6s;
+}
+.pro.open > img{filter:none;animation:proZoom 14s ease-in-out infinite alternate}
+@keyframes proZoom{from{transform:scale(1.02)}to{transform:scale(1.12)}}
+.pro::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(10,9,13,.94) 0%,rgba(10,9,13,.55) 38%,rgba(10,9,13,.1) 70%)}
+.pro-head{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  padding:22px 0 26px;background:none;border:none;color:inherit;cursor:pointer;transition:opacity .3s;
+}
+.pro.open .pro-head{opacity:0;pointer-events:none}
+.pro-title{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:24px;letter-spacing:.01em;white-space:nowrap}
+.pro-plus{display:none}
+.pro-body{
+  position:absolute;left:0;right:0;bottom:0;padding:32px;
+  opacity:0;transform:translateY(16px);transition:opacity .35s,transform .35s;pointer-events:none;
+}
+.pro.open .pro-body{opacity:1;transform:none;pointer-events:auto;transition-delay:.3s}
+.pro-body h3{font-family:var(--font-display);font-weight:700;text-transform:uppercase;line-height:.98;font-size:clamp(34px,3.4vw,50px);margin:16px 0 12px}
+.pro-body p{font-size:15px;color:#D4CFD9;max-width:400px;margin-bottom:16px}
+.pro-fact{display:inline-block;background:var(--violet);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;margin-bottom:22px}
+.pro-body .more{display:flex;align-items:center;gap:10px;width:max-content;font-size:13.5px;font-weight:800;padding-bottom:5px;border-bottom:2px solid var(--lime);transition:gap .25s}
+.pro-body .more:hover{gap:16px}
 
 /* ===== PORTFOLIO ===== */
 .case{display:grid;grid-template-columns:1.72fr 1fr;border-radius:var(--r);overflow:hidden;background:var(--ink-2);border:1px solid var(--line-d);margin-bottom:14px}
@@ -367,18 +394,15 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
 /* ===== адаптив ===== */
 @media (max-width:1080px){
   .nav-links{display:none}
-  .hero-grid{grid-template-columns:1fr}
-  .hero-media{max-width:720px}
   .case{grid-template-columns:1fr}
 }
 @media (max-width:900px){
   section{padding:72px 0}
   .sec-head{grid-template-columns:1fr;gap:18px}
-  .courses-grid,.why-grid,.formats-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:minmax(260px,auto)}
-  .course-main,.why-main,.fmt-main{grid-column:span 2;grid-row:auto;min-height:440px}
-  .course-wide,.why-wide,.fmt-wide{grid-column:span 2}
-  .works,.courses-more{grid-template-columns:1fr 1fr}
-  .courses-more .course-x:last-child{grid-column:span 2;aspect-ratio:21/9}
+  .why-grid,.formats-grid{grid-template-columns:1fr 1fr;grid-template-rows:none;grid-auto-rows:minmax(260px,auto)}
+  .why-main,.fmt-main{grid-column:span 2;grid-row:auto;min-height:440px}
+  .why-wide,.fmt-wide{grid-column:span 2}
+  .works{grid-template-columns:1fr 1fr}
   .works .work:last-child{grid-column:span 2;aspect-ratio:21/9}
   .mentors-grid{grid-template-columns:1fr}
   .cta-grid{grid-template-columns:1fr}
@@ -392,21 +416,55 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
   .nav-inner{gap:16px;height:66px}
   .nav-logo img{height:32px}
   .nav .btn-sm{padding:10px 12px;font-size:12.5px}
-  .hero{padding-top:28px}
-  .hero-points li{padding:4px 12px 4px 0;border-left:none}
-  .hero-card{left:12px;right:12px;bottom:12px;max-width:none}
-  .courses-grid,.why-grid,.formats-grid,.works,.courses-more{grid-template-columns:1fr}
-  .courses-more .course-x:last-child{grid-column:auto;aspect-ratio:16/12}
-  .course-main,.why-main,.fmt-main,.course-wide,.why-wide,.fmt-wide,.works .work:last-child{grid-column:auto}
+  .why-grid,.formats-grid,.works{grid-template-columns:1fr}
+  .why-main,.fmt-main,.why-wide,.fmt-wide,.works .work:last-child{grid-column:auto}
   .works .work:last-child{aspect-ratio:16/11}
   .fade-left-light::before{background:linear-gradient(180deg,var(--paper-2) 38%,rgba(246,242,236,.75) 55%,transparent 80%)}
   .fade-left-dark::before{background:linear-gradient(180deg,var(--ink) 40%,rgba(10,9,13,.7) 58%,transparent 85%)}
   .case-media{min-height:0}
   .case-info{padding:26px 22px}
   .footer-grid{grid-template-columns:1fr}
-  .course-sm p,.card p{max-width:none}
+  .card p{max-width:none}
   .form-row{grid-template-columns:1fr}
   .modal-panel{padding:30px 22px}
+}
+
+/* ===== hero и полосы направлений: телефон и вертикальный планшет ===== */
+@media (max-width:1080px){
+  .hero-bottom{flex-direction:column;align-items:stretch}
+  .hero-card{width:auto;max-width:420px}
+}
+@media (max-width:700px),(max-aspect-ratio:4/5){
+  .hero{min-height:max(600px,calc(100svh - 66px))}
+  .hero-stage::after{
+    background:
+      linear-gradient(180deg,rgba(10,9,13,.94) 0%,rgba(10,9,13,.72) 34%,rgba(10,9,13,0) 58%),
+      linear-gradient(0deg,rgba(10,9,13,.95) 0%,rgba(10,9,13,.6) 24%,rgba(10,9,13,0) 42%);
+  }
+  .hero-inner{align-items:flex-start;padding-top:32px}
+  .hero-points{display:none}
+  .hero-bottom{gap:14px;padding-bottom:20px}
+  .hero-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -24px;padding:0 24px;scroll-snap-type:x proximity}
+  .hero-tabs::-webkit-scrollbar{display:none}
+  .hero-tabs button{flex:none;min-height:44px;scroll-snap-align:start}
+  .hero-card{max-width:none;padding:13px 16px}
+  .hero-card b{font-size:21px}
+}
+@media (max-width:700px){
+  .hero h1{font-size:clamp(40px,11.5vw,56px);margin-bottom:16px}
+  .hero-sub{font-size:15px;margin-bottom:20px}
+  .hero-cta{margin-bottom:0}
+  .hero-cta .btn{width:100%}
+  .hero-cta .btn-line{display:none}
+  .hero-tabs{margin:0 -16px;padding:0 16px}
+  .pros{flex-direction:column;height:auto;gap:8px}
+  .pro{flex:none;height:76px;transition:height .6s cubic-bezier(.22,1,.36,1)}
+  .pro.open{height:min(480px,78svh)}
+  .pro-head{inset:0 0 auto 0;height:76px;flex-direction:row;justify-content:flex-start;gap:14px;padding:0 18px}
+  .pro-title{writing-mode:horizontal-tb;transform:none;font-size:22px}
+  .pro-plus{display:block;margin-left:auto;font-size:26px;font-weight:500;line-height:1;color:var(--lime)}
+  .pro-body{padding:22px}
+  .pro-body h3{font-size:36px;margin-top:12px}
 }
 </style>
 </head>
@@ -436,8 +494,20 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
 </nav>
 
 <!-- ======== HERO ======== -->
-<header class="hero s-dark">
-  <div class="wrap hero-grid">
+<!-- Одна комната превращается из профессии в профессию: кадры и переходы — assets/hero (Higgsfield).
+     s0 — пустая коробка, s1…s7 — сцены направлений; t{k} — переход из сцены k-1 в сцену k.
+     -d — горизонтальные 16:9, -m — вертикальные 9:16 для телефонов. -->
+<header class="hero s-dark" id="hero">
+  <div class="hero-stage" aria-hidden="true">
+    <picture>
+      <source id="heroImgM" media="(max-aspect-ratio: 4/5)" srcset="assets/hero/s0-m.jpg">
+      <img id="heroImg" class="hero-layer" src="assets/hero/s0-d.jpg" alt="" fetchpriority="high">
+    </picture>
+    <img id="heroFade" class="hero-layer hero-fade" alt="">
+    <video class="hero-layer hero-vid" muted playsinline preload="none" disablepictureinpicture></video>
+    <video class="hero-layer hero-vid" muted playsinline preload="none" disablepictureinpicture></video>
+  </div>
+  <div class="wrap hero-inner">
     <div class="hero-text">
       <span class="tag" data-i18n="hero.tag">Школа современных профессий</span>
       <h1 class="display" data-i18n-html="hero.title">Освой профессию <span class="tape">на практике</span></h1>
@@ -452,25 +522,22 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
         <li data-i18n="hero.p3">Проекты в портфолио</li>
       </ul>
     </div>
-    <div class="hero-media">
-      <div class="hero-photo">
-        <img id="heroImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png" alt="Студентка работает над проектом интерьера">
-        <a class="hero-card" id="heroCard" href="https://interior.internoedu.uz" target="_blank" rel="noopener">
-          <small data-i18n="hero.cardLabel">Открытый урок</small>
-          <b id="heroCardTitle">Дизайн интерьера</b>
-          <span id="heroCardText">Практический проект с первого занятия</span>
-        </a>
-      </div>
-      <div class="hero-tabs" role="tablist">
-        <button type="button" class="active" data-tab="interior" data-i18n="tab.interior">Интерьер</button>
-        <button type="button" data-tab="arch" data-i18n="tab.arch">Архитектура</button>
-        <button type="button" data-tab="graphic" data-i18n="tab.graphic">Графдизайн</button>
-        <button type="button" data-tab="video" data-i18n="tab.video">Видеомонтаж</button>
-        <button type="button" data-tab="data" data-i18n="tab.data">Data-аналитика</button>
-        <button type="button" data-tab="ai" data-i18n="tab.ai">Искусственный интеллект</button>
-        <button type="button" data-tab="acc" data-i18n="tab.acc">Бухгалтерия</button>
-      </div>
+  </div>
+  <div class="wrap hero-bottom">
+    <div class="hero-tabs" role="tablist" aria-label="Направления">
+      <button type="button" role="tab" aria-selected="true" class="active" data-tab="interior" data-i18n="tab.interior">Интерьер</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="arch" data-i18n="tab.arch">Архитектура</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="graphic" data-i18n="tab.graphic">Графдизайн</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="video" data-i18n="tab.video">Видеомонтаж</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="data" data-i18n="tab.data">Data-аналитика</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="ai" data-i18n="tab.ai">Искусственный интеллект</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="acc" data-i18n="tab.acc">Бухгалтерия</button>
     </div>
+    <a class="hero-card" id="heroCard" href="https://interior.internoedu.uz" target="_blank" rel="noopener">
+      <small><span id="heroCardNum">01 / 07</span><svg class="arr"><use href="#arr"/></svg></small>
+      <b id="heroCardTitle">Дизайн интерьера</b>
+      <span id="heroCardText">Практический проект с первого занятия</span>
+    </a>
   </div>
 </header>
 
@@ -487,75 +554,113 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
         <a class="link-arrow" href="#formats"><span data-i18n="courses.compare">Сравнить все курсы</span><svg class="arr"><use href="#arr"/></svg></a>
       </div>
     </div>
-    <div class="courses-grid">
-      <a class="card course-main fade-left-dark on-dark reveal" href="https://interior.internoedu.uz" target="_blank" rel="noopener">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070412_12ddaa7f-7015-4f37-a9ef-3e6e80494124.png" alt="" loading="lazy">
-        <div class="card-body">
+    <ul class="pros reveal">
+      <li class="pro open">
+        <img src="assets/hero/s1-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="true" aria-controls="pro-interior">
+          <span class="num num-lime">01</span>
+          <span class="pro-title" data-i18n="course.interior">Дизайн интерьера</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-interior">
           <span class="num num-lime">01</span>
           <h3 data-i18n="course.interior">Дизайн интерьера</h3>
-          <span class="pill" data-i18n="course.offline">Офлайн</span>
           <p data-i18n="desc.interior">Планировка, 3D-визуализация и проект для портфолио.</p>
-          <div class="cities" data-i18n="cities.dots">Ташкент · Самарканд · Фергана</div>
-          <span class="more"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></span>
+          <span class="pro-fact" data-i18n="card.interior">Практический проект с первого занятия</span>
+          <a class="more" href="https://interior.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
         </div>
-      </a>
-      <a class="card course-wide fade-left-light on-light reveal d1" href="https://graphic.internoedu.uz" target="_blank" rel="noopener">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png" alt="" loading="lazy" style="object-position:right center">
-        <div class="card-body">
-          <span class="num num-violet">02</span>
-          <h3 data-i18n="course.graphic">Графический дизайн</h3>
-          <p data-i18n="desc.graphic">Айдентика, упаковка и digital-макеты.</p>
-          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
-        </div>
-      </a>
-      <a class="card course-sm fade-left-light on-light reveal d2" href="https://data.internoedu.uz" target="_blank" rel="noopener">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_f958f445-d731-4522-a1a8-9959ee1d7902.png" alt="" loading="lazy" style="object-position:70% center">
-        <div class="card-body">
-          <span class="num num-lime">03</span>
-          <h3 data-i18n="course.data">Data-аналитика</h3>
-          <p data-i18n="desc.data">Python, SQL и Power BI: от данных до дашборда.</p>
-          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
-        </div>
-      </a>
-      <a class="card course-sm dark fade-left-dark on-dark reveal d3" href="https://ai.internoedu.uz" target="_blank" rel="noopener" style="--ink:var(--violet-deep)">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png" alt="" loading="lazy" style="object-position:70% center">
-        <div class="card-body">
-          <span class="num num-lime">04</span>
-          <h3 data-i18n="course.ai">Искусственный интеллект</h3>
-          <p data-i18n="desc.ai">Практическое применение AI-инструментов для работы и проектов.</p>
-          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
-        </div>
-      </a>
-    </div>
-    <div class="courses-more">
-      <a class="card course-x fade-top-light on-light reveal" href="https://architecture.internoedu.uz" target="_blank" rel="noopener">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_5e09c6c1-d022-4290-aa9e-587659e15f5a.png" alt="" loading="lazy">
-        <div class="card-body">
-          <span class="num num-violet">05</span>
+      </li>
+      <li class="pro">
+        <img src="assets/hero/s2-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="false" aria-controls="pro-arch">
+          <span class="num num-lime">02</span>
+          <span class="pro-title" data-i18n="course.arch">Архитектура</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-arch">
+          <span class="num num-lime">02</span>
           <h3 data-i18n="course.arch">Архитектура</h3>
           <p data-i18n="desc.arch">Чертежи, 3D-модель здания и проект для портфолио.</p>
-          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
+          <span class="pro-fact" data-i18n="card.arch">От эскиза до 3D-модели здания</span>
+          <a class="more" href="https://architecture.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
         </div>
-      </a>
-      <a class="card course-x dark fade-top-violet on-dark reveal d1" href="https://videomontaj.internoedu.uz" target="_blank" rel="noopener">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_ccf60b80-9d66-4e2f-8d01-903fa45b2205.png" alt="" loading="lazy">
-        <div class="card-body">
-          <span class="num num-lime">06</span>
+      </li>
+      <li class="pro">
+        <img src="assets/hero/s3-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="false" aria-controls="pro-graphic">
+          <span class="num num-lime">03</span>
+          <span class="pro-title" data-i18n="course.graphic">Графический дизайн</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-graphic">
+          <span class="num num-lime">03</span>
+          <h3 data-i18n="course.graphic">Графический дизайн</h3>
+          <p data-i18n="desc.graphic">Айдентика, упаковка и digital-макеты.</p>
+          <span class="pro-fact" data-i18n="card.graphic">Айдентика бренда за 16 недель</span>
+          <a class="more" href="https://graphic.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
+        </div>
+      </li>
+      <li class="pro">
+        <img src="assets/hero/s4-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="false" aria-controls="pro-video">
+          <span class="num num-lime">04</span>
+          <span class="pro-title" data-i18n="course.video">Видеомонтаж</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-video">
+          <span class="num num-lime">04</span>
           <h3 data-i18n="course.video">Видеомонтаж</h3>
           <p data-i18n="desc.video">Монтаж, цвет и звук: от сырого материала до готового ролика.</p>
-          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
+          <span class="pro-fact" data-i18n="card.video">Ролики для брендов и соцсетей</span>
+          <a class="more" href="https://videomontaj.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
         </div>
-      </a>
-      <a class="card course-x fade-top-light on-light reveal d2" href="https://buxgalteriya.internoedu.uz" target="_blank" rel="noopener">
-        <img class="bg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125751_a9fa912f-1795-4332-b4ec-4b72c185a3bd.png" alt="" loading="lazy">
-        <div class="card-body">
-          <span class="num num-violet">07</span>
+      </li>
+      <li class="pro">
+        <img src="assets/hero/s5-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="false" aria-controls="pro-data">
+          <span class="num num-lime">05</span>
+          <span class="pro-title" data-i18n="course.data">Data-аналитика</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-data">
+          <span class="num num-lime">05</span>
+          <h3 data-i18n="course.data">Data-аналитика</h3>
+          <p data-i18n="desc.data">Python, SQL и Power BI: от данных до дашборда.</p>
+          <span class="pro-fact" data-i18n="card.data">36 уроков: Python, SQL, Power BI</span>
+          <a class="more" href="https://data.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
+        </div>
+      </li>
+      <li class="pro">
+        <img src="assets/hero/s6-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="false" aria-controls="pro-ai">
+          <span class="num num-lime">06</span>
+          <span class="pro-title" data-i18n="course.ai">Искусственный интеллект</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-ai">
+          <span class="num num-lime">06</span>
+          <h3 data-i18n="course.ai">Искусственный интеллект</h3>
+          <p data-i18n="desc.ai">Практическое применение AI-инструментов для работы и проектов.</p>
+          <span class="pro-fact" data-i18n="card.ai">Нейросети и Telegram-боты за 2 месяца</span>
+          <a class="more" href="https://ai.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
+        </div>
+      </li>
+      <li class="pro">
+        <img src="assets/hero/s7-m.jpg" alt="" loading="lazy">
+        <button type="button" class="pro-head" aria-expanded="false" aria-controls="pro-acc">
+          <span class="num num-lime">07</span>
+          <span class="pro-title" data-i18n="course.acc">Бухгалтерия</span>
+          <span class="pro-plus" aria-hidden="true">+</span>
+        </button>
+        <div class="pro-body" id="pro-acc">
+          <span class="num num-lime">07</span>
           <h3 data-i18n="course.acc">Бухгалтерия</h3>
           <p data-i18n="desc.acc">Учёт, налоги и отчётность — профессия, которая нужна каждому бизнесу.</p>
-          <span class="more"><span data-i18n="courses.short">Подробнее</span><svg class="arr"><use href="#arr"/></svg></span>
+          <span class="pro-fact" data-i18n="card.acc">Учёт, налоги и отчётность на практике</span>
+          <a class="more" href="https://buxgalteriya.internoedu.uz" target="_blank" rel="noopener"><span data-i18n="courses.more">Подробнее о курсе</span><svg class="arr"><use href="#arr"/></svg></a>
         </div>
-      </a>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -982,38 +1087,150 @@ const I18N={
   },
 };
 
-// ===== hero: переключение направлений =====
-const HERO_TABS={
-  interior:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070410_472db297-de89-4bc7-8bc2-441e579e4ea8.png',href:'https://interior.internoedu.uz'},
-  graphic:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070259_70865026-d716-44a7-9c60-a8f335bf22af.png',href:'https://graphic.internoedu.uz'},
-  data:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070456_312ae594-060e-411c-94f0-b03b953afbbd.png',href:'https://data.internoedu.uz'},
-  arch:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_5e09c6c1-d022-4290-aa9e-587659e15f5a.png',href:'https://architecture.internoedu.uz'},
-  video:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125752_ccf60b80-9d66-4e2f-8d01-903fa45b2205.png',href:'https://videomontaj.internoedu.uz'},
-  acc:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_125751_a9fa912f-1795-4332-b4ec-4b72c185a3bd.png',href:'https://buxgalteriya.internoedu.uz'},
-  ai:{img:'https://d8j0ntlcm91z4.cloudfront.net/user_3CLCviMVubl8pteTJQ9R4nBs27N/hf_20261009_070411_20836537-28eb-4479-93c6-ad7349278b4a.png',href:'https://ai.internoedu.uz'},
-};
-const heroImg=document.getElementById('heroImg');
-const heroCard=document.getElementById('heroCard');
-let heroTab='interior';
-function renderHeroCard(){
-  const t=I18N[lang];
-  document.getElementById('heroCardTitle').textContent=t['course.'+heroTab];
-  document.getElementById('heroCardText').textContent=t['card.'+heroTab];
-  heroCard.href=HERO_TABS[heroTab].href;
-}
-document.querySelectorAll('.hero-tabs button').forEach(b=>b.addEventListener('click',()=>{
-  if(b.dataset.tab===heroTab)return;
-  heroTab=b.dataset.tab;
-  document.querySelectorAll('.hero-tabs button').forEach(x=>x.classList.toggle('active',x===b));
-  heroImg.classList.add('is-fading');
-  setTimeout(()=>{heroImg.src=HERO_TABS[heroTab].img;heroImg.classList.remove('is-fading')},250);
-  renderHeroCard();
-}));
-Object.values(HERO_TABS).forEach(t=>{const i=new Image();i.src=t.img});
-
 let lang='ru';
 try{lang=localStorage.getItem('interno_lang')||'ru'}catch(_){}
 if(!I18N[lang])lang='ru';
+// ===== hero: одна комната — семь профессий =====
+// Сцена 0 — пустая коробка, 1…7 — направления. Переход t{k} ведёт из сцены k-1 в k,
+// его первый и последний кадр совпадают с соседними сценами, поэтому склейка не видна.
+const SCENES=['interior','arch','graphic','video','data','ai','acc'];
+const HERO_HREF={interior:'https://interior.internoedu.uz',arch:'https://architecture.internoedu.uz',graphic:'https://graphic.internoedu.uz',video:'https://videomontaj.internoedu.uz',data:'https://data.internoedu.uz',ai:'https://ai.internoedu.uz',acc:'https://buxgalteriya.internoedu.uz'};
+const HERO_HOLD=3500;   // сколько стоим на сцене перед следующим переходом
+const hero=document.getElementById('hero');
+const heroImg=document.getElementById('heroImg');
+const heroImgM=document.getElementById('heroImgM');
+const heroFade=document.getElementById('heroFade');
+const heroVids=[...hero.querySelectorAll('.hero-vid')];
+const heroTabs=[...hero.querySelectorAll('.hero-tabs button')];
+const heroCard=document.getElementById('heroCard');
+const portraitMQ=matchMedia('(max-aspect-ratio: 4/5)');
+// без видео: «уменьшить движение» или экономия трафика — только смена кадров
+const heroMotion=!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(navigator.connection&&navigator.connection.saveData);
+const heroVidExt=heroVids[0].canPlayType('video/webm; codecs="vp9"')?'webm':'mp4';
+const heroSrc=(kind,k,v=portraitMQ.matches?'m':'d')=>`assets/hero/${kind}${k}-${v}.${kind==='t'?heroVidExt:'jpg'}`;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+let heroScene=0,heroTab='interior',heroAuto=heroMotion,heroBusy=false,heroPending=0;
+let heroTimer=0,heroVisible=true,heroWaiting=false,activeVid=null;
+
+function renderHeroCard(){
+  const t=I18N[lang],i=SCENES.indexOf(heroTab)+1;
+  document.getElementById('heroCardNum').textContent=`0${i} / 07`;
+  document.getElementById('heroCardTitle').textContent=t['course.'+heroTab];
+  document.getElementById('heroCardText').textContent=t['card.'+heroTab];
+  heroCard.href=HERO_HREF[heroTab];
+}
+function setHeroTab(k){
+  heroTab=SCENES[k-1];
+  heroTabs.forEach((b,i)=>{
+    const on=i===k-1;
+    b.classList.toggle('active',on);b.classList.remove('timing');b.setAttribute('aria-selected',on);
+  });
+  // на телефоне табы — лента с прокруткой: подвозим активный, не трогая прокрутку страницы
+  const row=heroTabs[0].parentNode,b=heroTabs[k-1];
+  if(row.scrollWidth>row.clientWidth)row.scrollTo({left:b.offsetLeft-row.offsetLeft-16,behavior:heroMotion?'smooth':'auto'});
+  renderHeroCard();
+}
+function setBase(k){heroImgM.srcset=heroSrc('s',k,'m');heroImg.src=heroSrc('s',k,'d')}
+function hideVids(){heroVids.forEach(v=>{v.classList.remove('on');v.pause()});activeVid=null}
+async function crossfade(k){
+  const img=new Image();img.src=heroSrc('s',k);
+  try{await img.decode()}catch(_){}
+  hideVids();
+  heroFade.src=img.src;heroFade.classList.add('on');
+  await wait(heroMotion?700:0);
+  setBase(k);heroScene=k;
+  heroFade.classList.remove('on');
+}
+function playTransition(k){
+  return new Promise(resolve=>{
+    const v=heroVids.find(x=>x!==activeVid),want=heroSrc('t',k);
+    let started=false,done=false;
+    const finish=fallback=>{
+      if(done)return;done=true;clearTimeout(guard);
+      v.removeEventListener('playing',onPlaying);v.removeEventListener('ended',onEnded);v.removeEventListener('error',onError);
+      if(fallback)crossfade(k).then(resolve);
+      else{setBase(k);heroScene=k;resolve()}
+    };
+    const onPlaying=()=>{
+      if(started)return;started=true;
+      v.classList.add('on');
+      const prev=activeVid;activeVid=v;
+      if(prev&&prev!==v)setTimeout(()=>{prev.classList.remove('on');prev.pause()},60);
+    };
+    const onEnded=()=>finish(false);
+    const onError=()=>finish(true);
+    v.addEventListener('playing',onPlaying);v.addEventListener('ended',onEnded);v.addEventListener('error',onError);
+    // видео не успело загрузиться или автозапуск запрещён (режим энергосбережения iOS) — просто меняем кадр
+    const guard=setTimeout(()=>{if(!started)finish(true)},7000);
+    if(!v.src.endsWith(want)){v.preload='auto';v.src=want}
+    else v.currentTime=0;
+    v.play().catch(()=>finish(true));
+  });
+}
+function prefetch(k){
+  if(!heroMotion||k>7)return;
+  const v=heroVids.find(x=>x!==activeVid),want=heroSrc('t',k);
+  if(!v.src.endsWith(want)){v.preload='auto';v.src=want}
+}
+async function goTo(k){
+  if(heroBusy){heroPending=k;return}
+  if(k===heroScene)return;
+  heroBusy=true;clearTimeout(heroTimer);
+  if(k)setHeroTab(k);
+  if(heroMotion&&k===heroScene+1)await playTransition(k);
+  else await crossfade(k);
+  heroBusy=false;
+  if(heroPending){const n=heroPending;heroPending=0;if(n!==heroScene)return goTo(n)}
+  prefetch(heroScene+1);
+  scheduleNext();
+}
+function scheduleNext(){
+  clearTimeout(heroTimer);
+  if(!heroAuto||!heroScene)return;
+  if(!heroVisible||document.hidden){heroWaiting=true;return}
+  const b=heroTabs[heroScene-1];
+  b.classList.remove('timing');void b.offsetWidth;
+  b.style.setProperty('--dur',HERO_HOLD+'ms');b.classList.add('timing');
+  heroTimer=setTimeout(async()=>{
+    if(!heroVisible||document.hidden){heroWaiting=true;return}
+    if(heroScene<7)goTo(heroScene+1);
+    else{heroBusy=true;await crossfade(0);heroBusy=false;goTo(1)}   // по кругу: снова пустая коробка
+  },HERO_HOLD);
+}
+heroTabs.forEach((b,i)=>b.addEventListener('click',()=>{
+  heroAuto=false;clearTimeout(heroTimer);   // пользователь выбирает сам — автопоказ больше не мешает
+  heroTabs.forEach(x=>x.classList.remove('timing'));
+  goTo(i+1);
+}));
+new IntersectionObserver(([e])=>{
+  heroVisible=e.isIntersecting;
+  if(heroVisible&&heroWaiting){heroWaiting=false;scheduleNext()}
+},{threshold:.25}).observe(hero);
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden)return;
+  if(activeVid&&activeVid.paused&&!activeVid.ended)activeVid.play().catch(()=>{});
+  if(heroWaiting){heroWaiting=false;scheduleNext()}
+});
+portraitMQ.addEventListener('change',()=>{if(!heroBusy){hideVids();setBase(heroScene)}});
+if(heroMotion){prefetch(1);goTo(1)}
+else{setHeroTab(1);setBase(1);heroScene=1}
+
+// ===== направления: раскрывающиеся полосы =====
+const pros=[...document.querySelectorAll('.pro')];
+const prosHoverMQ=matchMedia('(hover:hover) and (min-width:701px)');
+function openPro(p){
+  pros.forEach(x=>{
+    const on=x===p,head=x.querySelector('.pro-head');
+    x.classList.toggle('open',on);head.setAttribute('aria-expanded',on);head.tabIndex=on?-1:0;
+  });
+}
+pros.forEach(p=>{
+  p.querySelector('.pro-head').addEventListener('click',()=>openPro(p));
+  p.addEventListener('mouseenter',()=>{if(prosHoverMQ.matches)openPro(p)});
+  p.addEventListener('focusin',()=>{if(!p.classList.contains('open'))openPro(p)});
+});
+openPro(pros[0]);
+
 function applyLang(l){
   lang=l;
   try{localStorage.setItem('interno_lang',l)}catch(_){}

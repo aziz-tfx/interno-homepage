@@ -26,8 +26,8 @@ Hero на весь экран: пустая бетонная комната по
 
 Пересобрать ассеты из исходников Higgsfield (`t1-d.mp4 … t7-m.mp4` в одной папке): `scripts/build-hero.sh <папка>` (нужен ffmpeg).
 
-- Фото секций сгенерированы в Higgsfield (GPT Image 2.5). Список — `scripts/photos.json`.
-  Сейчас они подгружаются с CDN Higgsfield; чтобы сохранить их в репозиторий как `assets/photos/*.jpg`, запустите `python3 scripts/localize-photos.py` (нужен Pillow).
+- Фото секций сгенерированы в Higgsfield (GPT Image 2.5) и лежат в `assets/photos/*.jpg` (список — `scripts/photos.json`).
+  Их скачал `scripts/localize-photos.py` (нужен Pillow) — пригодится, если добавятся новые фото с CDN Higgsfield.
 - `assets/mentor-*.jpg` — фото менторов
 - `assets/logo.svg` — логотип школы
 - `assets/icon-*.png`, `assets/hero-bg.png`, `assets/hero-loop.mp4`, `float-cap.png` — материалы прошлой версии, в текущей вёрстке не используются

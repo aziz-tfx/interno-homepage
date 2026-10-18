@@ -1107,7 +1107,8 @@ const heroCard=document.getElementById('heroCard');
 const portraitMQ=matchMedia('(max-aspect-ratio: 4/5)');
 // без видео: «уменьшить движение» или экономия трафика — только смена кадров
 const heroMotion=!matchMedia('(prefers-reduced-motion: reduce)').matches&&!(navigator.connection&&navigator.connection.saveData);
-let heroVidExt=heroVids[0].canPlayType('video/webm; codecs="vp9"')?'webm':'mp4';
+// MP4 (H.264) по умолчанию, WebM (VP9) — для браузеров без H.264
+let heroVidExt=heroVids[0].canPlayType('video/mp4; codecs="avc1.640028"')?'mp4':'webm',heroExtSwitched=false;
 const heroSrc=(kind,k,v=portraitMQ.matches?'m':'d')=>`assets/hero/${kind}${k}-${v}.${kind==='t'?heroVidExt:'jpg'}`;
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 let heroScene=0,heroTab='interior',heroAuto=heroMotion,heroBusy=false,heroPending=0;
@@ -1149,8 +1150,8 @@ function playTransition(k){
     const finish=fallback=>{
       if(done)return;done=true;clearTimeout(guard);
       v.removeEventListener('playing',onPlaying);v.removeEventListener('ended',onEnded);v.removeEventListener('error',onError);
-      // браузер обещал WebM, но не смог его проиграть — один раз пробуем тот же переход в MP4
-      if(fallback==='webm'){heroVidExt='mp4';playTransition(k).then(resolve)}
+      // формат не проигрывается — один раз пробуем тот же переход в другом формате
+      if(fallback==='format'){heroExtSwitched=true;heroVidExt=heroVidExt==='mp4'?'webm':'mp4';playTransition(k).then(resolve)}
       else if(fallback)crossfade(k).then(resolve);
       else{setBase(k);heroScene=k;resolve()}
     };
@@ -1161,7 +1162,7 @@ function playTransition(k){
       if(prev&&prev!==v)setTimeout(()=>{prev.classList.remove('on');prev.pause()},60);
     };
     const onEnded=()=>finish(false);
-    const onError=()=>finish(heroVidExt==='webm'&&!started?'webm':true);
+    const onError=()=>finish(!started&&!heroExtSwitched?'format':true);
     v.addEventListener('playing',onPlaying);v.addEventListener('ended',onEnded);v.addEventListener('error',onError);
     // видео не успело загрузиться или автозапуск запрещён (режим энергосбережения iOS) — просто меняем кадр
     const guard=setTimeout(()=>{if(!started)finish(true)},7000);

@@ -13,10 +13,11 @@ src=${1:?укажите папку с исходниками}
 out=$(dirname "$0")/../assets/hero
 mkdir -p "$out"
 
-enc() { # вход, выход без расширения, ширина
+enc() { # вход, выход без расширения, ширина, потолок битрейта
+  # потолок держит вес ролика ~1 МБ даже на «шумных» сценах (частицы AI)
   ffmpeg -v error -y -i "$1" -an -vf "scale=$3:-2" -c:v libx264 -preset slow -crf 27 \
-    -pix_fmt yuv420p -movflags +faststart "$2.mp4"
-  ffmpeg -v error -y -i "$1" -an -vf "scale=$3:-2" -c:v libvpx-vp9 -crf 37 -b:v 0 -row-mt 1 \
+    -maxrate "$4" -bufsize "$4" -pix_fmt yuv420p -movflags +faststart "$2.mp4"
+  ffmpeg -v error -y -i "$1" -an -vf "scale=$3:-2" -c:v libvpx-vp9 -crf 37 -b:v "$4" -row-mt 1 \
     -deadline good -cpu-used 2 -pix_fmt yuv420p "$2.webm"
 }
 frame() { # видео, выход, ширина, first|last
@@ -25,11 +26,11 @@ frame() { # видео, выход, ширина, first|last
 }
 
 for v in d m; do
-  w=1920; pw=1920; [ "$v" = m ] && { w=720; pw=1080; }  # постеры мобилки крупнее — их же показывают полосы направлений
+  w=1920; pw=1920; br=1600k; [ "$v" = m ] && { w=720; pw=1080; br=1000k; }  # постеры мобилки крупнее — их же показывают полосы направлений
   for k in 1 2 3 4 5 6 7; do
     f="$src/t$k-$v.mp4"
     [ -f "$f" ] || { echo "нет $f — пропускаю"; continue; }
-    enc "$f" "$out/t$k-$v" "$w"
+    enc "$f" "$out/t$k-$v" "$w" "$br"
     [ "$k" = 1 ] && frame "$f" "$out/s0-$v.jpg" "$pw" first
     frame "$f" "$out/s$k-$v.jpg" "$pw" last
   done

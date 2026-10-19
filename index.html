@@ -277,7 +277,7 @@ section{position:relative;padding:96px 0}
 .why-sm.dark{background:var(--violet-deep)}
 
 /* ===== MENTORS ===== */
-.mentors-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.mentors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .mentor{border-radius:var(--r);overflow:hidden;background:var(--ink-2);border:1px solid var(--line-d);transition:border-color .3s,transform .3s}
 .mentor:hover{border-color:rgba(91,43,224,.6);transform:translateY(-4px)}
 .mentor-photo{aspect-ratio:16/10;overflow:hidden}
@@ -286,7 +286,7 @@ section{position:relative;padding:96px 0}
 .mentor-info{padding:22px 26px 28px}
 .mentor-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
 .mentor-course{background:var(--violet);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px}
-.mentor-info h3{font-size:clamp(32px,3.4vw,46px);margin-bottom:10px}
+.mentor-info h3{font-size:clamp(28px,2.7vw,38px);margin-bottom:10px}
 .mentor-role{color:var(--muted-d);font-size:14.5px;font-weight:600;margin-bottom:18px}
 .mentor-info ul{list-style:none;display:flex;flex-direction:column;gap:9px}
 .mentor-info li{position:relative;padding-left:20px;color:#C9C4BC;font-size:14px}
@@ -773,9 +773,22 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
         </div>
       </div>
       <div class="mentor reveal d1">
+        <div class="mentor-photo"><img src="assets/mentor-vlad.jpg" alt="Владислав Данилов" loading="lazy"></div>
+        <div class="mentor-info">
+          <div class="mentor-top"><span class="mentor-course" data-i18n="mentors.vladCourse">Архитектура</span><span class="num num-lime">02</span></div>
+          <h3 class="display" data-i18n="mentors.vladName">Владислав Данилов</h3>
+          <p class="mentor-role" data-i18n="mentors.vladRole">Архитектор-концептуалист · спикер и ментор курса «Архитектура»</p>
+          <ul>
+            <li data-i18n="mentors.vlad1">Практика в проектных бюро и институтах Ташкента: ARCODE, TashGiproGor, UzLITI Engineering</li>
+            <li data-i18n="mentors.vlad2">1 место — «Лучшие архитектурные произведения Узбекистана 2023–2024»</li>
+            <li data-i18n="mentors.vlad3">1 место — конкурс «Новые таланты» среди архитектурных вузов</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mentor reveal d2">
         <div class="mentor-photo"><img src="assets/mentor-asliddin.jpg" alt="Аслиддин Омонбоев" loading="lazy"></div>
         <div class="mentor-info">
-          <div class="mentor-top"><span class="mentor-course" data-i18n="mentors.asliddinCourse">Искусственный интеллект</span><span class="num num-lime">02</span></div>
+          <div class="mentor-top"><span class="mentor-course" data-i18n="mentors.asliddinCourse">Искусственный интеллект</span><span class="num num-lime">03</span></div>
           <h3 class="display" data-i18n="mentors.asliddinName">Аслиддин Омонбоев</h3>
           <p class="mentor-role" data-i18n="mentors.asliddinRole">Дата-аналитик и Python-разработчик</p>
           <ul>
@@ -983,6 +996,10 @@ const I18N={
     "mentors.asad1":"120+ реализованных проектов в Ташкенте, Самарканде, Алматы",
     "mentors.asad2":"Обучил 800+ студентов — 60% работают в профессии",
     "mentors.asad3":"Эксперт по Revit и AutoCAD",
+    "mentors.vladCourse":"Архитектура","mentors.vladName":"Владислав Данилов","mentors.vladRole":"Архитектор-концептуалист · спикер и ментор курса «Архитектура»",
+    "mentors.vlad1":"Практика в проектных бюро и институтах Ташкента: ARCODE, TashGiproGor, UzLITI Engineering",
+    "mentors.vlad2":"1 место — «Лучшие архитектурные произведения Узбекистана 2023–2024»",
+    "mentors.vlad3":"1 место — конкурс «Новые таланты» среди архитектурных вузов",
     "mentors.asliddinCourse":"Искусственный интеллект","mentors.asliddinName":"Аслиддин Омонбоев","mentors.asliddinRole":"Дата-аналитик и Python-разработчик",
     "mentors.asliddin1":"Дашборды Power BI, SQL и Pandas для решений на данных",
     "mentors.asliddin2":"Автоматизирует бизнес Telegram-ботами: приём заявок, уведомления из API",
@@ -1059,6 +1076,10 @@ const I18N={
     "mentors.asad1":"Toshkent, Samarqand, Almatida 120+ amalga oshirilgan loyiha",
     "mentors.asad2":"800+ talabani o'qitgan — 60%i kasb bo'yicha ishlaydi",
     "mentors.asad3":"Revit va AutoCAD bo'yicha ekspert",
+    "mentors.vladCourse":"Arxitektura","mentors.vladName":"Vladislav Danilov","mentors.vladRole":"Kontseptualist-arxitektor · «Arxitektura» kursining spikeri va mentori",
+    "mentors.vlad1":"Toshkent loyiha byurolari va institutlarida amaliyot: ARCODE, TashGiproGor, UzLITI Engineering",
+    "mentors.vlad2":"1-o‘rin — «O‘zbekistonning eng yaxshi arxitektura asarlari 2023–2024»",
+    "mentors.vlad3":"1-o‘rin — arxitektura oliygohlari orasidagi «Yangi iste’dodlar» tanlovi",
     "mentors.asliddinCourse":"Sun'iy intellekt","mentors.asliddinName":"Asliddin Omonboyev","mentors.asliddinRole":"Data-analitik va Python-dasturchi",
     "mentors.asliddin1":"Ma'lumotlarga asoslangan qarorlar uchun Power BI, SQL va Pandas dashboardlari",
     "mentors.asliddin2":"Biznesni Telegram-botlar bilan avtomatlashtiradi: buyurtma qabul qilish, API xabarnomalari",

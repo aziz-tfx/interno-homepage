@@ -1,0 +1,136 @@
+# INTERNO School
+
+> INTERNO School — школа современных профессий в Узбекистане. Офлайн-курсы с менторами-практиками в Ташкенте, Самарканде и Фергане: дизайн интерьера, архитектура, графический дизайн, видеомонтаж, data-аналитика, искусственный интеллект и бухгалтерия.
+
+> INTERNO School — O'zbekistondagi zamonaviy kasblar maktabi. Toshkent, Samarqand va Farg'onada amaliyotchi mentorlar bilan oflayn kurslar: interyer dizayni, arxitektura, grafik dizayn, videomontaj, data-analitika, sun'iy intellekt va buxgalteriya.
+
+- [Главная (русский)](https://internoedu.uz/)
+- [Bosh sahifa (o'zbekcha)](https://internoedu.uz/uz/)
+
+## Ключевые факты
+
+- Формат: офлайн, небольшие группы; города: Ташкент, Самарканд, Фергана
+- Адреса: Ташкент · Мирзо-Улугбекский р-н, ул. Хирмонтепа, 34Б (м. Буюк Ипак Йули); Самарканд · ул. Давлатабад; Фергана · ул. Комус, 40
+- Первый шаг — бесплатный открытый урок; запись по телефону +998 78 113 18 08 или на https://internoedu.uz/
+- Рассрочка до 6 месяцев без переплат
+- Итог обучения: проекты в портфолио и сертификат
+- Языки сайта: русский и узбекский
+
+## Курсы (у каждого — свой сайт с программой)
+
+- [Дизайн интерьера](https://interior.internoedu.uz): Планировка, 3D-визуализация и проект для портфолио. Практический проект с первого занятия.
+- [Архитектура](https://architecture.internoedu.uz): Чертежи, 3D-модель здания и проект для портфолио. От эскиза до 3D-модели здания.
+- [Графический дизайн](https://graphic.internoedu.uz): Айдентика, упаковка и digital-макеты. Айдентика бренда за 16 недель.
+- [Видеомонтаж](https://videomontaj.internoedu.uz): Монтаж, цвет и звук: от сырого материала до готового ролика. Ролики для брендов и соцсетей.
+- [Data-аналитика](https://data.internoedu.uz): Python, SQL и Power BI: от данных до дашборда. 36 уроков: Python, SQL, Power BI.
+- [Искусственный интеллект](https://ai.internoedu.uz): Практическое применение AI-инструментов для работы и проектов. Нейросети и Telegram-боты за 2 месяца.
+- [Бухгалтерия](https://buxgalteriya.internoedu.uz): Учёт, налоги и отчётность — профессия, которая нужна каждому бизнесу. Учёт, налоги и отчётность на практике.
+
+## Менторы
+
+- Асад Халимов — Старший куратор · 7+ лет в дизайне (Дизайн интерьера). 120+ реализованных проектов в Ташкенте, Самарканде, Алматы; Обучил 800+ студентов — 60% работают в профессии; Эксперт по Revit и AutoCAD.
+- Владислав Данилов — Архитектор-концептуалист · спикер и ментор курса «Архитектура» (Архитектура). Практика в проектных бюро и институтах Ташкента: ARCODE, TashGiproGor, UzLITI Engineering; 1 место — «Лучшие архитектурные произведения Узбекистана 2023–2024»; 1 место — конкурс «Новые таланты» среди архитектурных вузов.
+- Аслиддин Омонбоев — Дата-аналитик и Python-разработчик (Искусственный интеллект). Дашборды Power BI, SQL и Pandas для решений на данных; Автоматизирует бизнес Telegram-ботами: приём заявок, уведомления из API; Учился в НИТУ МИСиС (Москва); с 2022 года — реальные проекты.
+
+## Частые вопросы
+
+### Каким профессиям можно научиться в INTERNO School?
+
+Семи: дизайн интерьера, архитектура, графический дизайн, видеомонтаж, data-аналитика, искусственный интеллект и бухгалтерия. У каждого направления — своя страница с программой курса.
+
+### Где проходят занятия?
+
+Офлайн, в аудиториях школы в трёх городах Узбекистана: Ташкенте, Самарканде и Фергане. Занятия проходят в небольших группах.
+
+### Можно ли попробовать до покупки курса?
+
+Да. Запишитесь на бесплатный открытый урок: познакомитесь с ментором и попробуете профессию на практике. Записаться можно через форму на сайте или по телефону +998 78 113 18 08.
+
+### Кто ведёт занятия?
+
+Менторы-практики, которые работают в профессии. Например, дизайнер интерьера Асад Халимов (7+ лет в дизайне, 120+ реализованных проектов), архитектор Владислав Данилов и дата-аналитик Аслиддин Омонбоев.
+
+### Что я получу в конце обучения?
+
+Проекты в портфолио, которые можно показать работодателю или клиенту, и сертификат. Менторы помогают оформить портфолио и начать работать по профессии.
+
+### Можно ли оплатить обучение в рассрочку?
+
+Да, доступна рассрочка до 6 месяцев без переплат.
+
+### Как устроено обучение?
+
+Практика с первого занятия: домашние задания на реальных кейсах, регулярные разборы работ и живая обратная связь от ментора.
+
+## Контакты
+
+- +998 78 113 18 08
+- https://t.me/interno_school
+- https://instagram.com/interno.school
+- https://internoedu.uz/
+
+---
+
+# INTERNO School — o'zbekcha
+
+## Asosiy faktlar
+
+- Format: oflayn, kichik guruhlar; shaharlar: Toshkent, Samarqand, Farg'ona
+- Manzillar: Toshkent · Mirzo Ulug‘bek tumani, Xirmontepa ko‘chasi, 34B (Buyuk Ipak Yo‘li metrosi); Samarqand · Davlatobod ko‘chasi; Farg‘ona · Komus ko‘chasi, 40
+- Birinchi qadam — bepul ochiq dars; yozilish: +998 78 113 18 08 yoki https://internoedu.uz/uz/
+- 6 oygacha ustama to'lovsiz bo'lib to'lash
+- O'qish natijasi: portfolio loyihalari va sertifikat
+- Sayt tillari: rus va o'zbek
+
+## Kurslar (har birining dasturi yozilgan alohida sayti bor)
+
+- [Interyer dizayni](https://interior.internoedu.uz): Planirovka, 3D-vizualizatsiya va portfolio uchun loyiha. Birinchi darsdan amaliy loyiha.
+- [Arxitektura](https://architecture.internoedu.uz): Chizmalar, binoning 3D-modeli va portfolio uchun loyiha. Eskizdan binoning 3D-modeligacha.
+- [Grafik dizayn](https://graphic.internoedu.uz): Aydentika, qadoq va digital-maketlar. 16 haftada brend aydentikasi.
+- [Videomontaj](https://videomontaj.internoedu.uz): Montaj, rang va ovoz: xom materialdan tayyor rolikkacha. Brendlar va ijtimoiy tarmoqlar uchun roliklar.
+- [Data-analitika](https://data.internoedu.uz): Python, SQL va Power BI: ma'lumotdan dashboardgacha. 36 dars: Python, SQL, Power BI.
+- [Sun'iy intellekt](https://ai.internoedu.uz): Ish va loyihalar uchun AI-vositalarni amalda qo'llash. 2 oyda neyrotarmoqlar va Telegram-botlar.
+- [Buxgalteriya](https://buxgalteriya.internoedu.uz): Hisob, soliqlar va hisobotlar — har bir biznesga kerak kasb. Hisob, soliqlar va hisobotlar amalda.
+
+## Mentorlar
+
+- Asad Halimov — Bosh mentor · 7+ yil dizaynda (Interyer dizayni). Toshkent, Samarqand, Almatida 120+ amalga oshirilgan loyiha; 800+ talabani o'qitgan — 60%i kasb bo'yicha ishlaydi; Revit va AutoCAD bo'yicha ekspert.
+- Vladislav Danilov — Kontseptualist-arxitektor · «Arxitektura» kursining spikeri va mentori (Arxitektura). Toshkent loyiha byurolari va institutlarida amaliyot: ARCODE, TashGiproGor, UzLITI Engineering; 1-o‘rin — «O‘zbekistonning eng yaxshi arxitektura asarlari 2023–2024»; 1-o‘rin — arxitektura oliygohlari orasidagi «Yangi iste’dodlar» tanlovi.
+- Asliddin Omonboyev — Data-analitik va Python-dasturchi (Sun'iy intellekt). Ma'lumotlarga asoslangan qarorlar uchun Power BI, SQL va Pandas dashboardlari; Biznesni Telegram-botlar bilan avtomatlashtiradi: buyurtma qabul qilish, API xabarnomalari; Moskvadagi NUST MISISda tahsil olgan; 2022-yildan beri real loyihalar.
+
+## Ko'p so'raladigan savollar
+
+### INTERNO School'da qaysi kasblarni o'rganish mumkin?
+
+Yettita: interyer dizayni, arxitektura, grafik dizayn, videomontaj, data-analitika, sun'iy intellekt va buxgalteriya. Har bir yo'nalishning kurs dasturi yozilgan alohida sahifasi bor.
+
+### Darslar qayerda o'tadi?
+
+Oflayn, maktab auditoriyalarida — O'zbekistonning uchta shahrida: Toshkent, Samarqand va Farg'ona. Darslar kichik guruhlarda o'tadi.
+
+### Kursni sotib olishdan oldin sinab ko'rsa bo'ladimi?
+
+Ha. Bepul ochiq darsga yoziling: mentor bilan tanishasiz va kasbni amalda sinab ko'rasiz. Saytdagi forma orqali yoki +998 78 113 18 08 raqamiga qo'ng'iroq qilib yozilishingiz mumkin.
+
+### Darslarni kim olib boradi?
+
+Kasbda ishlaydigan amaliyotchi mentorlar. Masalan, interyer dizayneri Asad Halimov (dizaynda 7+ yil, 120+ amalga oshirilgan loyiha), arxitektor Vladislav Danilov va data-analitik Asliddin Omonboyev.
+
+### O'qish yakunida nimaga ega bo'laman?
+
+Ish beruvchi yoki mijozga ko'rsatsa bo'ladigan portfolio loyihalari va sertifikat. Mentorlar portfolioni rasmiylashtirish va kasb bo'yicha ishlashni boshlashga yordam beradi.
+
+### O'qish uchun bo'lib to'lash mumkinmi?
+
+Ha, 6 oygacha ustama to'lovsiz bo'lib to'lash mavjud.
+
+### Ta'lim qanday tashkil etilgan?
+
+Birinchi darsdan amaliyot: real keyslar asosidagi uy vazifalari, ishlarni muntazam tahlil qilish va mentordan jonli fikr-mulohaza.
+
+## Aloqa
+
+- +998 78 113 18 08
+- https://t.me/interno_school
+- https://instagram.com/interno.school
+- https://internoedu.uz/uz/

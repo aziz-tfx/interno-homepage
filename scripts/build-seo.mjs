@@ -58,6 +58,7 @@ const LANGS = {
   },
 };
 const CITIES_EN = ['Tashkent', 'Samarkand', 'Fergana'];
+const CITY_KEYS = ['tsh', 'smr', 'frg'];
 
 // ---------- словарь из index.html ----------
 const srcPath = join(ROOT, 'index.html');
@@ -123,10 +124,12 @@ function translateBody(html, t) {
 function jsonLd(lang) {
   const L = LANGS[lang], t = I18N[lang], url = abs(L.path), OG_IMAGE = abs(L.og);
   const orgId = `${SITE}/#org`;
+  // Адреса филиалов — из футера (ключи addr.*: «Город · улица»)
+  const street = k => t[`addr.${k}`].split(' · ').slice(1).join(' · ');
   const places = L.cities.map((c, i) => ({
     '@type': 'Place',
     name: `INTERNO School — ${c}`,
-    address: {'@type': 'PostalAddress', addressLocality: CITIES_EN[i], addressCountry: 'UZ'},
+    address: {'@type': 'PostalAddress', streetAddress: street(CITY_KEYS[i]), addressLocality: CITIES_EN[i], addressCountry: 'UZ'},
   }));
   const courses = COURSES.map(([k, href]) => ({
     '@type': 'Course',
@@ -155,7 +158,7 @@ function jsonLd(lang) {
       slogan: plain(t['hero.title']),
       telephone: PHONE,
       sameAs: SAME_AS,
-      address: {'@type': 'PostalAddress', addressLocality: 'Tashkent', addressCountry: 'UZ'},
+      address: places[0].address,
       location: places,
       areaServed: {'@type': 'Country', name: L.country},
       knowsLanguage: ['ru', 'uz'],
@@ -296,10 +299,10 @@ function llmsBlock(lang) {
   const t = I18N[lang], L = LANGS[lang];
   const h = lang === 'ru'
     ? {facts: 'Ключевые факты', courses: 'Курсы (у каждого — свой сайт с программой)', mentors: 'Менторы', faq: 'Частые вопросы', contacts: 'Контакты',
-       f: [`Формат: офлайн, небольшие группы; города: ${L.cities.join(', ')}`, `Первый шаг — бесплатный открытый урок; запись по телефону ${PHONE_HUMAN} или на ${abs(L.path)}`,
+       f: [`Формат: офлайн, небольшие группы; города: ${L.cities.join(', ')}`, `Адреса: ${CITY_KEYS.map(k => t[`addr.${k}`]).join('; ')}`, `Первый шаг — бесплатный открытый урок; запись по телефону ${PHONE_HUMAN} или на ${abs(L.path)}`,
            'Рассрочка до 6 месяцев без переплат', 'Итог обучения: проекты в портфолио и сертификат', 'Языки сайта: русский и узбекский']}
     : {facts: 'Asosiy faktlar', courses: "Kurslar (har birining dasturi yozilgan alohida sayti bor)", mentors: 'Mentorlar', faq: "Ko'p so'raladigan savollar", contacts: 'Aloqa',
-       f: [`Format: oflayn, kichik guruhlar; shaharlar: ${L.cities.join(', ')}`, `Birinchi qadam — bepul ochiq dars; yozilish: ${PHONE_HUMAN} yoki ${abs(L.path)}`,
+       f: [`Format: oflayn, kichik guruhlar; shaharlar: ${L.cities.join(', ')}`, `Manzillar: ${CITY_KEYS.map(k => t[`addr.${k}`]).join('; ')}`, `Birinchi qadam — bepul ochiq dars; yozilish: ${PHONE_HUMAN} yoki ${abs(L.path)}`,
            "6 oygacha ustama to'lovsiz bo'lib to'lash", "O'qish natijasi: portfolio loyihalari va sertifikat", "Sayt tillari: rus va o'zbek"]};
   return [
     `## ${h.facts}`, '', ...h.f.map(x => `- ${x}`), '',

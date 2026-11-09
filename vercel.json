@@ -3,8 +3,7 @@
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/uz/index.html", "destination": "/uz/", "permanent": true },
-    { "source": "/aksiya/index.html", "destination": "/aksiya/", "permanent": true },
-    { "source": "/1111", "destination": "/aksiya/", "permanent": false }
+    { "source": "/aksiya/index.html", "destination": "/aksiya/", "permanent": true }
   ],
   "headers": [
     {

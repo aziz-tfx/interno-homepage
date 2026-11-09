@@ -809,21 +809,28 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), {threshold:.12, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* ===== Hero: в пустой комнате появляется подарок (переход Higgsfield, проигрывается один раз) ===== */
+/* ===== Hero: в пустой комнате с главной появляется подарок (переход Higgsfield, проигрывается один раз) ===== */
 (() => {
   const v = document.getElementById('heroVid');
   const conn = navigator.connection;
   if (reduceMotion || (conn && (conn.saveData || /2g/.test(conn.effectiveType || '')))) { v.remove(); return; }
-  const base = matchMedia('(max-aspect-ratio: 4/5)').matches ? v.dataset.m : v.dataset.d;
+  const mobile = matchMedia('(max-aspect-ratio: 4/5)').matches;
+  const base = mobile ? v.dataset.m : v.dataset.d;
   [['webm','video/webm'],['mp4','video/mp4']].forEach(([ext, type]) => {
     const s = document.createElement('source'); s.src = `${base}.${ext}`; s.type = type; v.appendChild(s);
   });
+  // пока видео грузится — пустая комната с главной (первый кадр перехода), потом в ней появляется подарок
+  v.poster = mobile ? '/assets/hero/s0-m.jpg' : '/assets/hero/s0-d.jpg';
+  v.classList.add('on');
+  let started = false;
+  const fail = () => { if (!v.isConnected) return; v.classList.remove('on'); setTimeout(() => v.remove(), 450); };
+  v.addEventListener('playing', () => { started = true; }, {once:true});
+  v.addEventListener('error', fail, true);
+  setTimeout(() => { if (!started) fail(); }, 6000); // не дождались видео — сразу кадр с подарком
+  // последний кадр перехода = картинка hero: плавно убираем видео
+  v.addEventListener('ended', fail);
   v.preload = 'auto'; v.load();
-  // видео начинается с пустой комнаты: показываем его, только когда оно реально пошло
-  v.addEventListener('playing', () => v.classList.add('on'), {once:true});
-  // последний кадр = картинка hero, после окончания просто убираем видео
-  v.addEventListener('ended', () => { v.classList.remove('on'); setTimeout(() => v.remove(), 500); });
-  v.play().catch(() => v.remove());
+  v.play().catch(fail);
 })();
 
 /* ===== Карточки курсов: вся карточка кликабельна ===== */

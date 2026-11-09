@@ -2,7 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/uz/index.html", "destination": "/uz/", "permanent": true }
+    { "source": "/uz/index.html", "destination": "/uz/", "permanent": true },
+    { "source": "/aksiya/index.html", "destination": "/aksiya/", "permanent": true },
+    { "source": "/1111", "destination": "/aksiya/", "permanent": false }
   ],
   "headers": [
     {
@@ -12,6 +14,10 @@
     },
     {
       "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
+    },
+    {
+      "source": "/aksiya/img/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
     },
     {

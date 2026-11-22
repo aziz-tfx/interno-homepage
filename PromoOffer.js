@@ -1,28 +1,29 @@
-/* ===== Акция 11.11 «Второй курс в подарок» — промо-карточка =====
-   Конфиг и дедлайн — в INTERNO_PROMO (PromoBanner.js, подключается
-   первым). Без offerBefore карточка не показывается. После hideAfter
-   карточка не рендерится — без деплоя. */
+/* ===== Новогодняя акция «Скидка до 40% + курс в подарок» — промо-карточка =====
+   Конфиг — в INTERNO_PROMO (PromoBanner.js, подключается первым), дедлайн — в /promo.js.
+   Без offerBefore карточка не показывается. После дедлайна карточка не рендерится — без деплоя. */
 (function(){
   var P = window.INTERNO_PROMO;
-  if (!P || !P.offerBefore || new Date() >= new Date(P.hideAfter)) return;
+  if (!P || !P.offerBefore || !P.deadline || !(new Date() < new Date(P.hideAfter))) return;
   if (P.onlyPaths && P.onlyPaths.indexOf(location.pathname) === -1) return;
 
+  function until(){ return P.until || { ru: 'конца акции', uz: 'Aksiya tugagunicha' }; }
+
   var T = {
-    ru: { badge: 'Акция 11.11', title: 'Запишитесь на курс — второй в подарок',
-          gifts: ['Курс на выбор: дизайн интерьера, архитектура, аналитика данных или ИИ',
+    ru: { badge: 'Новогодняя акция', title: 'Скидка до 40% и второй курс в подарок',
+          gifts: ['Скидка до 40% на курс: дизайн интерьера, архитектура, аналитика данных или ИИ',
                   'Второй курс бесплатно: графический дизайн или искусственный интеллект'],
-          note: 'Акция до 15 ноября. Количество мест ограничено.',
-          cta: 'Выбрать курс и забрать подарок' },
-    uz: { badge: '11.11 aksiyasi', title: "Kursga yoziling — ikkinchisi sovg'a",
-          gifts: ["Tanlov kursi: interyer dizayni, arxitektura, ma'lumotlar tahlili yoki sun'iy intellekt",
+          note: 'Акция до ' + until().ru + '. Количество мест ограничено.',
+          cta: 'Выбрать курс со скидкой' },
+    uz: { badge: 'Yangi yil aksiyasi', title: "40% gacha chegirma va ikkinchi kurs sovg'a",
+          gifts: ["Kursga 40% gacha chegirma: interyer dizayni, arxitektura, ma'lumotlar tahlili yoki sun'iy intellekt",
                   "Ikkinchi kurs bepul: grafik dizayn yoki sun'iy intellekt"],
-          note: '15-noyabrgacha. Joylar soni cheklangan.',
-          cta: "Kursni tanlash va sovg'ani olish" }
+          note: until().uz + '. Joylar soni cheklangan.',
+          cta: 'Chegirma bilan kurs tanlash' }
   };
   function lang(){ return (document.documentElement.lang || '').slice(0,2) === 'uz' ? 'uz' : 'ru'; }
   function link(){
     var u = P.url + (P.url.indexOf('?') === -1 ? '?' : '&');
-    return u + 'utm_source=' + encodeURIComponent(P.site) + '&utm_medium=card&utm_campaign=promo_1111';
+    return u + 'utm_source=' + encodeURIComponent(P.site) + '&utm_medium=card&utm_campaign=promo_newyear';
   }
 
   var style = document.createElement('style');
@@ -63,7 +64,7 @@
       '<div class="promo-offer__body">' +
         '<div class="promo-offer__head">' +
           '<span class="promo-offer__badge"></span>' +
-          '<span class="promo-offer__mech">1 + 1</span>' +
+          '<span class="promo-offer__mech">−40% + 1</span>' +
         '</div>' +
         '<h2 class="promo-offer__title"></h2>' +
         '<ul class="promo-offer__gifts"><li></li><li></li></ul>' +

@@ -1,12 +1,12 @@
-/* ===== Акция 11.11 «Второй курс в подарок» — sticky-баннер =====
-   Дедлайн акции задаётся ТОЛЬКО здесь: INTERNO_PROMO читают и баннер,
-   и карточка PromoOffer.js (подключается после этого файла). После
-   hideAfter промо не рендерится вовсе — выключается без деплоя.
-   Клик ведёт на страницу акции internoedu.uz/aksiya/ с UTM-метками. */
+/* ===== Новогодняя акция «Скидка до 40% + курс в подарок» — sticky-баннер =====
+   Дедлайн акции задаётся в /promo.js (window.INTERNO_PROMO_END, подключается
+   перед этим файлом) — его же читают лендинг /newyear/ и карточка PromoOffer.js.
+   Без даты или после неё промо не рендерится вовсе — выключается без деплоя.
+   Клик ведёт на страницу акции internoedu.uz/newyear/ с UTM-метками. */
 window.INTERNO_PROMO = {
-  deadline:  '2026-11-15T23:59:59+05:00', // конец обратного отсчёта (Ташкент)
-  hideAfter: '2026-11-16T00:00:00+05:00', // с этого момента промо не рендерится
-  url: '/aksiya/', // страница акции
+  deadline:  window.INTERNO_PROMO_END, // конец обратного отсчёта (Ташкент)
+  hideAfter: window.INTERNO_PROMO_END, // с этого момента промо не рендерится
+  url: '/newyear/', // страница акции
   site: 'homepage', // utm_source
   nav: ".nav", // шапка, которую баннер сдвигает вниз
   offerBefore: "#open-lesson", // перед каким блоком PromoOffer.js вставит карточку
@@ -16,24 +16,33 @@ window.INTERNO_PROMO = {
 
 (function(){
   var P = window.INTERNO_PROMO;
-  if (!P || new Date() >= new Date(P.hideAfter)) return;
+  if (!P || !P.deadline || !(new Date() < new Date(P.hideAfter))) return;
   if (P.onlyPaths && P.onlyPaths.indexOf(location.pathname) === -1) return;
+  // «до 1 декабря» — дата окончания по Ташкенту, считается из дедлайна
+  var until = P.until = (function(){
+    var d = new Date(new Date(P.deadline).getTime() + 5 * 36e5), n = d.getUTCDate(), m = d.getUTCMonth();
+    return {
+      ru: n + ' ' + ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][m],
+      uz: n + '-' + ['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'][m] + 'gacha'
+    };
+  })();
+
   var closed = false;
-  try { closed = sessionStorage.getItem('interno_promo1111_closed') === '1'; } catch(_) {}
+  try { closed = sessionStorage.getItem('interno_promo_ny_closed') === '1'; } catch(_) {}
   if (closed) return;
 
   // ссылка на страницу акции с UTM: откуда пришли (сайт) и с какого элемента
   P.link = function(medium){
     var u = P.url + (P.url.indexOf('?') === -1 ? '?' : '&');
-    return u + 'utm_source=' + encodeURIComponent(P.site) + '&utm_medium=' + medium + '&utm_campaign=promo_1111';
+    return u + 'utm_source=' + encodeURIComponent(P.site) + '&utm_medium=' + medium + '&utm_campaign=promo_newyear';
   };
 
   var T = {
-    ru: { full: '🎁 Акция 11.11: второй курс в подарок — до 15 ноября',
-          short: '🎁 Акция 11.11: 2-й курс в подарок',
+    ru: { full: '🎄 Новогодняя акция: скидка до 40% + курс в подарок — до ' + until.ru,
+          short: '🎄 Скидка до 40% + курс в подарок',
           more: 'Подробнее', units: ['д','ч','м'], close: 'Закрыть' },
-    uz: { full: "🎁 11.11 aksiyasi: ikkinchi kurs sovg'a — 15-noyabrgacha",
-          short: "🎁 11.11: 2-kurs sovg'a",
+    uz: { full: "🎄 Yangi yil aksiyasi: 40% gacha chegirma + kurs sovg'a — " + until.uz,
+          short: "🎄 40% gacha chegirma + kurs sovg'a",
           more: 'Batafsil', units: ['k','s','d'], close: 'Yopish' }
   };
   function lang(){ return (document.documentElement.lang || '').slice(0,2) === 'uz' ? 'uz' : 'ru'; }
@@ -127,7 +136,7 @@ window.INTERNO_PROMO = {
 
   el.querySelector('.promo-banner__close').addEventListener('click', function(e){
     e.stopPropagation();
-    try { sessionStorage.setItem('interno_promo1111_closed', '1'); } catch(_) {}
+    try { sessionStorage.setItem('interno_promo_ny_closed', '1'); } catch(_) {}
     teardown();
   });
 })();

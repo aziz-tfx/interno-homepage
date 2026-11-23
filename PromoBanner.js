@@ -7,6 +7,7 @@ window.INTERNO_PROMO = {
   deadline:  window.INTERNO_PROMO_END, // конец обратного отсчёта (Ташкент)
   hideAfter: window.INTERNO_PROMO_END, // с этого момента промо не рендерится
   url: '/newyear/', // страница акции
+  urlUz: '/uz/newyear/', // она же на узбекском — для страниц с <html lang="uz">
   site: 'homepage', // utm_source
   nav: ".nav", // шапка, которую баннер сдвигает вниз
   offerBefore: "#open-lesson", // перед каким блоком PromoOffer.js вставит карточку
@@ -33,7 +34,8 @@ window.INTERNO_PROMO = {
 
   // ссылка на страницу акции с UTM: откуда пришли (сайт) и с какого элемента
   P.link = function(medium){
-    var u = P.url + (P.url.indexOf('?') === -1 ? '?' : '&');
+    var page = lang() === 'uz' && P.urlUz ? P.urlUz : P.url;
+    var u = page + (page.indexOf('?') === -1 ? '?' : '&');
     return u + 'utm_source=' + encodeURIComponent(P.site) + '&utm_medium=' + medium + '&utm_campaign=promo_newyear';
   };
 
@@ -83,7 +85,6 @@ window.INTERNO_PROMO = {
       '<span class="promo-banner__more"></span>' +
     '</a>' +
     '<button type="button" class="promo-banner__close">&times;</button>';
-  el.querySelector('a').href = P.link('banner');
   document.body.insertBefore(el, document.body.firstChild);
 
   // Сдвиг шапки — CSS-правилом, а не инлайн-стилем: так он переживает перерисовку шапки скриптами сайта.
@@ -102,6 +103,7 @@ window.INTERNO_PROMO = {
 
   function applyTexts(){
     var t = T[lang()];
+    el.querySelector('a').href = P.link('banner');
     el.querySelector('.promo-banner__text--full').textContent = t.full;
     el.querySelector('.promo-banner__text--short').textContent = t.short;
     el.querySelector('.promo-banner__more').textContent = t.more + ' →';

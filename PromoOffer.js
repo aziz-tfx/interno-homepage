@@ -22,7 +22,8 @@
   };
   function lang(){ return (document.documentElement.lang || '').slice(0,2) === 'uz' ? 'uz' : 'ru'; }
   function link(){
-    var u = P.url + (P.url.indexOf('?') === -1 ? '?' : '&');
+    var page = lang() === 'uz' && P.urlUz ? P.urlUz : P.url;
+    var u = page + (page.indexOf('?') === -1 ? '?' : '&');
     return u + 'utm_source=' + encodeURIComponent(P.site) + '&utm_medium=card&utm_campaign=promo_newyear';
   }
 
@@ -73,7 +74,6 @@
       '</div>' +
     '</div>';
   el.querySelector('.promo-offer__img').src = P.icon;
-  el.querySelector('.promo-offer__cta').href = link();
 
   function applyTexts(){
     var t = T[lang()];
@@ -81,6 +81,7 @@
     el.querySelector('.promo-offer__title').textContent = t.title;
     el.querySelectorAll('.promo-offer__gifts li').forEach(function(li, i){ li.textContent = t.gifts[i]; });
     el.querySelector('.promo-offer__note').textContent = t.note;
+    el.querySelector('.promo-offer__cta').href = link();
     el.querySelector('.promo-offer__cta').textContent = t.cta + ' →';
   }
   applyTexts();

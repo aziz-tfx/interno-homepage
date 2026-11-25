@@ -6,6 +6,9 @@
 <title>Новогодняя акция — скидка до 40% и курс в подарок | INTERNO</title>
 <meta name="description" content="Новогодняя акция в INTERNO: скидка до 40% на курс — дизайн интерьера, архитектура, аналитика данных или ИИ — и второй курс в подарок. Офлайн в Ташкенте, Самарканде и Фергане.">
 <link rel="canonical" href="https://internoedu.uz/newyear/">
+<link rel="alternate" hreflang="ru" href="https://internoedu.uz/newyear/">
+<link rel="alternate" hreflang="uz" href="https://internoedu.uz/uz/newyear/">
+<link rel="alternate" hreflang="x-default" href="https://internoedu.uz/newyear/">
 <meta name="theme-color" content="#0A090D">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
@@ -138,6 +141,10 @@ section{position:relative;padding:96px 0}
 .nav-links{display:flex;gap:28px;margin-left:auto}
 .nav-links a{font-size:13.5px;font-weight:600;color:var(--muted-d);transition:color .2s}
 .nav-links a:hover{color:var(--cream)}
+.lang-switch{display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;color:var(--muted-d)}
+.lang-switch a{color:inherit;padding:4px 2px;letter-spacing:.04em;transition:color .2s}
+.lang-switch a:hover,.lang-switch a.active{color:var(--cream)}
+.lang-switch span{opacity:.4}
 .nav-phone{font-size:14px;font-weight:700;white-space:nowrap}
 .nav-phone:hover{color:var(--lime)}
 
@@ -347,6 +354,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
 /* ===== адаптив ===== */
 @media (max-width:1080px){
   .nav-links{display:none}
+  .lang-switch{margin-left:auto}
   .courses{grid-template-columns:1fr 1fr}
   .course{min-height:520px}
   .hero-bottom{flex-direction:column;align-items:stretch}
@@ -387,7 +395,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
   .nav-phone{display:none}
   .nav-inner{gap:16px;height:66px}
   .nav-logo img{height:32px}
-  .nav .btn-sm{padding:10px 12px;font-size:12.5px;margin-left:auto}
+  .nav .btn-sm{padding:10px 12px;font-size:12.5px}
   .hero h1{font-size:clamp(64px,20vw,96px);margin-bottom:12px}
   .hero-lead{font-size:30px;margin-bottom:12px}
   .hero-sub{font-size:15px;margin-bottom:20px}
@@ -438,6 +446,9 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
         <a href="#gift">Подарок</a>
         <a href="#why">Почему мы</a>
       </div>
+      <div class="lang-switch" role="group" aria-label="Язык">
+        <a href="/newyear/" hreflang="ru" lang="ru" class="active" aria-current="page">RU</a><span>/</span><a href="/uz/newyear/" hreflang="uz" lang="uz">UZ</a>
+      </div>
       <a class="nav-phone" href="tel:+998781131808">+998 78 113 18 08</a>
       <a class="btn btn-violet btn-sm" href="#courses">Выбрать курс</a>
     </div>
@@ -450,11 +461,11 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
 <header class="hero s-dark" id="top">
   <div class="hero-stage" aria-hidden="true">
     <picture>
-      <source media="(max-aspect-ratio: 4/5)" srcset="img/hero-m.jpg">
-      <img class="hero-layer" id="heroImg" src="img/hero-d.jpg" alt="" fetchpriority="high">
+      <source media="(max-aspect-ratio: 4/5)" srcset="/newyear/img/hero-m.jpg">
+      <img class="hero-layer" id="heroImg" src="/newyear/img/hero-d.jpg" alt="" fetchpriority="high">
     </picture>
     <video class="hero-layer hero-vid" id="heroVid" muted playsinline preload="none" disablepictureinpicture
-      data-d="img/hero-d" data-m="img/hero-m"></video>
+      data-d="/newyear/img/hero-d" data-m="/newyear/img/hero-m"></video>
   </div>
   <div class="wrap hero-inner">
     <div class="hero-text">
@@ -507,7 +518,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
         </div>
       </article>
       <article class="card gift on-dark fade-top-violet reveal d1">
-        <img class="bg" src="img/gift-flatlay.jpg" alt="" loading="lazy">
+        <img class="bg" src="/newyear/img/gift-flatlay.jpg" alt="" loading="lazy">
         <div class="card-body">
           <div class="big-num">+1</div>
           <h3 style="margin-top:14px;padding-top:0">Курс в подарок</h3>
@@ -672,7 +683,7 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
         <a href="https://instagram.com/interno.school" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>Instagram</a>
       </div>
     </div>
-    <div class="cta-photo"><img src="img/hero-d.jpg" alt="" loading="lazy"></div>
+    <div class="cta-photo"><img src="/newyear/img/hero-d.jpg" alt="" loading="lazy"></div>
   </div>
 </section>
 </main>
@@ -768,10 +779,31 @@ footer h5{font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:u
 // По ней считают оба таймера и подпись «Акция до …» в hero. Чтобы продлить акцию — меняйте дату там.
 const PROMO_END = new Date(window.INTERNO_PROMO_END || NaN);
 const PROMO_OK = !isNaN(PROMO_END);
-const PROMO_TAG = 'Новогодняя акция';
 
-const COURSES = {interior:'Дизайн интерьера', arch:'Архитектура', data:'Аналитика данных', ai:'Искусственный интеллект'};
-const CITY_LABEL = {tsh:'Ташкент', smr:'Самарканд', frg:'Фергана'};
+/* ui:start — тексты страницы; узбекскую версию этого блока подставляет scripts/build-newyear-uz.mjs */
+const UI = {
+  tag:'Новогодняя акция',
+  until:(day, month) => `до ${day} ${['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'][month]}`,
+  courses:{interior:'Дизайн интерьера', arch:'Архитектура', data:'Аналитика данных', ai:'Искусственный интеллект'},
+  plaqueDiscount:'скидка до 40%',
+  plaqueGiftAi:'+ Графический дизайн в подарок',
+  plaqueGiftAny:'+ курс в подарок: Графический дизайн или Искусственный интеллект',
+  sending:'Отправляем…',
+};
+/* ui:end */
+
+/* crm:start — что уходит в amoCRM и Telegram: всегда по-русски, чтобы менеджеры видели одинаковые заявки с обеих версий */
+const CRM = {
+  tag:'Новогодняя акция',
+  offer:'скидка до 40% + курс в подарок',
+  courses:{interior:'Дизайн интерьера', arch:'Архитектура', data:'Аналитика данных', ai:'Искусственный интеллект'},
+  cities:{tsh:'Ташкент', smr:'Самарканд', frg:'Фергана'},
+  giftAi:'Графический дизайн',
+  giftAny:'Графический дизайн или ИИ (на выбор)',
+  lang:'Русский',
+  source:'newyear_form (internoedu.uz/newyear)',
+};
+/* crm:end */
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const nav = document.getElementById('nav');
@@ -785,9 +817,8 @@ onScroll(); addEventListener('scroll', onScroll, {passive:true});
     document.querySelectorAll('.hero-card, [data-timer]').forEach(el => { el.hidden = true; el.style.display = 'none'; });
     return;
   }
-  const months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
   const d = new Date(PROMO_END.getTime() + 5 * 36e5); // дата по Ташкенту
-  tag.textContent = `${PROMO_TAG} · до ${d.getUTCDate()} ${months[d.getUTCMonth()]}`;
+  tag.textContent = `${UI.tag} · ${UI.until(d.getUTCDate(), d.getUTCMonth())}`;
 })();
 
 /* ===== UTM: сохраняем на сессию ===== */
@@ -871,15 +902,13 @@ let lastFocus = null;
 
 function renderPlaque(){
   const key = form.elements.course.value;
-  plaque.innerHTML = `${COURSES[key]} — скидка до 40%<small>` + (key === 'ai'
-    ? '+ Графический дизайн в подарок'
-    : '+ курс в подарок: Графический дизайн или Искусственный интеллект') + '</small>';
+  plaque.innerHTML = `${UI.courses[key]} — ${UI.plaqueDiscount}<small>${key === 'ai' ? UI.plaqueGiftAi : UI.plaqueGiftAny}</small>`;
 }
 form.elements.course.addEventListener('change', renderPlaque);
 
 function openModal(courseKey, from){
   lastFocus = from || document.activeElement;
-  if (courseKey && COURSES[courseKey]) form.elements.course.value = courseKey;
+  if (courseKey && UI.courses[courseKey]) form.elements.course.value = courseKey;
   renderPlaque();
   form.hidden = false; success.hidden = true;
   modal.classList.add('is-open');
@@ -928,28 +957,31 @@ form.addEventListener('submit', async e => {
 
   const phone = '+998' + phoneDigits();
   const courseKey = form.elements.course.value;
-  const courseLabel = COURSES[courseKey];
-  const giftLabel = courseKey === 'ai' ? 'Графический дизайн' : 'Графический дизайн или ИИ (на выбор)';
-  const cityLabel = CITY_LABEL[form.elements.city.value];
+  const courseLabel = CRM.courses[courseKey];
+  const giftLabel = courseKey === 'ai' ? CRM.giftAi : CRM.giftAny;
+  const cityLabel = CRM.cities[form.elements.city.value];
   const utm = getUtm();
   const btn = form.querySelector('[type="submit"]');
   const btnText = btn.textContent;
-  btn.disabled = true; btn.textContent = 'Отправляем…';
+  btn.disabled = true; btn.textContent = UI.sending;
 
   // amoCRM: пометка «Новогодняя акция» — в имени сделки и первой строкой заметки
-  const dealName = `${PROMO_TAG} · ${name} · ${cityLabel}`;
+  const dealName = `${CRM.tag} · ${name} · ${cityLabel}`;
+  /* crm-note:start — заметка в сделке, по-русски в обеих версиях */
   const noteParts = [
-    `🎄 ${PROMO_TAG}: скидка до 40% + курс в подарок`,
+    `🎄 ${CRM.tag}: ${CRM.offer}`,
     `🎓 Курс: ${courseLabel}`,
     `🎁 Подарок: ${giftLabel}`,
     `🏙 Город: ${cityLabel}`,
+    `🌐 Язык страницы: ${CRM.lang}`,
     '—',
-    'Источник: newyear_form (internoedu.uz/newyear)',
+    `Источник: ${CRM.source}`,
     `URL: ${location.href}`,
   ];
   if (document.referrer) noteParts.push(`Referrer: ${document.referrer}`);
   const utmPairs = UTM_KEYS.map(k => utm[k] ? `${k}=${utm[k]}` : null).filter(Boolean);
   noteParts.push(utmPairs.length ? utmPairs.join(' · ') : 'UTM: нет');
+  /* crm-note:end */
   const note = noteParts.join('\n');
 
   const sendAmoDirect = () => {
@@ -979,8 +1011,8 @@ form.addEventListener('submit', async e => {
     fetch(TG_NOTIFY, {
       method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        name, phone, city:cityLabel, lang:'Русский',
-        source:`${PROMO_TAG} · ${courseLabel} + ${giftLabel}`,
+        name, phone, city:cityLabel, lang:CRM.lang,
+        source:`${CRM.tag} · ${courseLabel} + ${giftLabel}`,
         url:location.href, referrer:document.referrer || '', utm,
       }),
       keepalive:true,
